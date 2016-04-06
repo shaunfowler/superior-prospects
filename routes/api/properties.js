@@ -3,21 +3,21 @@ var express = require('express');
 var _ = require('lodash');
 var Guid = require('guid');
 var router = express.Router();
-var authMiddleware = require('../../authMiddleware');
-var Model = require('../../models/property');
+var authMiddleware = require('../../auth/middleware');
+var ModelProperty = require('../../models/property');
 var ModelMedia = require('../../models/media');
 
 router.route('/')
     // Query (all)
     .get(authMiddleware, function(req, res) {
-        Model.find(function(error, properties) {
+        ModelProperty.find(function(error, properties) {
             res.json(properties);
         });
     })
     // Add
     .post(authMiddleware, function(req, res) {
         req.body.id = Guid.raw();
-        var property = new Model(req.body);
+        var property = new ModelProperty(req.body);
         property.save(function(error) {
             if (error) {
                 res.json({ error: error });
@@ -31,7 +31,7 @@ router.route('/')
 router.route('/visible')
     // Query (visible)
     .get(function(req, res) {
-        Model.find(function(error, properties) {
+        ModelProperty.find(function(error, properties) {
             res.json(_.filter(properties, { visible: true }));
         });
     });
@@ -39,7 +39,7 @@ router.route('/visible')
 router.route('/:id/media')
     // Get
     .get(function(req, res) {
-        Model.findOne({ safeName: req.params.id }, function(error, property) {
+        ModelProperty.findOne({ safeName: req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
@@ -58,7 +58,7 @@ router.route('/:id/media')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        Model.findOne({ 'safeName': req.params.id }, function(error, property) {
+        ModelProperty.findOne({ 'safeName': req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
@@ -73,7 +73,7 @@ router.route('/:id')
     })
     // Update
     .put(authMiddleware, function(req, res) {
-        Model.findOne({ id: req.params.id }, function(error, property) {
+        ModelProperty.findOne({ id: req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
@@ -96,7 +96,7 @@ router.route('/:id')
     })
     // Delete
     .delete(authMiddleware, function(req, res) {
-        Model.findOneAndRemove({ id: req.params.id }, function(error) {
+        ModelProperty.findOneAndRemove({ id: req.params.id }, function(error) {
             if (error) {
                 res.json({ error: error })
                 return;

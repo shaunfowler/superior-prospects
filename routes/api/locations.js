@@ -3,14 +3,14 @@ var express = require('express');
 var _ = require('lodash');
 var Guid = require('guid');
 var router = express.Router();
-var authMiddleware = require('../../authMiddleware');
-var Model = require('../../models/location');
-var ModelProperties = require('../../models/property');
+var authMiddleware = require('../../auth/middleware');
+var ModelLocation = require('../../models/location');
+var ModelProperty = require('../../models/property');
 
 router.route('/')
     // Query (all)
     .get(function(req, res) {
-        Model.find(function(error, properties) {
+        ModelLocation.find(function(error, properties) {
             res.json(properties);
         });
     })
@@ -18,7 +18,7 @@ router.route('/')
     .post(authMiddleware, function(req, res) {
         req.body.id = Guid.raw();
         req.body.safeName = req.body.name.toLowerCase().split(' ').join('-');
-        var location = new Model(req.body);
+        var location = new ModelLocation(req.body);
         location.save(function(error) {
             if (error) {
                 res.json({ error: error });
@@ -31,14 +31,14 @@ router.route('/')
 router.route('/:id/properties')
     // Query properties based on location (all)
     .get(authMiddleware, function(req, res) {
-        Model.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
             }
 
             if (location) {
-                ModelProperties.find({ locationRefId: location.id },
+                ModelProperty.find({ locationRefId: location.id },
                     function(_error, properties) {
                         if (error) {
                             res.json(error);
@@ -55,14 +55,14 @@ router.route('/:id/properties')
 router.route('/:id/properties/visible')
     // Query properties based on location (visible)
     .get(function(req, res) {
-        Model.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
             }
 
             if (location) {
-                ModelProperties.find({ locationRefId: location.id, visible: true },
+                ModelProperty.find({ locationRefId: location.id, visible: true },
                     function(_error, properties) {
                         if (error) {
                             res.json(error);
@@ -79,7 +79,7 @@ router.route('/:id/properties/visible')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        Model.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -94,7 +94,7 @@ router.route('/:id')
     })
     // Update
     .put(authMiddleware, function(req, res) {
-        Model.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -117,7 +117,7 @@ router.route('/:id')
     })
     // Delete
     .delete(authMiddleware, function(req, res) {
-        Model.findOneAndRemove({ safeName: req.params.id }, function(error) {
+        ModelLocation.findOneAndRemove({ safeName: req.params.id }, function(error) {
             if (error) {
                 res.json({ error: error })
                 return;

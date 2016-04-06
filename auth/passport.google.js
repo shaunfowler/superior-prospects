@@ -1,11 +1,11 @@
 var passport = require('passport');
 var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
-var authConfig = require('./auth');
+var config = require('../config');
 
 var strategySettings = {
-    clientID: authConfig.google.clientID,
-    clientSecret: authConfig.google.clientSecret,
-    callbackURL: 'http://' + authConfig.apiHostname + '/auth/google/callback'
+    clientID: config.google.clientID,
+    clientSecret: config.google.clientSecret,
+    callbackURL: 'http://' + config.apiHostname + '/auth/google/callback'
 };
 
 module.exports = function (app) {

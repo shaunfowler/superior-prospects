@@ -1,6 +1,6 @@
 var express = require('express');
 var passport = require('passport');
-var authMiddleware = require('../authMiddleware');
+var authMiddleware = require('../auth/middleware');
 var router = express.Router();
 
 router.route('/')

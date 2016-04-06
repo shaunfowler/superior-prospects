@@ -3,7 +3,7 @@ var express = require('express');
 var _ = require('lodash');
 var Guid = require('guid');
 var router = express.Router();
-var authMiddleware = require('../../authMiddleware');
+var authMiddleware = require('../../auth/middleware');
 var Model = require('../../models/update');
 
 router.route('/')

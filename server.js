@@ -31,7 +31,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(session({ secret: 'e68f7c19-c864-47d7-967f-e86ba6d8e636' }));
 
 // Setup auth strategies
-require('./config/passport')(app);
+require('./auth/passport')(app);
 
 // Map routes
 app.use('/auth', authRoutes);
