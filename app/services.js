@@ -11,7 +11,8 @@
                     $location.path('/#/login');
                 }
                 if (errors.indexOf(rejection.status) > -1) {
-                    $log.error('HTTP Error:', rejection.status, ' ', rejection.statusText, '[', rejection.config.url, ']');
+                    $log.error('HTTP Error:', rejection.status, ' ',
+                        rejection.statusText, '[', rejection.config.url, ']');
                 }
                 return $q.reject(rejection);
             }
@@ -23,14 +24,14 @@
 
     .factory('LocationService', ['$resource',
         function($resource) {
-            return $resource('api/locations/:lid', { lid: '@id' }, {
+            return $resource('api/locations/:safename', {}, {
                 allProperties: {
-                    url: 'api/locations/:lid/properties',
+                    url: 'api/locations/:safename/properties',
                     method: 'GET',
                     isArray: true
                 },
                 visibleProperties: {
-                    url: 'api/locations/:lid/properties/visible',
+                    url: 'api/locations/:safename/properties/visible',
                     method: 'GET',
                     isArray: true
                 },
@@ -42,14 +43,14 @@
 
     .factory('PropertyService', ['$resource',
         function($resource) {
-            return $resource('api/properties/:pid', { pid: '@id' }, {
+            return $resource('api/properties/:safename', {}, {
                 visible: {
                     url: 'api/properties/visible',
                     method: 'GET',
                     isArray: true
                 },
                 media: {
-                    url: 'api/properties/:pid/media',
+                    url: 'api/properties/:safename/media',
                     method: 'GET',
                     isArray: true
                 },
@@ -61,22 +62,21 @@
 
     .factory('MediaService', ['$resource',
         function($resource) {
-            return $resource('api/media/:mid', { mid: '@id' });
+            return $resource('api/media/:safename');
         }])
 
     .factory('UpdateService', ['$resource',
         function($resource) {
-            return $resource('api/updates/:uid', { uid: '@id' });
+            return $resource('api/updates/:safename');
         }])
 
     .factory('LoginHelper', ['$http',
         function($http) {
-
             return {
-                ok: function(){
-                    return $http.get('/user').then(function(){
+                ok: function() {
+                    return $http.get('/user').then(function() {
                         return true;
-                    }, function(){
+                    }, function() {
                         return false;
                     })
                 }

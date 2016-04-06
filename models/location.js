@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var connLocations = mongoose.createConnection('mongodb://localhost/locations');
 
 var locationSchema = mongoose.Schema({
-    id: String,
+    _id: String,
     safeName: String,
     name: String,
     body: String

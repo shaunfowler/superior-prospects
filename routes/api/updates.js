@@ -15,7 +15,6 @@ router.route('/')
     })
     // Add
     .post(authMiddleware, function(req, res) {
-        req.body.id = Guid.raw();
         var update = new Model(req.body);
         update.created = new Date().toString();
         update.save(function(error) {

@@ -16,7 +16,6 @@ router.route('/')
     })
     // Add
     .post(authMiddleware, function(req, res) {
-        req.body.id = Guid.raw();
         req.body.safeName = req.body.name.toLowerCase().split(' ').join('-');
         var location = new ModelLocation(req.body);
         location.save(function(error) {
@@ -44,7 +43,10 @@ router.route('/:id/properties')
                             res.json(error);
                             return;
                         }
-                        res.json(properties ? properties : []);
+                        _.forEach(properties, function(p, i) {
+                            delete properties[i]._doc.body;
+                        });
+                        res.json(properties);
                     });
             } else {
                 res.json({ info: 'not found' });

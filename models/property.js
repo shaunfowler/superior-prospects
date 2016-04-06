@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var connProperties = mongoose.createConnection('mongodb://localhost/properties');
 
 var propertySchema = mongoose.Schema({
-    id: String,
+    _id: String,
     name: String,
     safeName: String,
     description: String,

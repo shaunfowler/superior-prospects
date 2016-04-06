@@ -11,12 +11,14 @@ router.route('/')
     // Query (all)
     .get(authMiddleware, function(req, res) {
         ModelProperty.find(function(error, properties) {
+            _.forEach(properties, function(p, i) {
+                delete properties[i]._doc.body;
+            });
             res.json(properties);
         });
     })
     // Add
     .post(authMiddleware, function(req, res) {
-        req.body.id = Guid.raw();
         var property = new ModelProperty(req.body);
         property.save(function(error) {
             if (error) {
@@ -32,6 +34,9 @@ router.route('/visible')
     // Query (visible)
     .get(function(req, res) {
         ModelProperty.find(function(error, properties) {
+            _.forEach(properties, function(p, i) {
+                delete properties[i]._doc.body;
+            });
             res.json(_.filter(properties, { visible: true }));
         });
     });

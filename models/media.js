@@ -3,7 +3,7 @@ var mongoose = require('mongoose');
 var connMedia = mongoose.createConnection('mongodb://localhost/media');
 
 var mediaSchema = mongoose.Schema({
-    id: String,
+    _id: String,
     fileName: String,
     fileSize: String,
     propertyRefId: String,
