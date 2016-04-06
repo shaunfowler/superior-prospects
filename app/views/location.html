@@ -1,0 +1,23 @@
+﻿<div class="row">
+    <div class="col-sm-3">
+        <br />
+        <ul class="list-group">
+            <li class="list-group-item heading">
+                <h4 >Properties</h4>
+            </li>
+            <li ng-repeat="p in properties" class="list-group-item">
+                <a ui-sref="property({pid: '{{p.safeName}}'})">
+                    {{p.name}}
+                </a>
+                <div class="description">
+                    {{p.description}}
+                </div>
+            </li>
+        </ul>
+    </div>
+    <div class="col-sm-9">
+        <br />
+        <div ng-bind-html="trustedHtml"></div>
+        <br />
+    </div>
+</div>

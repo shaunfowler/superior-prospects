@@ -1,0 +1,32 @@
+﻿<br />
+
+<!--<div style="position: absolute; top: -220px; z-index: 10000; max-width: 500px;">
+    <span style="font-size: 24px; font-weight: 300; color: #fff; background: rgba(0,0,0,0.4); text-shadow: 1px 1px 0 #000; line-height: 38px;">
+        SPI
+    </span>
+</div>-->
+
+<div class="row">
+    <div class="col-sm-8">
+        <div class="update-tile clearfix" ng-repeat="u in updates | orderBy: 'created': true | limitTo: 5">
+            <calendar-tile date="{{u.created}}"></calendar-tile>
+            <p class="update-text">{{u.body}}</p>
+        </div>
+        <br />
+    </div>
+    <div class="col-sm-4">
+        <ul class="list-group">
+            <li class="list-group-item heading">
+                <h4>Recently added properties</h4>
+            </li>
+            <li ng-repeat="p in properties | orderBy: 'created': true | limitTo: 3" class="list-group-item">
+                <a ui-sref="property({pid: '{{p.safeName}}'})">
+                    {{p.name}}
+                </a>
+                <div class="description">
+                    {{p.description}}
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

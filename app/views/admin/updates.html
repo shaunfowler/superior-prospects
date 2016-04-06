@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="col-sm-6">
+        <h2>Updates</h2>
+        <div class="list-group">
+            <a ng-repeat="u in updates | orderBy: 'created': true" href="" class="list-group-item" style="position: relative;">
+                <strong>{{u.created | niceDate: 'dmy1'}}</strong>
+                [{{u.id}}]
+                <p class="list-group-item-text">{{u.body}}</p>
+                <span class="btn btn-link" ng-click="deleteUpdate(u.id)" style="position: absolute; right: 0; top: 0;">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </span>
+            </a>
+        </div>
+    </div>
+
+    <div class="col-sm-6">
+        <h2>Add new</h2>
+
+        <form class="form-inline" role="form">
+            <textarea ng-model="newUpdate.body" class="form-control" placeholder="Enter text here..."></textarea>
+            <br /><br />
+            <button ng-click="add()" class="btn btn-default" type="button">Add</button>
+        </form>
+    </div>
+</div>

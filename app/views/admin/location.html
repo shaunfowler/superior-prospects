@@ -1,0 +1,23 @@
+﻿<h2>
+    {{location.name}}
+    <span class="pull-right" style="margin-top: -5px;">
+        <button class="btn btn-default" ng-click="deleteLocation(location.id)">
+            <i class="fa fa-trash"></i>
+            Delete
+        </button>
+        <button class="btn btn-default" ng-click="viewLocation(location.safeName)">
+            <i class="fa fa-reply"></i>
+            View
+        </button>
+        <button class="btn btn-primary" ng-click="saveLocation()">
+            <i class="fa fa-save"></i>
+            Save
+        </button>
+    </span>
+</h2>
+
+<br />
+
+<textarea id="location-editor" ui-tinymce="tinymceOptions" ng-model="location.body"></textarea>
+
+<br />
