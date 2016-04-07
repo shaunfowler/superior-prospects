@@ -42,7 +42,7 @@
                                 </a>
                                 <ul class="dropdown-menu" role="menu">
                                     <li ng-repeat="l in locations">
-                                        <a ui-sref="location({lid: '{{l.safeName}}'})">
+                                        <a ui-sref="location({lid: '{{l._id}}'})">
                                             {{l.name}}
                                         </a>
                                     </li>

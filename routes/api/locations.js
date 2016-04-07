@@ -30,7 +30,7 @@ router.route('/')
 router.route('/:id/properties')
     // Query properties based on location (all)
     .get(authMiddleware, function(req, res) {
-        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -57,7 +57,7 @@ router.route('/:id/properties')
 router.route('/:id/properties/visible')
     // Query properties based on location (visible)
     .get(function(req, res) {
-        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -81,7 +81,7 @@ router.route('/:id/properties/visible')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -96,7 +96,7 @@ router.route('/:id')
     })
     // Update
     .put(authMiddleware, function(req, res) {
-        ModelLocation.findOne({ safeName: req.params.id }, function(error, location) {
+        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -110,7 +110,7 @@ router.route('/:id')
                         return;
                     }
 
-                    res.json({ info: 'locationd' })
+                    res.json({ info: 'updated' })
                 });
             } else {
                 res.json({ info: 'not found' });
@@ -119,7 +119,7 @@ router.route('/:id')
     })
     // Delete
     .delete(authMiddleware, function(req, res) {
-        ModelLocation.findOneAndRemove({ safeName: req.params.id }, function(error) {
+        ModelLocation.findOneAndRemove({ _id: req.params.id }, function(error) {
             if (error) {
                 res.json({ error: error })
                 return;

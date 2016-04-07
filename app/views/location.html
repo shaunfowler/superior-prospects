@@ -6,7 +6,7 @@
                 <h4 >Properties</h4>
             </li>
             <li ng-repeat="p in properties" class="list-group-item">
-                <a ui-sref="property({pid: '{{p.safeName}}'})">
+                <a ui-sref="property({pid: '{{p._id}}'})">
                     {{p.name}}
                 </a>
                 <div class="description">

@@ -82,7 +82,7 @@
 
             // Reload all media after any uploads
             $scope.uploader.onCompleteAll = function() {
-                $scope.media = PropertyService.media({ pid: $state.params.pid });
+                $scope.media = PropertyService.media({ _id: $state.params.pid });
                 $scope.$apply();
             };
 
@@ -101,12 +101,12 @@
 
             // Load everything
             $scope.locations = LocationService.query();
-            $scope.media = PropertyService.media({ pid: $state.params.pid });
-            $scope.property = PropertyService.get({ pid: $state.params.pid },
+            $scope.media = PropertyService.media({ _id: $state.params.pid });
+            $scope.property = PropertyService.get({ _id: $state.params.pid },
                 function(property) {
                     $scope.location = LocationService.get({ lid: property.locationRefId });
                     $scope.uploaderOptions = {
-                        url: 'api/media/file/' + property.id
+                        url: 'api/media/file/' + property._id
                     }
                 });
 
@@ -117,7 +117,7 @@
 
             // View a property on the public side
             $scope.viewProperty = function() {
-                $state.go('property', { pid: $scope.property.safeName });
+                $state.go('property', { pid: $scope.property._id });
             }
 
             // Hide a property
@@ -134,7 +134,7 @@
 
             // Save a property
             $scope.saveProperty = function() {
-                PropertyService.update({ pid: $scope.property.id }, $scope.property, function() {
+                PropertyService.update({ _id: $scope.property._id }, $scope.property, function() {
                     $scope.$parent.properties = PropertyService.query();
                 });
             };
@@ -142,7 +142,7 @@
             // Delete a property
             $scope.deleteProperty = function() {
                 if (confirm('Do you really want to delete ' + $scope.property.name + '?')) {
-                    PropertyService.delete({ pid: $scope.property.id }, function() {
+                    PropertyService.delete({ _id: $scope.property._id }, function() {
                         $state.go('admin.properties', {}, { reload: true });
                     });
                 }
@@ -151,9 +151,9 @@
             // Delete a file
             $scope.deleteFile = function(id) {
                 if (confirm('Do you really want to delete ' + id + '?')) {
-                    MediaService.delete({ mid: id });
+                    MediaService.delete({ id: id });
                     _.remove($scope.media, function(m) {
-                        return m.id == id;
+                        return m._id == id;
                     });
                 }
 

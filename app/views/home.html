@@ -20,7 +20,7 @@
                 <h4>Recently added properties</h4>
             </li>
             <li ng-repeat="p in properties | orderBy: 'created': true | limitTo: 3" class="list-group-item">
-                <a ui-sref="property({pid: '{{p.safeName}}'})">
+                <a ui-sref="property({pid: '{{p._id}}'})">
                     {{p.name}}
                 </a>
                 <div class="description">

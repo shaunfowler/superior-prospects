@@ -24,14 +24,14 @@
 
     .factory('LocationService', ['$resource',
         function($resource) {
-            return $resource('api/locations/:safename', {}, {
+            return $resource('api/locations/:_id', {}, {
                 allProperties: {
-                    url: 'api/locations/:safename/properties',
+                    url: 'api/locations/:_id/properties',
                     method: 'GET',
                     isArray: true
                 },
                 visibleProperties: {
-                    url: 'api/locations/:safename/properties/visible',
+                    url: 'api/locations/:_id/properties/visible',
                     method: 'GET',
                     isArray: true
                 },
@@ -43,14 +43,14 @@
 
     .factory('PropertyService', ['$resource',
         function($resource) {
-            return $resource('api/properties/:safename', {}, {
+            return $resource('api/properties/:_id', {}, {
                 visible: {
                     url: 'api/properties/visible',
                     method: 'GET',
                     isArray: true
                 },
                 media: {
-                    url: 'api/properties/:safename/media',
+                    url: 'api/properties/:_id/media',
                     method: 'GET',
                     isArray: true
                 },
@@ -62,12 +62,12 @@
 
     .factory('MediaService', ['$resource',
         function($resource) {
-            return $resource('api/media/:safename');
+            return $resource('api/media/:_id');
         }])
 
     .factory('UpdateService', ['$resource',
         function($resource) {
-            return $resource('api/updates/:safename');
+            return $resource('api/updates/:_id');
         }])
 
     .factory('LoginHelper', ['$http',

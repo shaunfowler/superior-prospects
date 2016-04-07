@@ -5,11 +5,11 @@
             <li ng-repeat="l in locations" style="margin-bottom: 10px;">
                 {{l.name}}
                 <ul style="list-style: none; padding-left: 15px;">
-                    <li ng-repeat="p in properties | filter: {'locationRefId': l.id}">
+                    <li ng-repeat="p in properties | filter: {'locationRefId': l._id}">
                         <i class="fa fa-eye" ng-show="p.visible" style="color: #666;"></i>
                         <i class="fa fa-eye-slash" ng-hide="p.visible" style="color: #d76900"></i>
                         &nbsp;
-                        <a ui-sref="admin.properties.edit({pid: '{{p.id}}'})">
+                        <a ui-sref="admin.properties.edit({pid: '{{p._id}}'})">
                             {{p.name}}
                         </a>
                     </li>
@@ -40,7 +40,7 @@
             <div class="form-group">
                 <label for="input-location" class="col-sm-2 control-label">Location</label>
                 <div class="col-sm-10">
-                    <select ng-model="_locationObject" ng-change="locationSelectOptionChanged(_locationObject.id)"
+                    <select ng-model="_locationObject" ng-change="locationSelectOptionChanged(_locationObject._id)"
                             ng-options="l.name for l in locations" class="form-control" id="input-location" />
                 </div>
             </div>

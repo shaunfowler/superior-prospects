@@ -14,10 +14,11 @@ var userRoutes = require('./routes/user');
 var propertiesRoutes = require('./routes/api/properties');
 var updatesRoutes = require('./routes/api/updates');
 var locationsRoutes = require('./routes/api/locations');
+var mediaRoutes = require('./routes/api/media')(app);
 
 // HTTP logger
 app.all('*', function(req, res, next) {
-    if (req.originalUrl.indexOf('.') === -1) {
+    if (req.originalUrl.indexOf('/api') > -1) {
         console.log(req.method, req.originalUrl);
     }
     next();
@@ -39,6 +40,7 @@ app.use('/user', userRoutes);
 app.use('/api/properties', propertiesRoutes);
 app.use('/api/updates', updatesRoutes);
 app.use('/api/locations', locationsRoutes);
+app.use('/api/media', mediaRoutes);
 app.use('/', express.static(__dirname + '/app'));
 
 // Listen on port 3000

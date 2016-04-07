@@ -16,22 +16,22 @@
 
     .controller('LocationController', ['$rootScope', '$scope', '$sce', '$state', 'LocationService',
         function($rootScope, $scope, $sce, $state, LocationService) {
-            $scope.location = LocationService.get({ safename: $state.params.lid }, function(data) {
+            $scope.location = LocationService.get({ _id: $state.params.lid }, function(data) {
                 $rootScope.title = data.name;
                 $rootScope.subtitle = null;
                 $scope.trustedHtml = $sce.trustAsHtml(data.body);
             });
-            $scope.properties = LocationService.visibleProperties({ safename: $state.params.lid });
+            $scope.properties = LocationService.visibleProperties({ _id: $state.params.lid });
         }])
 
     .controller('PropertyController', ['$rootScope', '$scope', '$sce', '$state', 'PropertyService',
         function($rootScope, $scope, $sce, $state, PropertyService) {
-            $scope.property = PropertyService.get({ safename: $state.params.pid }, function(data) {
+            $scope.property = PropertyService.get({ _id: $state.params.pid }, function(data) {
                 $rootScope.title = data.name;
                 $rootScope.subtitle = data.description;
                 $scope.trustedHtml = $sce.trustAsHtml(data.body);
             });
-            $scope.media = PropertyService.media({ safename: $state.params.pid });
+            $scope.media = PropertyService.media({ _id: $state.params.pid });
         }])
 
     .controller('ContactController', ['$rootScope', '$scope',

@@ -44,14 +44,14 @@ router.route('/visible')
 router.route('/:id/media')
     // Get
     .get(function(req, res) {
-        ModelProperty.findOne({ safeName: req.params.id }, function(error, property) {
+        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
             }
 
             if (property) {
-                ModelMedia.find({ propertyRefId: property.id }, function(_error, media) {
+                ModelMedia.find({ propertyRefId: property._doc._id }, function(_error, media) {
                     res.json(media); // media is an array
                 });
             } else {
@@ -63,7 +63,7 @@ router.route('/:id/media')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        ModelProperty.findOne({ 'safeName': req.params.id }, function(error, property) {
+        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
