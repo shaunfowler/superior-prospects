@@ -1,7 +1,5 @@
 ﻿'use strict';
 
-// angular.module('app', ['ngResource']);
-
 angular.module('app', ['ngResource', 'ui.router', 'ui.bootstrap',
     'angularFileUpload', 'ui.tinymce'/*, 'angular-loading-bar'*/])
 
@@ -12,32 +10,32 @@ angular.module('app', ['ngResource', 'ui.router', 'ui.bootstrap',
                 // Public
                 .state('home', {
                     url: '/',
-                    templateUrl: 'views/home.html',
+                    templateUrl: 'views/public/home.html',
                     controller: 'HomeController'
                 })
                 .state('location', {
                     url: '/locations/:lid',
-                    templateUrl: 'views/location.html',
+                    templateUrl: 'views/public/location.html',
                     controller: 'LocationController'
                 })
                 .state('property', {
                     url: '/properties/:pid',
-                    templateUrl: 'views/property.html',
+                    templateUrl: 'views/public/property.html',
                     controller: 'PropertyController'
                 })
                 .state('contact', {
                     url: '/contact',
-                    templateUrl: 'views/contact.html',
+                    templateUrl: 'views/public/contact.html',
                     controller: 'ContactController'
                 })
                 .state('about', {
                     url: '/about',
-                    templateUrl: 'views/about.html',
+                    templateUrl: 'views/public/about.html',
                     controller: 'AboutController'
                 })
                 .state('login', {
                     url: '/login',
-                    templateUrl: 'views/login.html',
+                    templateUrl: 'views/public/login.html',
                     controller: 'LoginController',
                     resolve: {
                         isLoggedIn: ['LoginHelper', function(LoginHelper) { return LoginHelper.ok() }]
