@@ -3,7 +3,7 @@
         <h2>Locations</h2>
         <ul style="list-style: none; padding-left: 0;">
             <li ng-repeat="l in locations">
-                <a ui-sref="admin.locations.edit({lid: '{{l.id}}'})">{{l.name}}</a>
+                <a ui-sref="admin.locations.edit({lid: '{{l._id}}'})">{{l.name}}</a>
             </li>
         </ul>
         <br />

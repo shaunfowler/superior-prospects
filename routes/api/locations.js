@@ -17,13 +17,14 @@ router.route('/')
     // Add
     .post(authMiddleware, function(req, res) {
         req.body.safeName = req.body.name.toLowerCase().split(' ').join('-');
+        req.body._id = Guid.raw();
         var location = new ModelLocation(req.body);
         location.save(function(error) {
             if (error) {
                 res.json({ error: error });
                 return;
             }
-            res.json({ info: 'created' });
+            res.json(location);
         });
     })
 

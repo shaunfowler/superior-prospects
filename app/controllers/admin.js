@@ -52,7 +52,7 @@
             $scope.add = function() {
                 PropertyService.save($scope.newProperty, function(result) {
                     $scope.properties = PropertyService.query();
-                    $state.go('admin.properties.edit', { pid: result.id });
+                    $state.go('admin.properties.edit', { pid: result._id });
                 });
             };
         }])
@@ -104,7 +104,7 @@
             $scope.media = PropertyService.media({ _id: $state.params.pid });
             $scope.property = PropertyService.get({ _id: $state.params.pid },
                 function(property) {
-                    $scope.location = LocationService.get({ lid: property.locationRefId });
+                    $scope.location = LocationService.get({ _id: property.locationRefId });
                     $scope.uploaderOptions = {
                         url: 'api/media/file/' + property._id
                     }
@@ -178,7 +178,7 @@
                 LocationService.save(location, function(result) {
                     $scope.newLocation = {};
                     $scope.locations = LocationService.query();
-                    $state.go('admin.locations.edit', { lid: result.id });
+                    $state.go('admin.locations.edit', { lid: result._id });
                 });
             };
         }])
@@ -201,7 +201,7 @@
 
             // Load locations
             $scope.locations = LocationService.query();
-            $scope.location = LocationService.get({ lid: $state.params.lid });
+            $scope.location = LocationService.get({ _id: $state.params.lid });
 
             // View a location on the public side
             $scope.viewLocation = function(id) {
@@ -210,13 +210,13 @@
 
             // Save a location
             $scope.saveLocation = function() {
-                LocationService.update({ lid: $scope.location.id }, $scope.location);
+                LocationService.update({ _id: $scope.location._id }, $scope.location);
             };
 
             // Delete a location
             $scope.deleteLocation = function(id) {
                 if (confirm('Do you really want to delete ' + $scope.location.name + '?')) {
-                    LocationService.delete({ lid: id }, function() {
+                    LocationService.delete({ _id: id }, function() {
                         $state.go('admin.locations', {}, { reload: true });
                     });
                 }
@@ -248,10 +248,10 @@
             };
 
             // Delete an update
-            $scope.deleteUpdate = function(id) {
-                UpdateService.delete({ uid: id });
+            $scope.deleteUpdate = function(_id) {
+                UpdateService.delete({ _id: _id });
                 _.remove($scope.updates, function(u) {
-                    return u.id == id;
+                    return u._id == _id;
                 });
             }
         }]);

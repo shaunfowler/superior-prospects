@@ -16,6 +16,7 @@ router.route('/')
     // Add
     .post(authMiddleware, function(req, res) {
         var update = new Model(req.body);
+        update._id = Guid.raw();
         update.created = new Date().toString();
         update.save(function(error) {
             if (error) {
@@ -29,7 +30,7 @@ router.route('/')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        Model.find({ id: req.params.id }, function(error, update) {
+        Model.find({ _id: req.params.id }, function(error, update) {
             if (error) {
                 res.json(error);
                 return;
@@ -44,7 +45,7 @@ router.route('/:id')
     })
     // Delete
     .delete(authMiddleware, function(req, res) {
-        Model.findOneAndRemove({ id: req.params.id }, function(error) {
+        Model.findOneAndRemove({ _id: req.params.id }, function(error) {
             if (error) {
                 res.json({ error: error })
                 return;

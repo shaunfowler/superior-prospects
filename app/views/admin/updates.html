@@ -4,9 +4,8 @@
         <div class="list-group">
             <a ng-repeat="u in updates | orderBy: 'created': true" href="" class="list-group-item" style="position: relative;">
                 <strong>{{u.created | niceDate: 'dmy1'}}</strong>
-                [{{u.id}}]
                 <p class="list-group-item-text">{{u.body}}</p>
-                <span class="btn btn-link" ng-click="deleteUpdate(u.id)" style="position: absolute; right: 0; top: 0;">
+                <span class="btn btn-link" ng-click="deleteUpdate(u._id)" style="position: absolute; right: 0; top: 0;">
                     <span class="glyphicon glyphicon-remove"></span>
                 </span>
             </a>
