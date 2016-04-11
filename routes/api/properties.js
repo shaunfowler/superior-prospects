@@ -20,12 +20,13 @@ router.route('/')
     // Add
     .post(authMiddleware, function(req, res) {
         var property = new ModelProperty(req.body);
+        property._id = Guid.raw();
         property.save(function(error) {
             if (error) {
                 res.json({ error: error });
                 return;
             }
-            res.json({ info: 'created' });
+            res.json(property);
         });
     });
 
@@ -78,7 +79,7 @@ router.route('/:id')
     })
     // Update
     .put(authMiddleware, function(req, res) {
-        ModelProperty.findOne({ id: req.params.id }, function(error, property) {
+        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
             if (error) {
                 res.json(error);
                 return;
@@ -101,7 +102,7 @@ router.route('/:id')
     })
     // Delete
     .delete(authMiddleware, function(req, res) {
-        ModelProperty.findOneAndRemove({ id: req.params.id }, function(error) {
+        ModelProperty.findOneAndRemove({ _id: req.params.id }, function(error) {
             if (error) {
                 res.json({ error: error })
                 return;

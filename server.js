@@ -34,14 +34,17 @@ app.use(session({ secret: 'e68f7c19-c864-47d7-967f-e86ba6d8e636' }));
 // Setup auth strategies
 require('./auth/passport')(app);
 
-// Map routes
+// Map static routes
+app.use('/', express.static(__dirname + '/app'));
+app.use('/uploads', express.static(__dirname + '/uploads'));
+
+// Map API routes
 app.use('/auth', authRoutes);
 app.use('/user', userRoutes);
 app.use('/api/properties', propertiesRoutes);
 app.use('/api/updates', updatesRoutes);
 app.use('/api/locations', locationsRoutes);
 app.use('/api/media', mediaRoutes);
-app.use('/', express.static(__dirname + '/app'));
 
 // Listen on port 3000
 var server = app.listen(3000, function() {

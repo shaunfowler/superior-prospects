@@ -478,11 +478,6 @@ angular.module('app')
             // New instance of the file uploader
             $scope.uploader = new FileUploader();
 
-            // Add the auth header
-            $scope.uploader.onBeforeUploadItem = function(item) {
-                // item.headers.Authorization = 'Bearer ' + LoginService.token();
-            };
-
             // Reload all media after any uploads
             $scope.uploader.onCompleteAll = function() {
                 $scope.media = PropertyService.media({ _id: $state.params.pid });
@@ -492,9 +487,7 @@ angular.module('app')
             // Check if file type is an image format
             $scope.isPhotoType = function(extension) {
                 var extensions = ['png', 'jpg', 'jpeg', 'gif', 'img'];
-                return (extensions.indexOf(extension) > -1)
-                //return extension == 'png' || extension == 'jpg' || extension == 'jpeg'
-                //    || extension == 'gif' || extension == 'img';
+                return extensions.indexOf(extension) > -1;
             }
 
             // Check if file type is a document format
@@ -554,12 +547,11 @@ angular.module('app')
             // Delete a file
             $scope.deleteFile = function(id) {
                 if (confirm('Do you really want to delete ' + id + '?')) {
-                    MediaService.delete({ id: id });
+                    MediaService.delete({ _id: id });
                     _.remove($scope.media, function(m) {
                         return m._id == id;
                     });
                 }
-
             }
         }]);
 angular.module('app')

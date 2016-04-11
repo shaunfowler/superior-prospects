@@ -4,27 +4,18 @@
     </div>
     <div style="position: absolute; top: 0; right: 0; width: 240px; margin-top: 20px;">
 
-        <!-- images -->
-        <!--<div ng-repeat="m in media | images" style="margin-bottom: 10px; position:relative;">
-            <a href="uploads/{{m.propertyRefId}}/{{m.fileName}}" fancybox>
-                <img ng-src="uploads/{{m.propertyRefId}}/thumb_{{m.fileName}}" alt="{{m.fileName}}"
-                     style="width: 240px; height: 70px; box-sizing: border-box; border: 1px solid #ccc;" />
-                <div style="position: absolute; bottom: 0; left: 0; background: #333; text-shadow: 1px 1px 0 #000; color: #fff; font-size: 12px; padding: 2px 5px;">
-                    {{m.fileName}}
-                </div>
-            </a>
-        </div>-->
+        <!-- Images -->
         <div ng-repeat="m in media | images" style="margin-top: 8px;">
             <i class="fa fa-2x fa-file-image-o"></i>
-            <a href="uploads/{{m.propertyRefId}}/{{m.fileName}}" fancybox style="font-size: 12px; padding: 2px 6px;">
+            <a href="uploads/{{m.fileName}}" fancybox style="font-size: 12px; padding: 2px 6px;">
                 {{m.fileName}}
             </a>
         </div>
 
-        <!-- documents -->
+        <!-- Documents -->
         <div ng-repeat="m in media | documents" style="margin-top: 8px;">
             <i class="fa fa-2x {{m.type | mediaIcon}}"></i>
-            <a href="uploads/{{m.propertyRefId}}/{{m.fileName}}" target="_blank" style="font-size: 12px; padding: 2px 6px;">
+            <a href="uploads/{{m.fileName}}" target="_blank" style="font-size: 12px; padding: 2px 6px;">
                 {{m.fileName}}
             </a>
         </div>

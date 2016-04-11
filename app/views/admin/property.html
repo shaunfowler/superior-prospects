@@ -3,7 +3,7 @@
     <small>
         <select ng-model="location" ng-change="locationSelectOptionChanged(location)"
                 style="border: 1px solid #DDD; padding: 1px; top: -5px; position: relative; color: #666; margin-left: 10px;">
-            <option ng-repeat="l in locations" value="{{l.id}}" ng-selected="l.id == property.locationRefId">
+            <option ng-repeat="l in locations" value="{{l._id}}" ng-selected="l._id == property.locationRefId">
                 {{l.name}}
             </option>
         </select>
@@ -120,18 +120,17 @@
             <tbody>
                 <tr ng-repeat="m in media | images">
                     <td>
-                        <img ng-src="uploads/{{m.propertyRefId}}/thumb_{{m.fileName}}" alt="{{m.fileName}}" class="img-thumbnail"
-                             style="margin-right: 10px; width: 64px; height: 36px; border-radius: 3px 3px 0 0;" />
+                        <i class="fa fa-2x fa-file-image-o"></i>
                     </td>
                     <td>
-                        <a href="uploads/{{m.propertyRefId}}/{{m.fileName}}" fancybox>
+                        <a href="uploads/{{m.fileName}}" fancybox>
                             {{m.fileName}}
                         </a>
                     </td>
                     <td>{{m.type}}</td>
                     <td>{{m.created | niceDate: 'dmy1'}}</td>
                     <td>
-                        <a href="" ng-click="deleteFile(m.id)">
+                        <a href="" ng-click="deleteFile(m._id)">
                             Delete
                         </a>
                     </td>
@@ -141,14 +140,14 @@
                         <i class="fa fa-2x {{m.type | mediaIcon}}"></i>
                     </td>
                     <td>
-                        <a href="uploads/{{m.propertyRefId}}/{{m.fileName}}" target="_blank">
+                        <a href="uploads/{{m.fileName}}" target="_blank">
                             {{m.fileName}}
                         </a>
                     </td>
                     <td>{{m.type}}</td>
                     <td>{{m.created | niceDate: 'dmy1'}}</td>
                     <td>
-                        <a href="" ng-click="deleteFile(m.id)">
+                        <a href="" ng-click="deleteFile(m._id)">
                             Delete
                         </a>
                     </td>
