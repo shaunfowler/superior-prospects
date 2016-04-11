@@ -36,13 +36,13 @@
 
 <br />
 
-<tabset>
-    <tab heading="Article">
+<uib-tabset>
+    <uib-tab heading="Article">
         <br />
-        <textarea id="article-editor" ui-tinymce="tinymceOptions" ng-model="property.body"></textarea>
+        <textarea id="article-editor" ui-tinymce="tinymceOptions" ng-model="property.body" style="min-height: 460px"></textarea>
         <br />
-    </tab>
-    <tab heading="Files ({{media.length}})">
+    </uib-tab>
+    <uib-tab heading="Files ({{media.length}})">
         <br />
         <span class="btn btn-primary btn-file">
             <i class="fa fa-plus"></i>
@@ -154,5 +154,5 @@
                 </tr>
             </tbody>
         </table>
-    </tab>
-</tabset>
+    </uib-tab>
+</uib-tabset>
