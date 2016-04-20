@@ -1,6 +1,6 @@
 angular.module('app')
     .controller('AdminLocationController', ['$rootScope', '$scope', '$state', 'isLoggedIn', 'LocationService',
-        function($rootScope, $scope, $state, isLoggedIn, LocationService) {
+        function ($rootScope, $scope, $state, isLoggedIn, LocationService) {
 
             $rootScope.title = null;
             $rootScope.subtitle = null;
@@ -20,19 +20,26 @@ angular.module('app')
             $scope.location = LocationService.get({ _id: $state.params.lid });
 
             // View a location on the public side
-            $scope.viewLocation = function(id) {
+            $scope.viewLocation = function (id) {
                 $state.go('location', { lid: id });
             }
 
             // Save a location
-            $scope.saveLocation = function() {
-                LocationService.update({ _id: $scope.location._id }, $scope.location);
+            $scope.saveLocation = function () {
+                LocationService.update({ _id: $scope.location._id }, $scope.location, function () {
+                    angular.forEach($scope.$parent.locations, function (val, key) {
+                        // Update the sidebar on the parent controller
+                        if (val._id === $scope.location._id) {
+                            $scope.$parent.locations[key].name = $scope.location.name;
+                        }
+                    });
+                });
             };
 
             // Delete a location
-            $scope.deleteLocation = function(id) {
+            $scope.deleteLocation = function (id) {
                 if (confirm('Do you really want to delete ' + $scope.location.name + '?')) {
-                    LocationService.delete({ _id: id }, function() {
+                    LocationService.delete({ _id: id }, function () {
                         $state.go('admin.locations', {}, { reload: true });
                     });
                 }

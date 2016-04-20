@@ -6,10 +6,9 @@ var uglify = require('gulp-uglify');
 var js = {
     src: [
         'app/app.js',
-        'app/services.js',
+        'app/services/**/*.*',
         'app/directives.js',
         'app/filters.js',
-        'app/controllers/**/*.*',
         'app/controllers/**/*.*',
     ],
     dest: {
