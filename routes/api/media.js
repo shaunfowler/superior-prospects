@@ -92,7 +92,7 @@ function ensureExists(path, cb) {
 var uploadMiddleware = multer({
     storage: multer.diskStorage({
         destination: function(req, file, cb) {
-            var dirName = __dirname + '../../../uploads/'; // + req.params.propertyId;
+            var dirName = __dirname + '/../../uploads/'; // + req.params.propertyId;
             // ensureExists(dirName, function() {
             cb(null, dirName);
             // });
