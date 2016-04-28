@@ -92,7 +92,7 @@ function ensureExists(path, cb) {
 var uploadMiddleware = multer({
     storage: multer.diskStorage({
         destination: function(req, file, cb) {
-            var dirName = 'uploads/'; // + req.params.propertyId;
+            var dirName = __dirname + '../../../uploads/'; // + req.params.propertyId;
             // ensureExists(dirName, function() {
             cb(null, dirName);
             // });
@@ -107,7 +107,7 @@ module.exports = function(app) {
 
     // Setup file upload route directly on 'app'
     app.post('/api/media/file/:propertyId',
-        [uploadMiddleware, authMiddleware],
+        [uploadMiddleware], // authMiddleware
         function(req, res) {
             console.log('Uploading file ' + req.file.originalname
                 + ' for property ' + req.params.propertyId);
