@@ -9,19 +9,19 @@ var ModelMedia = require('../../models/media');
 
 router.route('/')
     // Query (all)
-    .get(authMiddleware, function(req, res) {
-        ModelProperty.find(function(error, properties) {
-            _.forEach(properties, function(p, i) {
+    .get(authMiddleware, function (req, res) {
+        ModelProperty.find(function (error, properties) {
+            _.forEach(properties, function (p, i) {
                 delete properties[i]._doc.body;
             });
             res.json(properties);
         });
     })
     // Add
-    .post(authMiddleware, function(req, res) {
+    .post(authMiddleware, function (req, res) {
         var property = new ModelProperty(req.body);
         property._id = Guid.raw();
-        property.save(function(error) {
+        property.save(function (error) {
             if (error) {
                 res.json({ error: error });
                 return;
@@ -33,9 +33,9 @@ router.route('/')
 
 router.route('/visible')
     // Query (visible)
-    .get(function(req, res) {
-        ModelProperty.find(function(error, properties) {
-            _.forEach(properties, function(p, i) {
+    .get(function (req, res) {
+        ModelProperty.find(function (error, properties) {
+            _.forEach(properties, function (p, i) {
                 delete properties[i]._doc.body;
             });
             res.json(_.filter(properties, { visible: true }));
@@ -44,15 +44,16 @@ router.route('/visible')
 
 router.route('/:id/media')
     // Get
-    .get(function(req, res) {
-        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
+    .get(function (req, res) {
+        ModelProperty.findOne().or([{ _id: req.params.id }, { safeName: req.params.id }])
+            .exec(function (error, property) {
             if (error) {
                 res.json(error);
                 return;
             }
 
             if (property) {
-                ModelMedia.find({ propertyRefId: property._doc._id }, function(_error, media) {
+                ModelMedia.find({ propertyRefId: property._doc._id }, function (_error, media) {
                     res.json(media); // media is an array
                 });
             } else {
@@ -63,23 +64,24 @@ router.route('/:id/media')
 
 router.route('/:id')
     // Get
-    .get(function(req, res) {
-        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
-            if (error) {
-                res.json(error);
-                return;
-            }
+    .get(function (req, res) {
+        ModelProperty.findOne().or([{ _id: req.params.id }, { safeName: req.params.id }])
+            .exec(function (error, property) {
+                if (error) {
+                    res.json(error);
+                    return;
+                }
 
-            if (property) {
-                res.json(property);
-            } else {
-                res.json({ info: 'not found' });
-            }
-        });
+                if (property) {
+                    res.json(property);
+                } else {
+                    res.json({ info: 'not found' });
+                }
+            });
     })
     // Update
-    .put(authMiddleware, function(req, res) {
-        ModelProperty.findOne({ _id: req.params.id }, function(error, property) {
+    .put(authMiddleware, function (req, res) {
+        ModelProperty.findOne({ _id: req.params.id }, function (error, property) {
             if (error) {
                 res.json(error);
                 return;
@@ -87,7 +89,7 @@ router.route('/:id')
 
             if (property) {
                 _.merge(property, req.body);
-                property.save(function(error) {
+                property.save(function (error) {
                     if (error) {
                         res.json({ error: error });
                         return;
@@ -101,8 +103,8 @@ router.route('/:id')
         });
     })
     // Delete
-    .delete(authMiddleware, function(req, res) {
-        ModelProperty.findOneAndRemove({ _id: req.params.id }, function(error) {
+    .delete(authMiddleware, function (req, res) {
+        ModelProperty.findOneAndRemove({ _id: req.params.id }, function (error) {
             if (error) {
                 res.json({ error: error })
                 return;

@@ -10,6 +10,6 @@ angular.module('app')
             }
 
             $scope.logout = function() {
-                LoginService.logout();
+                // LoginService.logout(); // TODO
             }
         }]);

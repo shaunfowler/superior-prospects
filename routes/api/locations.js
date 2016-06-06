@@ -30,6 +30,7 @@ router.route('/')
 
 router.route('/:id/properties')
     // Query properties based on location (all)
+    // Admin - only allow lookup by ID and not safeName
     .get(authMiddleware, function(req, res) {
         ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
             if (error) {
@@ -58,7 +59,8 @@ router.route('/:id/properties')
 router.route('/:id/properties/visible')
     // Query properties based on location (visible)
     .get(function(req, res) {
-        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
+        ModelLocation.findOne().or([{ _id: req.params.id }, { safeName: req.params.id }])
+            .exec(function (error, location) {
             if (error) {
                 res.json(error);
                 return;
@@ -82,7 +84,8 @@ router.route('/:id/properties/visible')
 router.route('/:id')
     // Get
     .get(function(req, res) {
-        ModelLocation.findOne({ _id: req.params.id }, function(error, location) {
+        ModelLocation.findOne().or([{ _id: req.params.id }, { safeName: req.params.id }])
+            .exec(function (error, location) {
             if (error) {
                 res.json(error);
                 return;
