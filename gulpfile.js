@@ -17,8 +17,6 @@ var js = {
     }
 };
 
-var jsSrc
-
 gulp.task('js', function() {
     return gulp.src(js.src)
         .pipe(concat(js.dest.filename))

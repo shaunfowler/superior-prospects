@@ -7,7 +7,7 @@
         <!-- Images -->
         <div ng-repeat="m in media | images" style="margin-top: 8px;">
             <i class="fa fa-2x fa-file-image-o"></i>
-            <a href="uploads/{{m.fileName}}" fancybox style="font-size: 12px; padding: 2px 6px;">
+            <a href="uploads/{{m.fileName}}" ng-click="track(m)" fancybox style="font-size: 12px; padding: 2px 6px;">
                 {{m.fileName}}
             </a>
         </div>
@@ -15,7 +15,7 @@
         <!-- Documents -->
         <div ng-repeat="m in media | documents" style="margin-top: 8px;">
             <i class="fa fa-2x {{m.type | mediaIcon}}"></i>
-            <a href="uploads/{{m.fileName}}" target="_blank" style="font-size: 12px; padding: 2px 6px;">
+            <a href="uploads/{{m.fileName}}" ng-click="track(m)" target="_blank" style="font-size: 12px; padding: 2px 6px;">
                 {{m.fileName}}
             </a>
         </div>

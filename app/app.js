@@ -108,7 +108,7 @@ angular.module('app', ['ngResource', 'ui.router', 'ui.bootstrap',
                     var path = $location.path();
                     if (path.indexOf('/api/') == -1 && path.indexOf('/admin') == -1) {
                         console.log('[+] ' + path);
-                        // // // $window.ga('send', 'pageview', { page: $location.path() });
+                        $window.ga('send', 'pageview', { page: $location.path() });
                     } else {
                         console.log('[-] ' + path);
                     }
