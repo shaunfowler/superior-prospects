@@ -90,6 +90,9 @@ function ensureExists(path, cb) {
 
 // File upload middleware
 var uploadMiddleware = multer({
+    limits: {
+        fileSize: 50000000 // bytes
+    },
     storage: multer.diskStorage({
         destination: function(req, file, cb) {
             var dirName = __dirname + '/../../uploads/'; // + req.params.propertyId;
