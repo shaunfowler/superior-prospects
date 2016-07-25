@@ -21,6 +21,7 @@ router.route('/')
     .post(authMiddleware, function (req, res) {
         var property = new ModelProperty(req.body);
         property._id = Guid.raw();
+        property.safeName = property.name.toLowerCase().split(' ').join('-');
         property.save(function (error) {
             if (error) {
                 res.json({ error: error });

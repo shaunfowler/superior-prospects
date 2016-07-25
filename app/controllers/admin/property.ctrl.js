@@ -52,7 +52,7 @@ angular.module('app')
 
             // View a property on the public side
             $scope.viewProperty = function() {
-                $state.go('property', { pid: $scope.property._id });
+                $state.go('property', { pid: $scope.property.safeName });
             }
 
             // Hide a property
