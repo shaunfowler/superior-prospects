@@ -1,11 +1,11 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
-var connUpdates = mongoose.createConnection('mongodb://localhost/updates');
+var connUpdates = mongoose.createConnection("mongodb://sp_mongo:27017/updates");
 
 var updateSchema = mongoose.Schema({
-    _id: String,
-    body: String,
-    created: Date
+  _id: String,
+  body: String,
+  created: Date
 });
 
-module.exports = connUpdates.model('Update', updateSchema);
+module.exports = connUpdates.model("Update", updateSchema);

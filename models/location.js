@@ -1,12 +1,14 @@
-var mongoose = require('mongoose');
+var mongoose = require("mongoose");
 
-var connLocations = mongoose.createConnection('mongodb://localhost/locations');
+var connLocations = mongoose.createConnection(
+  "mongodb://sp_mongo:27017/locations"
+);
 
 var locationSchema = mongoose.Schema({
-    _id: String,
-    safeName: String,
-    name: String,
-    body: String
+  _id: String,
+  safeName: String,
+  name: String,
+  body: String
 });
 
-module.exports = connLocations.model('Location', locationSchema);
+module.exports = connLocations.model("Location", locationSchema);
