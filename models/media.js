@@ -1,6 +1,6 @@
 var mongoose = require('mongoose');
 
-var connMedia = mongoose.createConnection('mongodb://localhost/media');
+var connMedia = mongoose.createConnection('mongodb://sp_mongo:27017/media');
 
 var mediaSchema = mongoose.Schema({
     _id: String,

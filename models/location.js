@@ -1,6 +1,8 @@
 var mongoose = require('mongoose');
 
-var connLocations = mongoose.createConnection('mongodb://localhost/locations');
+var connLocations = mongoose.createConnection(
+    'mongodb://sp_mongo:27017/locations'
+);
 
 var locationSchema = mongoose.Schema({
     _id: String,
