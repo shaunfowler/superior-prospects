@@ -4,8 +4,7 @@
 
 [![Code Climate](https://codeclimate.com/github/shaunfowler/superior-prospects/badges/gpa.svg)](https://codeclimate.com/github/shaunfowler/superior-prospects)
 
-The source for http://superiorprospects.com. The backend is a REST API running
-on Node, using Express and MongoDB. AngularJS powers the frontend.
+The source for http://superiorprospects.com.
 
 ## Install Dependencies
 
