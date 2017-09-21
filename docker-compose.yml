@@ -1,11 +1,38 @@
 version: '3'
 services:
-    superior_prospects:
-        image: superior_prospects
+    sp_traefik:
+        image: traefik
+        # command: -c /dev/null --web --docker
+        command: --web --docker --docker.domain=sp_traefik --docker.swarmmode=true --logLevel=INFO --entryPoints='Name:http Address::80' --defaultentrypoints=http
+        ports:
+            - "80:80"
+            - "8080:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+        
+    sp_client:
+        image: sp_client
         ports:
             - 3000:3000
+        volumes:
+            - ./src/client:/usr/app
+        deploy:
+            labels:
+                - "traefik.frontend.rule=Path: /"
+                - "traefik.port=3000"
+                - "traefik.docker.network=superior_prospects_default"
+
+    sp_server:
+        image: sp_server
+        ports:
+            - 4000:4000
         links:
             - "sp_mongo:sp_mongo"
+        deploy:
+            labels:
+                - "traefik.frontend.rule=Path: /api"
+                - "traefik.port=4000"
+                - "traefik.docker.network=superior_prospects_default"
 
     sp_mongo:
         image: mongo:latest
@@ -13,7 +40,7 @@ services:
             - 27017:27017
         command: mongod --smallfiles
 
-    mongo_seed:
-        image: mongo_seed
-        links:
-            - sp_mongo
+    # sp_mongo_seed:
+    #     image: sp_mongo_seed
+    #     links:
+    #         - sp_mongo

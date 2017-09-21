@@ -4,15 +4,12 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "lint": "eslint app/**/*.js",
-    "bower-install": "bower install",
-    "build": "gulp js",
-    "start": "node server.js",
-    "build:image:app":
-      "docker build -t superior_prospects  -f Dockerfile.app .",
+    "build:image:client": "docker build -t sp_client -f Dockerfile.client .",
+    "build:image:server": "docker build -t sp_server -f Dockerfile.server .",
     "build:image:mongo_seed":
-      "docker build -t mongo_seed  -f Dockerfile.mongo_seed .",
-    "build:images": "npm run build:image:app && npm run build:image:mongo_seed",
+      "docker build -t sp_mongo_seed -f Dockerfile.mongo_seed .",
+    "build:images":
+      "npm run build:image:client && npm run build:image:mongo_seed && npm run build:image:server",
     "deploy": "docker stack deploy -c docker-compose.yml superior_prospects"
   },
   "keywords": [],
