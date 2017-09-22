@@ -3,3 +3,4 @@ npm-debug.log
 config.js
 app/bower_components/
 db-backup*
+src/client/build
