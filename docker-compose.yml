@@ -24,6 +24,7 @@ services:
 
     sp_server:
         image: sp_server
+        command: npm run start:watch
         ports:
             - 4000:4000
         links:

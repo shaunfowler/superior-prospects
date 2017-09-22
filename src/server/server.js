@@ -31,6 +31,16 @@ app.use(bodyParser.urlencoded({ extended: true }));
 // Use express sessions
 app.use(session({ secret: "e68f7c19-c864-47d7-967f-e86ba6d8e636" }));
 
+// CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 // Setup auth strategies
 require("./auth/passport")(app);
 
