@@ -2,10 +2,10 @@ FROM mongo:latest
 
 WORKDIR /tmp
 
-COPY ./src/server/mock/locations.json ./locations.json
-COPY ./src/server/mock/media.json ./media.json
-COPY ./src/server/mock/updates.json ./updates.json
-COPY ./src/server/mock/properties.json ./properties.json
-COPY ./src/server/mock/import-mock-data-to-mongo.sh ./import-mock-data-to-mongo.sh
+COPY ./mock/locations.json ./locations.json
+COPY ./mock/media.json ./media.json
+COPY ./mock/updates.json ./updates.json
+COPY ./mock/properties.json ./properties.json
+COPY ./mock/import-mock-data-to-mongo.sh ./import-mock-data-to-mongo.sh
 
 CMD ./import-mock-data-to-mongo.sh
