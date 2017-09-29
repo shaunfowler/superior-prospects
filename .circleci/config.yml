@@ -12,17 +12,9 @@ jobs:
           command: npm install
 
       - run:
-          name: Restore bower packages
-          command: npm run bower-install
-
-      - run:
-          name: Gulp build
+          name: Build
           command: npm run build
 
       - run:
-          name: Lint
-          command: npm run lint
-
-      - run:
-          name: Tests
+          name: Test
           command: npm run test
