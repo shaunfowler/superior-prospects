@@ -11,12 +11,12 @@ import { getUpdates } from './actions/updatesActions';
 const store = configureStore();
 
 render(
-    <Provider store={store}>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </Provider>,
-    document.getElementById('root')
+  <Provider store={store}>
+    <BrowserRouter>
+      <App />
+    </BrowserRouter>
+  </Provider>,
+  document.getElementById('root')
 );
 
 store.dispatch(getUpdates());
