@@ -22,7 +22,7 @@ jobs:
             sudo mv /tmp/docker/* /usr/bin
 
       - run:
-          name: Login to docker hub
+          name: Login to Docker
           command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
       - run: 
@@ -38,7 +38,7 @@ jobs:
           command: npm run test
 
       - run:
-          name: Build docker images
+          name: Build Docker images
           command: |
             set -euo pipefail
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
@@ -48,7 +48,7 @@ jobs:
             fi
 
       - deploy:
-          name: Deploy
+          name: Deploy to Docker Hub
           command: |
             set -euo pipefail
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
