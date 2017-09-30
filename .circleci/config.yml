@@ -2,10 +2,28 @@ version: 2
 
 jobs:
   build:
-    machine: true      
+    docker:
+      - image: circleci/node:8.5.0
+
     working_directory: ~/superior-prospects
+
     steps:
       - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            sudo mv /tmp/docker/* /usr/bin
+
+      - run:
+          name: Login to Docker
+          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
       - run: 
           name: Restore npm packages
@@ -18,3 +36,23 @@ jobs:
       - run:
           name: Test
           command: npm run test
+
+      - run:
+          name: Build Docker images
+          command: |
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker build -t $DOCKER_REPO:latest -f Dockerfile .
+            else
+              docker build -t $DOCKER_REPO:$CIRCLE_SHA1 -f Dockerfile .
+            fi
+
+      - deploy:
+          name: Deploy to Docker Hub
+          command: |
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker push $DOCKER_REPO:latest
+            else
+              docker push $DOCKER_REPO:$CIRCLE_SHA1
+            fi
