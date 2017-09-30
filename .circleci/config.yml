@@ -2,7 +2,11 @@ version: 2
 
 jobs:
   build:
+    docker:
+      - image: circleci/node:8.5.0
+
     working_directory: ~/superior-prospects
+
     steps:
       - checkout
 
