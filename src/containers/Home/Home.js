@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { connect } from "react-redux";
 import { getUpdates } from "../../actions/updatesActions";
-import UpdateItem from "../../components/UpdateItem/UpdateItem";
+import UpdateItem from "../../components/UpdateItem";
 
 class Home extends Component {
   componentWillMount() {
