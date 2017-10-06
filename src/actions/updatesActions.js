@@ -1,9 +1,9 @@
-import axios from 'axios';
+import * as model from "../models/updates";
 import {
   GET_UPDATES_REQUEST,
   GET_UPDATES_SUCCESS,
   GET_UPDATES_FAILURE
-} from './actionTypes';
+} from "./actionTypes";
 
 function createGetUpdatesRequest() {
   return { type: GET_UPDATES_REQUEST };
@@ -18,11 +18,10 @@ function createGetUpdatesFailure(error) {
 }
 
 export function getUpdates() {
-  console.log('sdfds');
   return dispatch => {
     dispatch(createGetUpdatesRequest());
-    return axios
-      .get('http://localhost:4000/api/updates')
+    return model
+      .getAll()
       .then(response => {
         dispatch(createGetUpdatesSuccess(response.data));
       })

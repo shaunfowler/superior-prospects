@@ -6,8 +6,6 @@ import { BrowserRouter } from "react-router-dom";
 import "./index.css";
 import App from "./containers/App/App";
 
-import { getUpdates } from "./actions/updatesActions";
-
 const store = configureStore();
 
 render(
@@ -18,5 +16,3 @@ render(
   </Provider>,
   document.getElementById("root")
 );
-
-store.dispatch(getUpdates());
