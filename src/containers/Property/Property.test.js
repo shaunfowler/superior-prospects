@@ -1,8 +1,8 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import Properties from "./Properties";
+import Property from "./Property";
 
 it("renders without crashing", () => {
   const div = document.createElement("div");
-  ReactDOM.render(<Properties />, div);
+  ReactDOM.render(<Property />, div);
 });
