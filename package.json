@@ -20,5 +20,9 @@
     "eject": "react-scripts eject",
     "lint": "eslint ./src/",
     "build:image": "docker build -t sp_client -f Dockerfile ."
+  },
+  "devDependencies": {
+    "eslint": "^4.8.0",
+    "eslint-config-react-app": "^2.0.1"
   }
 }

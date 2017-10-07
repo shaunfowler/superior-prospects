@@ -3,7 +3,8 @@ import {
   GET_UPDATES_REQUEST,
   GET_UPDATES_SUCCESS,
   GET_UPDATES_FAILURE,
-  DELETE_UPDATE_SUCCESS
+  DELETE_UPDATE_SUCCESS,
+  ADD_UPDATE_SUCCESS
 } from "./actionTypes";
 
 function createGetUpdatesRequest() {
@@ -22,24 +23,36 @@ function createDeleteUpdateSuccess(id) {
   return { type: DELETE_UPDATE_SUCCESS, id };
 }
 
-export function deleteUpdate(id) {
-  return dispatch => {
-    return model.deleteUpdate(id).then(() => {
-      dispatch(createDeleteUpdateSuccess(id));
-    });
-  };
+function createAddUpdateSuccess(id) {
+  return { type: ADD_UPDATE_SUCCESS, id };
 }
 
 export function getUpdates() {
   return dispatch => {
     dispatch(createGetUpdatesRequest());
     return model
-      .getAll()
+      .getUpdates()
       .then(response => {
         dispatch(createGetUpdatesSuccess(response.data));
       })
       .catch(response => {
         dispatch(createGetUpdatesFailure(response));
       });
+  };
+}
+
+export function addUpdate(update) {
+  return dispatch => {
+    return model.deleteUpdate(update).then(() => {
+      dispatch(createAddUpdateSuccess(/* response.data */));
+    });
+  };
+}
+
+export function deleteUpdate(id) {
+  return dispatch => {
+    return model.deleteUpdate(id).then(() => {
+      dispatch(createDeleteUpdateSuccess(id));
+    });
   };
 }

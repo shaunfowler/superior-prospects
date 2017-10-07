@@ -5,7 +5,8 @@ const UpdateItem = ({ id, text, date, onDelete }) => (
     {text}
     <br />
     {date.toString()}
-    <button onClick={onDelete(id)}>Delete</button>
+    <br />
+    <button onClick={() => onDelete(id)}>Delete</button>
   </div>
 );
 

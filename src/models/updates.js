@@ -1,4 +1,4 @@
-const getAll = () => {
+const getUpdates = () => {
   return new Promise(resolve => {
     resolve({
       data: [
@@ -10,4 +10,12 @@ const getAll = () => {
   });
 };
 
-export { getAll };
+const deleteUpdate = () => {
+  return new Promise(resolve => resolve());
+};
+
+const addUpdate = () => {
+  return new Promise(resolve => resolve());
+};
+
+export { getUpdates, deleteUpdate, addUpdate };
