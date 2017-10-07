@@ -8,7 +8,7 @@ import {
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
 
-class Home extends Component {
+export class Home extends Component {
   componentWillMount() {
     this.props.getUpdates();
   }
@@ -52,7 +52,7 @@ function mapDispatchToProps(dispatch) {
   return {
     getUpdates: () => dispatch(getUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
-    addUpdate: id => dispatch(addUpdate(id))
+    addUpdate: update => dispatch(addUpdate(update))
   };
 }
 
