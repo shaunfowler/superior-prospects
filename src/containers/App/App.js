@@ -1,11 +1,11 @@
 import React, { Component } from "react";
 import { Route, BrowserRouter } from "react-router-dom";
-import Header from "../../components/Header/Header";
-import Footer from "../../components/Footer/Footer";
-import Home from "../Home/Home";
-import Properties from "../Properties/Properties";
-import Property from "../Property/Property";
-import About from "../About/About";
+import Header from "../../components/Header";
+import Footer from "../../components/Footer";
+import Home from "../Home";
+import Properties from "../Properties";
+import Property from "../Property";
+import About from "../About";
 
 class App extends Component {
   render() {
