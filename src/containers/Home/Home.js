@@ -1,14 +1,8 @@
 import React, { Component } from "react";
-import { connect } from "react-redux";
-import {
-  getUpdates,
-  deleteUpdate,
-  addUpdate
-} from "../../actions/updatesActions";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
 
-export class Home extends Component {
+class Home extends Component {
   componentWillMount() {
     this.props.getUpdates();
   }
@@ -44,16 +38,4 @@ export class Home extends Component {
   }
 }
 
-const mapStateToProps = state => {
-  return { updates: state.updates };
-};
-
-const mapDispatchToProps = dispatch => {
-  return {
-    getUpdates: () => dispatch(getUpdates()),
-    deleteUpdate: id => dispatch(deleteUpdate(id)),
-    addUpdate: update => dispatch(addUpdate(update))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default Home;
