@@ -17,8 +17,8 @@ export class Home extends Component {
     this.props.deleteUpdate(id);
   };
 
-  onAddUpdate = id => {
-    this.props.addUpdate(id);
+  onAddUpdate = update => {
+    this.props.addUpdate(update);
   };
 
   render() {
@@ -44,16 +44,16 @@ export class Home extends Component {
   }
 }
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return { updates: state.updates };
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
     getUpdates: () => dispatch(getUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
     addUpdate: update => dispatch(addUpdate(update))
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);

@@ -14,8 +14,16 @@ const deleteUpdate = () => {
   return new Promise(resolve => resolve());
 };
 
-const addUpdate = () => {
-  return new Promise(resolve => resolve());
+const addUpdate = update => {
+  return new Promise(resolve =>
+    resolve({
+      data: {
+        id: 9, // generate
+        text: update.text,
+        date: update.date
+      }
+    })
+  );
 };
 
 export { getUpdates, deleteUpdate, addUpdate };

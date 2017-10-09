@@ -23,8 +23,8 @@ function createDeleteUpdateSuccess(id) {
   return { type: DELETE_UPDATE_SUCCESS, id };
 }
 
-function createAddUpdateSuccess(id) {
-  return { type: ADD_UPDATE_SUCCESS, id };
+function createAddUpdateSuccess(update) {
+  return { type: ADD_UPDATE_SUCCESS, update };
 }
 
 export function getUpdates() {
@@ -43,8 +43,8 @@ export function getUpdates() {
 
 export function addUpdate(update) {
   return dispatch => {
-    return model.deleteUpdate(update).then(() => {
-      dispatch(createAddUpdateSuccess(/* response.data */));
+    return model.addUpdate(update).then(response => {
+      dispatch(createAddUpdateSuccess(response.data));
     });
   };
 }

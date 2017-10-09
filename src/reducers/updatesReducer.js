@@ -18,6 +18,20 @@ export default function updatesReducer(state = [], action) {
         error,
         loading: false
       });
+    case types.DELETE_UPDATE_SUCCESS:
+      const { id } = action;
+      return Object.assign({}, state, {
+        list: [...state.list].filter(u => u.id !== id),
+        loading: false,
+        error: null
+      });
+    case types.ADD_UPDATE_SUCCESS:
+      const { update } = action;
+      return Object.assign({}, state, {
+        list: [...state.list, update],
+        loading: false,
+        error: null
+      });
     default:
       return state;
   }
