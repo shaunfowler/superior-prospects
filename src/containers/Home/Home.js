@@ -4,7 +4,7 @@ import {
   getUpdates,
   deleteUpdate,
   addUpdate
-} from "../../actions/updatesActions";
+} from "../../redux/actions/updatesActions";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
 
