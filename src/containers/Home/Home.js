@@ -21,22 +21,23 @@ class Home extends Component {
     const updates = this.props.updates.list;
     const properties = this.props.properties.list;
     return (
-      <div>
-        Home
-        <div>
+      <div className="home">
+        <div className="updatesList">
           <AddUpdateForm onAdd={this.onAddUpdate} />
+          <h2>Updates</h2>
           {updates &&
             updates.map(u => (
               <UpdateItem
-                key={u.id}
-                id={u.id}
+                key={u._id}
+                id={u._id}
                 body={u.body}
                 created={u.created}
                 onDelete={this.onDeleteUpdate}
               />
             ))}
         </div>
-        <div>
+        <div className="propertiesList">
+          <h2>Recently added properties</h2>
           {properties &&
             properties.map(p => (
               <PropertyItem

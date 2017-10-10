@@ -17,7 +17,7 @@ const deleteProperty = () => {
 const addProperty = property => {
   return new Promise(resolve => {
     const createdEntity = Object.assign({}, property);
-    property.id = 9;
+    createdEntity._id = 9;
     resolve({
       data: createdEntity
     });

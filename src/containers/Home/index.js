@@ -6,6 +6,7 @@ import {
   addUpdate
 } from "../../redux/actions/updatesActions";
 import { getProperties } from "../../redux/actions/propertiesActions";
+import "./Home.css";
 
 const mapStateToProps = state => {
   return {

@@ -15,7 +15,7 @@ const deleteUpdate = () => {
 const addUpdate = update => {
   return new Promise(resolve => {
     const createdEntity = Object.assign({}, update);
-    update.id = 9; // TODO - generate on server
+    createdEntity._id = 9; // TODO - generate on server
     resolve({
       data: createdEntity
     });

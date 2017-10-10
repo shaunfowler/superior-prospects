@@ -13,8 +13,8 @@ class AddUpdateForm extends React.Component {
   onSubmit = event => {
     event.preventDefault();
     this.props.onAdd({
-      text: this.state.text,
-      date: new Date()
+      body: this.state.text,
+      created: new Date()
     });
     this.setState({ text: "" });
   };

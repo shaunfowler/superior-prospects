@@ -24,8 +24,8 @@ describe("updatesReducer", () => {
 
   it("should populate the list", () => {
     const updates = [
-      { id: 1, date: new Date(), body: "test1" },
-      { id: 2, date: new Date(), body: "test2" }
+      { id: 1, created: new Date(), body: "test1" },
+      { id: 2, created: new Date(), body: "test2" }
     ];
     expect(
       updatesReducer(undefined, { type: types.GET_UPDATES_SUCCESS, updates })
@@ -60,7 +60,7 @@ describe("updatesReducer", () => {
   });
 
   it("should add update to the list", () => {
-    const update = { id: 1, date: new Date(), body: "test" };
+    const update = { id: 1, created: new Date(), body: "test" };
     expect(
       updatesReducer(undefined, { type: types.ADD_UPDATE_SUCCESS, update })
     ).toEqual({
@@ -94,7 +94,7 @@ describe("updatesReducer", () => {
   });
 
   it("should remove from the list", () => {
-    const update = { id: 1, date: new Date(), body: "test" };
+    const update = { id: 1, created: new Date(), body: "test" };
     const initialState = {
       loading: false,
       error: null,
@@ -109,7 +109,7 @@ describe("updatesReducer", () => {
     expect(
       updatesReducer(initialState, {
         type: types.DELETE_UPDATE_SUCCESS,
-        id: update.id
+        _id: update._id
       })
     ).toEqual(newState);
   });

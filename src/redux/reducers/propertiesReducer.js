@@ -34,7 +34,7 @@ export default function propertiesReducer(state = initialState, action) {
     case types.DELETE_PROPERTY_SUCCESS:
       const { id } = action;
       return Object.assign({}, state, {
-        list: [...state.list].filter(u => u.id !== id),
+        list: [...state.list].filter(u => u._id !== id),
         loading: false,
         error: null
       });
