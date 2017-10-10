@@ -1,6 +1,12 @@
 import * as types from "../actions/actionTypes";
 
-export default function updatesReducer(state = [], action) {
+export const initialState = {
+  loading: false,
+  error: null,
+  list: []
+};
+
+export default function updatesReducer(state = initialState, action) {
   switch (action.type) {
     case types.GET_UPDATES_REQUEST:
     case types.ADD_UPDATE_REQUEST:
