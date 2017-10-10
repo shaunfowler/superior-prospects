@@ -8,7 +8,7 @@ The source for http://superiorprospects.com.
 
 ## Install Dependencies
 
-`npm install && bower install`
+`npm install`
 
 ## Configure
 
@@ -21,10 +21,14 @@ Note: the `allowedEmailAddresses` property in `config.js` represents a user DB (
 
 `npm run build`
 
->To rebuild only the app image, run: `docker build -t superior_prospects  -f Dockerfile.app .`
+>To rebuild only the app image, run: `docker build -t shaunfowler/sp_client -f Dockerfile .`
 
 ## Run
 
-`docker-compose up`
+`npm run start`
+
+or
+
+`docker run shaunfowler/sp_client`
 
 Access the app at `http://localhost:3000`.
