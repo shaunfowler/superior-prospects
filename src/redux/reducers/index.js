@@ -1,5 +1,5 @@
-import { combineReducers } from 'redux';
-import updates from './updatesReducer';
+import { combineReducers } from "redux";
+import updates from "./updatesReducer";
 
 const rootReducer = combineReducers({ updates });
 

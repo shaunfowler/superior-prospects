@@ -111,11 +111,7 @@ describe("updatesReducer", () => {
         type: types.DELETE_UPDATE_SUCCESS,
         id: update.id
       })
-    ).toEqual({
-      loading: false,
-      error: null,
-      list: []
-    });
+    ).toEqual(newState);
   });
 
   it("should set error object when delete fails", () => {
