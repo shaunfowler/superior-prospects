@@ -6,6 +6,7 @@ import AddUpdateForm from "../../components/AddUpdateForm";
 class Home extends Component {
   componentWillMount() {
     this.props.getUpdates();
+    this.props.getProperties();
   }
 
   onDeleteUpdate = id => {
@@ -18,6 +19,7 @@ class Home extends Component {
 
   render() {
     const updates = this.props.updates.list;
+    const properties = this.props.properties.list;
     return (
       <div>
         Home
@@ -28,16 +30,22 @@ class Home extends Component {
               <UpdateItem
                 key={u.id}
                 id={u.id}
-                text={u.text}
-                date={u.date}
+                body={u.body}
+                created={u.created}
                 onDelete={this.onDeleteUpdate}
               />
             ))}
         </div>
         <div>
-          <PropertyItem />
-          <PropertyItem />
-          <PropertyItem />
+          {properties &&
+            properties.map(p => (
+              <PropertyItem
+                key={p._id}
+                name={p.name}
+                safeName={p.safeName}
+                description={p.description}
+              />
+            ))}
         </div>
       </div>
     );

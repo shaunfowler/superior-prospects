@@ -1,10 +1,10 @@
 import React from "react";
 
-const UpdateItem = ({ id, text, date, onDelete }) => (
+const UpdateItem = ({ id, body, created, onDelete }) => (
   <div>
-    {text}
+    {body}
     <br />
-    {date.toString()}
+    {created.toString()}
     <br />
     <button onClick={() => onDelete(id)}>Delete</button>
   </div>

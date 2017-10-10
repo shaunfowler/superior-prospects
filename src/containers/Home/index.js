@@ -5,16 +5,21 @@ import {
   deleteUpdate,
   addUpdate
 } from "../../redux/actions/updatesActions";
+import { getProperties } from "../../redux/actions/propertiesActions";
 
 const mapStateToProps = state => {
-  return { updates: state.updates };
+  return {
+    updates: state.updates,
+    properties: state.properties
+  };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
     getUpdates: () => dispatch(getUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
-    addUpdate: update => dispatch(addUpdate(update))
+    addUpdate: update => dispatch(addUpdate(update)),
+    getProperties: () => dispatch(getProperties())
   };
 };
 
