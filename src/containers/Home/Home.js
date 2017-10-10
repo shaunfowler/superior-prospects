@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PropertyItem from "../../components/PropertyItem";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
 
@@ -32,6 +33,11 @@ class Home extends Component {
                 onDelete={this.onDeleteUpdate}
               />
             ))}
+        </div>
+        <div>
+          <PropertyItem />
+          <PropertyItem />
+          <PropertyItem />
         </div>
       </div>
     );
