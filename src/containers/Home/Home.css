@@ -1,4 +1,4 @@
-.home {
+.homeView {
   flex: 1;
   display: flex;
   flex-direction: row;
@@ -9,4 +9,9 @@
   flex: 0 0 50%;
   padding: 15px;
   box-sizing: border-box;
+  overflow: auto;
+}
+
+.updatesList {
+  border-right: 1px solid #ddd;
 }
