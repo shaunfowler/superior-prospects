@@ -1,7 +1,5 @@
 import { properties as mock } from "../mock";
 
-console.log(mock);
-
 const getProperties = () => {
   return new Promise(resolve => {
     resolve({

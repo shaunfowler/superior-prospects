@@ -1,17 +1,15 @@
-.homeView {
+.propertiesView {
   flex: 1;
   display: flex;
   flex-direction: row;
 }
 
-.updatesList,
-.propertiesList {
-  flex: 0 0 50%;
+.locationsNav,
+.propertiesNav {
   padding: 15px;
-  box-sizing: border-box;
   overflow: auto;
 }
 
-.updatesList {
+.locationsNav {
   border-right: 1px solid #ddd;
 }

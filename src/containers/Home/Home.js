@@ -21,7 +21,7 @@ class Home extends Component {
     const updates = this.props.updates.list;
     const properties = this.props.properties.list;
     return (
-      <div className="home">
+      <div className="homeView">
         <div className="updatesList">
           <AddUpdateForm onAdd={this.onAddUpdate} />
           <h2>Updates</h2>
