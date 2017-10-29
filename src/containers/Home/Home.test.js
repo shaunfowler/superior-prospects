@@ -11,6 +11,10 @@ it("renders without crashing", () => {
     updates: {
       loading: false,
       list: []
+    },
+    properties: {
+      loading: false,
+      list: []
     }
   };
   const store = mockStore(initialState);

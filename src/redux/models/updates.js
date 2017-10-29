@@ -1,11 +1,9 @@
+import { updates as mock } from "../mock";
+
 const getUpdates = () => {
   return new Promise(resolve => {
     resolve({
-      data: [
-        { id: 1, date: new Date(), text: "abc" },
-        { id: 2, date: new Date(), text: "def" },
-        { id: 3, date: new Date(), text: "ghi" }
-      ]
+      data: mock
     });
   });
 };
@@ -15,15 +13,13 @@ const deleteUpdate = () => {
 };
 
 const addUpdate = update => {
-  return new Promise(resolve =>
+  return new Promise(resolve => {
+    const createdEntity = Object.assign({}, update);
+    createdEntity._id = 9; // TODO - generate on server
     resolve({
-      data: {
-        id: 9, // generate
-        text: update.text,
-        date: update.date
-      }
-    })
-  );
+      data: createdEntity
+    });
+  });
 };
 
 export { getUpdates, deleteUpdate, addUpdate };

@@ -6,32 +6,32 @@ export const initialState = {
   list: []
 };
 
-export default function updatesReducer(state = initialState, action) {
+export default function propertiesReducer(state = initialState, action) {
   switch (action.type) {
-    case types.GET_UPDATES_REQUEST:
-    case types.ADD_UPDATE_REQUEST:
-    case types.DELETE_UPDATE_REQUEST:
+    case types.GET_PROPERTIES_REQUEST:
+    case types.ADD_PROPERTY_REQUEST:
+    case types.DELETE_PROPERTY_REQUEST:
       return Object.assign({}, state, {
         loading: true
       });
 
-    case types.GET_UPDATES_FAILURE:
-    case types.ADD_UPDATE_FAILURE:
-    case types.DELETE_UPDATE_FAILURE:
+    case types.GET_PROPERTIES_FAILURE:
+    case types.ADD_PROPERTY_FAILURE:
+    case types.DELETE_PROPERTY_FAILURE:
       const { error } = action;
       return Object.assign({}, state, {
         error,
         loading: false
       });
 
-    case types.GET_UPDATES_SUCCESS:
-      const { updates } = action;
+    case types.GET_PROPERTIES_SUCCESS:
+      const { properties } = action;
       return Object.assign({}, state, {
-        list: updates,
+        list: properties,
         loading: false
       });
 
-    case types.DELETE_UPDATE_SUCCESS:
+    case types.DELETE_PROPERTY_SUCCESS:
       const { id } = action;
       return Object.assign({}, state, {
         list: [...state.list].filter(u => u._id !== id),
@@ -39,10 +39,10 @@ export default function updatesReducer(state = initialState, action) {
         error: null
       });
 
-    case types.ADD_UPDATE_SUCCESS:
-      const { update } = action;
+    case types.ADD_PROPERTY_SUCCESS:
+      const { property } = action;
       return Object.assign({}, state, {
-        list: [...state.list, update],
+        list: [...state.list, property],
         loading: false,
         error: null
       });
