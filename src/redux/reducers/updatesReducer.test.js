@@ -23,16 +23,16 @@ describe("updatesReducer", () => {
   });
 
   it("should populate the list", () => {
-    const updates = [
+    const entities = [
       { id: 1, created: new Date(), body: "test1" },
       { id: 2, created: new Date(), body: "test2" }
     ];
     expect(
-      updatesReducer(undefined, { type: types.GET_UPDATES_SUCCESS, updates })
+      updatesReducer(undefined, { type: types.GET_UPDATES_SUCCESS, entities })
     ).toEqual({
       loading: false,
       error: null,
-      list: updates
+      list: entities
     });
   });
 
@@ -60,13 +60,13 @@ describe("updatesReducer", () => {
   });
 
   it("should add update to the list", () => {
-    const update = { id: 1, created: new Date(), body: "test" };
+    const entity = { id: 1, created: new Date(), body: "test" };
     expect(
-      updatesReducer(undefined, { type: types.ADD_UPDATE_SUCCESS, update })
+      updatesReducer(undefined, { type: types.ADD_UPDATE_SUCCESS, entity })
     ).toEqual({
       loading: false,
       error: null,
-      list: [update]
+      list: [entity]
     });
   });
 
@@ -94,11 +94,11 @@ describe("updatesReducer", () => {
   });
 
   it("should remove from the list", () => {
-    const update = { id: 1, created: new Date(), body: "test" };
+    const entity = { id: 1, created: new Date(), body: "test" };
     const initialState = {
       loading: false,
       error: null,
-      list: [update]
+      list: [entity]
     };
     const newState = {
       loading: false,
@@ -109,7 +109,7 @@ describe("updatesReducer", () => {
     expect(
       updatesReducer(initialState, {
         type: types.DELETE_UPDATE_SUCCESS,
-        _id: update._id
+        _id: entity._id
       })
     ).toEqual(newState);
   });
