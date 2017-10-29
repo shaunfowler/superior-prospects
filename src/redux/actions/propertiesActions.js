@@ -17,8 +17,8 @@ function createGetPropertiesRequest() {
   return { type: GET_PROPERTIES_REQUEST };
 }
 
-function createGetPropertiesSuccess(properties) {
-  return { type: GET_PROPERTIES_SUCCESS, properties };
+function createGetPropertiesSuccess(entities) {
+  return { type: GET_PROPERTIES_SUCCESS, entities };
 }
 
 function createGetPropertiesFailure(error) {
@@ -41,12 +41,12 @@ function createDeletePropertyFailure(error) {
 
 // ADD
 
-function createAddPropertyRequest(property) {
-  return { type: ADD_PROPERTY_REQUEST, property };
+function createAddPropertyRequest(entity) {
+  return { type: ADD_PROPERTY_REQUEST, entity };
 }
 
-function createAddPropertySuccess(property) {
-  return { type: ADD_PROPERTY_SUCCESS, property };
+function createAddPropertySuccess(entity) {
+  return { type: ADD_PROPERTY_SUCCESS, entity };
 }
 
 function createAddPropertyFailure(error) {
