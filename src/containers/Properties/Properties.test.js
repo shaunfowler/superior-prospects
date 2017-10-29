@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import Properties from "./Properties";
+import Properties from "./";
 
 const mockStore = configureStore([thunk]);
 
