@@ -17,8 +17,8 @@ function createGetUpdatesRequest() {
   return { type: GET_UPDATES_REQUEST };
 }
 
-function createGetUpdatesSuccess(updates) {
-  return { type: GET_UPDATES_SUCCESS, updates };
+function createGetUpdatesSuccess(entities) {
+  return { type: GET_UPDATES_SUCCESS, entities };
 }
 
 function createGetUpdatesFailure(error) {
@@ -41,12 +41,12 @@ function createDeleteUpdateFailure(error) {
 
 // ADD
 
-function createAddUpdateRequest(update) {
-  return { type: ADD_UPDATE_REQUEST, update };
+function createAddUpdateRequest(entity) {
+  return { type: ADD_UPDATE_REQUEST, entity };
 }
 
-function createAddUpdateSuccess(update) {
-  return { type: ADD_UPDATE_SUCCESS, update };
+function createAddUpdateSuccess(entity) {
+  return { type: ADD_UPDATE_SUCCESS, entity };
 }
 
 function createAddUpdateFailure(error) {
