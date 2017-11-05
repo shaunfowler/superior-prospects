@@ -10,28 +10,20 @@ export default function baseReducer(
   actionMappings
 ) {
   const {
-    getRequest,
-    addRequest,
-    deleteRequest,
-    getFailure,
-    addFailure,
-    deleteFailure,
+    request,
+    failure,
     getSuccess,
     addSuccess,
     deleteSuccess
   } = actionMappings;
 
   switch (action.type) {
-    case getRequest:
-    case addRequest:
-    case deleteRequest:
+    case request:
       return Object.assign({}, state, {
         loading: true
       });
 
-    case getFailure:
-    case addFailure:
-    case deleteFailure:
+    case failure:
       const { error } = action;
       return Object.assign({}, state, {
         error,
