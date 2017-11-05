@@ -1,5 +1,3 @@
-import * as types from "../actions/actionTypes";
-import updatesReducer from "./updatesReducer";
 import baseReducer from "./baseReducer";
 
 describe("updatesReducer", () => {
