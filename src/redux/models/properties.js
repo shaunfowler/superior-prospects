@@ -1,10 +1,20 @@
-import { properties as mock } from "../mock";
+import { properties, media, propertyBodies } from "../mock";
 
 const getProperties = () => {
   return new Promise(resolve => {
     resolve({
-      data: mock
+      data: properties
     });
+  });
+};
+
+const getPropertyBody = id => {
+  return Promise.resolve({ data: propertyBodies[id] });
+};
+
+const getPropertyMedia = propertyId => {
+  return Promise.resolve({
+    data: media.filter(m => m.propertyRefId === propertyId)
   });
 };
 
@@ -22,4 +32,10 @@ const addProperty = property => {
   });
 };
 
-export { getProperties, deleteProperty, addProperty };
+export {
+  getProperties,
+  getPropertyBody,
+  getPropertyMedia,
+  deleteProperty,
+  addProperty
+};

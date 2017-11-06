@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Link } from "react-router-dom";
 
 class Properties extends Component {
   componentWillMount() {
@@ -20,6 +21,7 @@ class Properties extends Component {
               <div key={p._id}>
                 <h3>{p.name}</h3>
                 <p>{p.description}</p>
+                <Link to={`properties/${p._id}`}>Details</Link>
               </div>
             ))}
         </div>
