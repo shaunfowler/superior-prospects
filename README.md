@@ -2,20 +2,13 @@
 
 [![CircleCI](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master.svg?style=svg)](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master)
 
-[![Code Climate](https://codeclimate.com/github/shaunfowler/superior-prospects/badges/gpa.svg)](https://codeclimate.com/github/shaunfowler/superior-prospects)
-
 The source for http://superiorprospects.com.
+
+> Note: This service is intended to be deployed in swarm. See the composition repo that contains the docker-compose file: https://github.com/shaunfowler/superior-prospects-composition
 
 ## Install Dependencies
 
 `npm install`
-
-## Configure
-
-Create a config file by running: `cp config.js.sample config.js`.
-Open `config.js` and set the hostname, email whitelist, and Google API creds.
-
-Note: the `allowedEmailAddresses` property in `config.js` represents a user DB (could be stored in mongo).
 
 ## Build
 
