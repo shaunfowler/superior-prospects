@@ -1,9 +1,9 @@
-import React, { Component } from "react";
-import renderHTML from "react-render-html";
+import React, { Component } from 'react';
+import renderHTML from 'react-render-html';
 import {
   getPropertyBody,
   getPropertyMedia
-} from "../../redux/models/properties";
+} from '../../redux/models/properties';
 
 class Property extends Component {
   constructor(props) {
@@ -43,7 +43,7 @@ class Property extends Component {
         <h2>{property.name}</h2>
         <em>{property.description}</em>
         <ul>{media.map(m => <li key={m._id}>{m.fileName}</li>)}</ul>
-        <div>{renderHTML(body)}</div>
+        <div>{body && renderHTML(body)}</div>
       </div>
     );
   }
