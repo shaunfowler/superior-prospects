@@ -1,12 +1,6 @@
-import { updates as mock } from "../mock";
-
-const getUpdates = () => {
-  return new Promise(resolve => {
-    resolve({
-      data: mock
-    });
-  });
-};
+import axios from "axios";
+console.log("sdfs");
+const getUpdates = () => axios.get("/api/updates");
 
 const deleteUpdate = () => {
   return new Promise(resolve => resolve());
