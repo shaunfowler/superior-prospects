@@ -1,5 +1,4 @@
 import axios from "axios";
-console.log("sdfs");
 const getUpdates = () => axios.get("/api/updates");
 
 const deleteUpdate = () => {
