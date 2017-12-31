@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
+import { MemoryRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
 import Home from "./";
@@ -19,5 +20,10 @@ it("renders without crashing", () => {
   };
   const store = mockStore(initialState);
   const div = document.createElement("div");
-  ReactDOM.render(<Home store={store} />, div);
+  ReactDOM.render(
+    <MemoryRouter>
+      <Home store={store} />
+    </MemoryRouter>,
+    div
+  );
 });
