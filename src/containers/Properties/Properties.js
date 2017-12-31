@@ -11,20 +11,17 @@ class Properties extends Component {
     const locations = this.props.locations.list;
     const properties = this.props.properties.list;
     return (
-      <div className="propertiesView">
-        <div className="locationsNav">
-          {locations && locations.map(l => <h3 key={l._id}>{l.name}</h3>)}
-        </div>
-        <div className="propertiesNav">
-          {properties &&
-            properties.map(p => (
-              <div key={p._id}>
-                <h3>{p.name}</h3>
-                <p>{p.description}</p>
-                <Link to={`properties/${p._id}`}>Details</Link>
-              </div>
-            ))}
-        </div>
+      <div className="propertiesView container">
+        {locations && locations.map(l => <div key={l._id}>{l.name}</div>)}
+        <hr />
+        {properties &&
+          properties.map(p => (
+            <div key={p._id}>
+              <h3>{p.name}</h3>
+              <p>{p.description}</p>
+              <Link to={`properties/${p._id}`}>Details</Link>
+            </div>
+          ))}
       </div>
     );
   }

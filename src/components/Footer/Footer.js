@@ -1,5 +1,7 @@
 import React from "react";
 
-const Footer = () => <div className="footer">Footer</div>;
+const Footer = () => (
+  <footer className="sp-footer">Superior Prospects Inc. © 2018</footer>
+);
 
 export default Footer;

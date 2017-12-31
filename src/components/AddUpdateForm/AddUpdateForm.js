@@ -22,13 +22,25 @@ class AddUpdateForm extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <div>
-        <h2>Add new update</h2>
-        <form onSubmit={this.onSubmit}>
-          <input type="text" value={text} onChange={this.onTextChange} />
-          <input type="submit" value="Add" />
-        </form>
-      </div>
+      <form className="box" onSubmit={this.onSubmit}>
+        <div className="field">
+          <label className="label">Add a new update</label>
+          <div className="control">
+            <textarea
+              value={text}
+              onChange={this.onTextChange}
+              className="textarea"
+              placeholder="Enter the update text"
+            />
+          </div>
+        </div>
+
+        <div className="field">
+          <div className="control">
+            <input type="submit" className="button is-link" value="Add" />
+          </div>
+        </div>
+      </form>
     );
   }
 }

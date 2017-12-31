@@ -1,12 +1,13 @@
 import React from "react";
+import "./UpdateItem.css";
 
 const UpdateItem = ({ id, body, created, onDelete }) => (
-  <div>
+  <div className="updateItem">
     {body}
     <br />
     {created.toString()}
     <br />
-    <button onClick={() => onDelete(id)}>Delete</button>
+    <button onClick={() => onDelete(id)} className="delete" />
   </div>
 );
 
