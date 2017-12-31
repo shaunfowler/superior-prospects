@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const separator = () => <span>&nbsp;&mdash;&nbsp;</span>;
-
 const Header = () => (
   <nav className="navbar header" role="navigation" aria-label="main navigation">
     <div className="container">
