@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => (
-  <nav className="navbar header" role="navigation" aria-label="main navigation">
+  <nav className="navbar header" aria-label="main navigation">
     <div className="container">
       <div className="navbar-brand">
         <a className="navbar-item" href="/">
