@@ -23,7 +23,7 @@ class Property extends Component {
 
     const { selected } = this.props;
     return (
-      <div className="propertyView">
+      <div className="propertyView container">
         <h2>{selected.name}</h2>
         <em>{selected.description}</em>
         <ul>{selected.media.map(m => <li key={m._id}>{m.fileName}</li>)}</ul>
