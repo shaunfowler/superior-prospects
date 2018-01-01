@@ -1,14 +1,13 @@
-FROM node:7.7.2-alpine
+FROM node:8
 
 WORKDIR /usr/app
-
 COPY ./ /usr/app/
 
-RUN apk add --update git && \
-  rm -rf /tmp/* /var/cache/apk/*
-
-RUN npm install --silent
+ENV NODE_PATH=/node_modules
+ENV PATH=$PATH:/node_modules/.bin
+RUN yarn
 
 EXPOSE 3000
+EXPOSE 35729
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

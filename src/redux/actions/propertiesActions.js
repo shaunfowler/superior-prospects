@@ -3,6 +3,7 @@ import {
   PROPERTIES_REQUEST,
   PROPERTIES_FAILURE,
   GET_PROPERTIES_SUCCESS,
+  GET_PROPERTY_SUCCESS,
   DELETE_PROPERTY_SUCCESS,
   ADD_PROPERTY_SUCCESS
 } from "./actionTypes";
@@ -15,10 +16,16 @@ function createPropertiesFailure(error) {
   return { type: PROPERTIES_FAILURE, error };
 }
 
-// GET
+// GET all
 
 function createGetPropertiesSuccess(entities) {
   return { type: GET_PROPERTIES_SUCCESS, entities };
+}
+
+// GET by ID
+
+function createGetPropertySuccess(entity) {
+  return { type: GET_PROPERTY_SUCCESS, entity };
 }
 
 // DELETE
@@ -40,6 +47,25 @@ export function getProperties() {
       .getProperties()
       .then(response => {
         dispatch(createGetPropertiesSuccess(response.data));
+      })
+      .catch(response => {
+        dispatch(createPropertiesFailure(response));
+      });
+  };
+}
+
+export function getProperty(id) {
+  return dispatch => {
+    dispatch(createPropertiesRequest());
+    return Promise.all([model.getProperty(id), model.getPropertyMedia(id)])
+      .then(responses => {
+        const propertyResponse = responses[0].data;
+        const mediaResponse = responses[1].data;
+        dispatch(
+          createGetPropertySuccess(
+            Object.assign({}, propertyResponse, { media: [...mediaResponse] })
+          )
+        );
       })
       .catch(response => {
         dispatch(createPropertiesFailure(response));

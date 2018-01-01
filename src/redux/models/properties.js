@@ -1,40 +1,18 @@
-import { properties, media, propertyBodies } from "../mock";
+import axios from "axios";
 
-const getProperties = () => {
-  return new Promise(resolve => {
-    resolve({
-      data: properties
-    });
-  });
-};
+const getProperties = () => axios.get("/api/properties/visible");
 
-const getPropertyBody = id => {
-  return Promise.resolve({ data: propertyBodies[id] });
-};
+const getProperty = id => axios.get(`/api/properties/${id}`);
 
-const getPropertyMedia = propertyId => {
-  return Promise.resolve({
-    data: media.filter(m => m.propertyRefId === propertyId)
-  });
-};
+const getPropertyMedia = id => axios.get(`/api/properties/${id}/media`);
 
-const deleteProperty = () => {
-  return new Promise(resolve => resolve());
-};
+const deleteProperty = id => axios.delete(`/api/properties/${id}`);
 
-const addProperty = property => {
-  return new Promise(resolve => {
-    const createdEntity = Object.assign({}, property);
-    createdEntity._id = 9;
-    resolve({
-      data: createdEntity
-    });
-  });
-};
+const addProperty = property => axios.post("/api/properties", property);
 
 export {
   getProperties,
-  getPropertyBody,
+  getProperty,
   getPropertyMedia,
   deleteProperty,
   addProperty

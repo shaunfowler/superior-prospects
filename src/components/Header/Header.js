@@ -5,9 +5,9 @@ const Header = () => (
   <nav className="navbar header" aria-label="main navigation">
     <div className="container">
       <div className="navbar-brand">
-        <a className="navbar-item" href="/">
+        <Link className="navbar-item" to="/">
           Superior Prospects Inc.
-        </a>
+        </Link>
 
         <button className="button navbar-burger">
           <span />

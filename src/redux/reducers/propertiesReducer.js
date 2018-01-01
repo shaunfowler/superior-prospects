@@ -6,6 +6,7 @@ export default function propertiesReducer(state, action) {
     request: types.PROPERTIES_REQUEST,
     failure: types.PROPERTIES_FAILURE,
     getSuccess: types.GET_PROPERTIES_SUCCESS,
+    getByIdSuccess: types.GET_PROPERTY_SUCCESS,
     addSuccess: types.ADD_PROPERTY_SUCCESS,
     deleteSuccess: types.DELETE_PROPERTY_SUCCESS
   });

@@ -1,25 +1,9 @@
-import { updates as mock } from "../mock";
+import axios from "axios";
 
-const getUpdates = () => {
-  return new Promise(resolve => {
-    resolve({
-      data: mock
-    });
-  });
-};
+const getUpdates = () => axios.get("/api/updates");
 
-const deleteUpdate = () => {
-  return new Promise(resolve => resolve());
-};
+const deleteUpdate = (id) => axios.delete(`/api/updates/${id}`);
 
-const addUpdate = update => {
-  return new Promise(resolve => {
-    const createdEntity = Object.assign({}, update);
-    createdEntity._id = 9; // TODO - generate on server
-    resolve({
-      data: createdEntity
-    });
-  });
-};
+const addUpdate = update => axios.post('/api/updates', update);
 
 export { getUpdates, deleteUpdate, addUpdate };

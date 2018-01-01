@@ -1,32 +1,18 @@
-import React, { Component } from 'react';
-import renderHTML from 'react-render-html';
-import {
-  getPropertyBody,
-  getPropertyMedia
-} from '../../redux/models/properties';
+import React, { Component } from "react";
+import renderHTML from "react-render-html";
 
 class Property extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      initialized: false,
-      body: [],
-      media: []
+      initialized: false
     };
   }
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    Promise.all([
-      this.props.getProperties(),
-      getPropertyBody(id),
-      getPropertyMedia(id)
-    ]).then(([properties, body, media]) => {
-      this.setState({
-        initialized: true,
-        body: body.data,
-        media: media.data
-      });
+    this.props.getProperty(id).then(() => {
+      this.setState({ initialized: true });
     });
   }
 
@@ -35,15 +21,13 @@ class Property extends Component {
       return null;
     }
 
-    const { id } = this.props.match.params;
-    const property = this.props.properties.list.find(p => p._id === id);
-    const { body, media } = this.state;
+    const { selected } = this.props;
     return (
-      <div className="propertyView">
-        <h2>{property.name}</h2>
-        <em>{property.description}</em>
-        <ul>{media.map(m => <li key={m._id}>{m.fileName}</li>)}</ul>
-        <div>{body && renderHTML(body)}</div>
+      <div className="propertyView container">
+        <h2>{selected.name}</h2>
+        <em>{selected.description}</em>
+        <ul>{selected.media.map(m => <li key={m._id}>{m.fileName}</li>)}</ul>
+        <div>{selected.body && renderHTML(selected.body)}</div>
       </div>
     );
   }

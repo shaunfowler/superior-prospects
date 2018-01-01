@@ -13,6 +13,7 @@ export default function baseReducer(
     request,
     failure,
     getSuccess,
+    getByIdSuccess,
     addSuccess,
     deleteSuccess
   } = actionMappings;
@@ -24,31 +25,33 @@ export default function baseReducer(
       });
 
     case failure:
-      const { error } = action;
       return Object.assign({}, state, {
-        error,
+        error: action.error,
         loading: false
       });
 
     case getSuccess:
-      const { entities } = action;
       return Object.assign({}, state, {
-        list: entities,
+        list: action.entities,
+        loading: false
+      });
+
+    case getByIdSuccess:
+      return Object.assign({}, state, {
+        selected: action.entity,
         loading: false
       });
 
     case addSuccess:
-      const { entity } = action;
       return Object.assign({}, state, {
-        list: [...state.list, entity],
+        list: [...state.list, action.entity],
         loading: false,
         error: null
       });
 
     case deleteSuccess:
-      const { id } = action;
       return Object.assign({}, state, {
-        list: [...state.list].filter(x => x._id !== id),
+        list: [...state.list].filter(x => x._id !== action.id),
         loading: false,
         error: null
       });
