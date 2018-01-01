@@ -57,14 +57,15 @@ export function getProperties() {
 export function getProperty(id) {
   return dispatch => {
     dispatch(createPropertiesRequest());
-    return model
-      .getProperty(id)
-      .then(response => {
-        // TODO - body & media API calls
-        const { data } = response;
-        data.media = [];
-        data.body = "";
-        dispatch(createGetPropertySuccess(response.data));
+    return Promise.all([model.getProperty(id), model.getPropertyMedia(id)])
+      .then(responses => {
+        const propertyResponse = responses[0].data;
+        const mediaResponse = responses[1].data;
+        dispatch(
+          createGetPropertySuccess(
+            Object.assign({}, propertyResponse, { media: [...mediaResponse] })
+          )
+        );
       })
       .catch(response => {
         dispatch(createPropertiesFailure(response));
