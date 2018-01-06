@@ -8,6 +8,10 @@ import Property from "../Property";
 import About from "../About";
 
 class App extends Component {
+  componentDidMount() {
+    this.props.getUser();
+  }
+
   render() {
     return (
       <BrowserRouter>
