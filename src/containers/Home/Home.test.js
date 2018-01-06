@@ -7,7 +7,7 @@ import Home from "./";
 
 const mockStore = configureStore([thunk]);
 
-it("renders without crashing", () => {
+it("renders when unauthenticated", () => {
   const initialState = {
     updates: {
       loading: false,
@@ -16,6 +16,33 @@ it("renders without crashing", () => {
     properties: {
       loading: false,
       list: []
+    },
+    user: {
+      isAuthenticated: false
+    }
+  };
+  const store = mockStore(initialState);
+  const div = document.createElement("div");
+  ReactDOM.render(
+    <MemoryRouter>
+      <Home store={store} />
+    </MemoryRouter>,
+    div
+  );
+});
+
+it("renders when authenticated", () => {
+  const initialState = {
+    updates: {
+      loading: false,
+      list: []
+    },
+    properties: {
+      loading: false,
+      list: []
+    },
+    user: {
+      isAuthenticated: true
     }
   };
   const store = mockStore(initialState);

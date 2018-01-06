@@ -21,12 +21,13 @@ class Home extends Component {
   render() {
     const updates = this.props.updates.list;
     const properties = this.props.properties.list;
+    const { isAuthenticated } = this.props;
     return (
       <div className="homeView container ">
         <div className="columns">
           <div className="column">
             <h1 className="title">Updates</h1>
-            <AddUpdateForm onAdd={this.onAddUpdate} />
+            {isAuthenticated && <AddUpdateForm onAdd={this.onAddUpdate} />}
             {updates &&
               updates.map(u => (
                 <UpdateItem
@@ -35,6 +36,7 @@ class Home extends Component {
                   body={u.body}
                   created={u.created}
                   onDelete={this.onDeleteUpdate}
+                  isUserAuthenticated={isAuthenticated}
                 />
               ))}
           </div>

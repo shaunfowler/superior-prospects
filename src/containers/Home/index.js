@@ -8,10 +8,11 @@ import {
 import { getProperties } from "../../redux/actions/propertiesActions";
 import "./Home.css";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ updates, properties, user }) => {
   return {
-    updates: state.updates,
-    properties: state.properties
+    updates: updates,
+    properties: properties,
+    isAuthenticated: user.isAuthenticated
   };
 };
 
