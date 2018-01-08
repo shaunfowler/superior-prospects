@@ -6,7 +6,7 @@ import AddUpdateForm from "../../components/AddUpdateForm";
 
 class Home extends Component {
   componentWillMount() {
-    this.props.getUpdates();
+    this.props.queryUpdates();
     this.props.getProperties();
   }
 

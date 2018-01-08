@@ -31,6 +31,7 @@ export default function baseReducer(
       });
 
     case getSuccess:
+      console.log(action);
       return Object.assign({}, state, {
         list: action.entities,
         loading: false
