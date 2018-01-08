@@ -12,8 +12,6 @@ import { asyncActionNames, buildAsyncActions } from "./actionUtils";
 export const UPDATE_ACTION_NAMES = asyncActionNames("UPDATES");
 export const UPDATE_ACTIONS = buildAsyncActions(UPDATE_ACTION_NAMES);
 
-console.log(UPDATE_ACTION_NAMES);
-
 export function queryUpdates() {
   return dispatch => {
     dispatch(UPDATE_ACTIONS.request());

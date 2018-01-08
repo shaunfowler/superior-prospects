@@ -12,7 +12,7 @@ export default function baseReducer(
   const {
     request,
     failure,
-    getSuccess,
+    querySuccess,
     getByIdSuccess,
     addSuccess,
     deleteSuccess
@@ -30,8 +30,7 @@ export default function baseReducer(
         loading: false
       });
 
-    case getSuccess:
-      console.log(action);
+    case querySuccess:
       return Object.assign({}, state, {
         list: action.entities,
         loading: false

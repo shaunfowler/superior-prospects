@@ -1,22 +1,11 @@
 import baseReducer from "./baseReducer";
+import { asyncActionNames, buildAsyncActions } from "../actions/actionUtils";
 
 describe("updatesReducer", () => {
-  const REQUEST = "REQUEST";
-  const FAILURE = "FAILURE";
-  const GET_SUCCESS = "GET_SUCCESS";
-  const ADD_SUCCESS = "ADD_SUCCESS";
-  const DELETE_SUCCESS = "DELETE_SUCCESS";
-
-  const actionMappings = {
-    request: REQUEST,
-    failure: FAILURE,
-    getSuccess: GET_SUCCESS,
-    addSuccess: ADD_SUCCESS,
-    deleteSuccess: DELETE_SUCCESS
-  };
+  const TEST_ACTION_NAMES = asyncActionNames("TEST");
 
   it("should return initial state", () => {
-    expect(baseReducer(undefined, {}, actionMappings)).toEqual({
+    expect(baseReducer(undefined, {}, TEST_ACTION_NAMES)).toEqual({
       loading: false,
       error: null,
       list: []
@@ -26,7 +15,13 @@ describe("updatesReducer", () => {
   // Request and failure
 
   it("should set loading state", () => {
-    expect(baseReducer(undefined, { type: REQUEST }, actionMappings)).toEqual({
+    expect(
+      baseReducer(
+        undefined,
+        { type: TEST_ACTION_NAMES.request },
+        TEST_ACTION_NAMES
+      )
+    ).toEqual({
       loading: true,
       error: null,
       list: []
@@ -36,7 +31,11 @@ describe("updatesReducer", () => {
   it("should set error object", () => {
     const error = new Error("oh no!");
     expect(
-      baseReducer(undefined, { type: FAILURE, error }, actionMappings)
+      baseReducer(
+        undefined,
+        { type: TEST_ACTION_NAMES.failure, error },
+        TEST_ACTION_NAMES
+      )
     ).toEqual({
       loading: false,
       error: error,
@@ -52,7 +51,11 @@ describe("updatesReducer", () => {
       { id: 2, created: new Date(), body: "test2" }
     ];
     expect(
-      baseReducer(undefined, { type: GET_SUCCESS, entities }, actionMappings)
+      baseReducer(
+        undefined,
+        { type: TEST_ACTION_NAMES.querySuccess, entities },
+        TEST_ACTION_NAMES
+      )
     ).toEqual({
       loading: false,
       error: null,
@@ -65,7 +68,11 @@ describe("updatesReducer", () => {
   it("should add to the list", () => {
     const entity = { id: 1, created: new Date(), body: "test" };
     expect(
-      baseReducer(undefined, { type: ADD_SUCCESS, entity }, actionMappings)
+      baseReducer(
+        undefined,
+        { type: TEST_ACTION_NAMES.addSuccess, entity },
+        TEST_ACTION_NAMES
+      )
     ).toEqual({
       loading: false,
       error: null,
@@ -93,10 +100,10 @@ describe("updatesReducer", () => {
       baseReducer(
         initialState,
         {
-          type: DELETE_SUCCESS,
+          type: TEST_ACTION_NAMES.deleteSuccess,
           _id: entity._id
         },
-        actionMappings
+        TEST_ACTION_NAMES
       )
     ).toEqual(newState);
   });
