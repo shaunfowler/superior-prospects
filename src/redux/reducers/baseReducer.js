@@ -14,7 +14,8 @@ export default function baseReducer(
     failure,
     querySuccess,
     getByIdSuccess,
-    addSuccess,
+    editSuccess,
+    createSuccess,
     deleteSuccess
   } = actionMappings;
 
@@ -42,7 +43,11 @@ export default function baseReducer(
         loading: false
       });
 
-    case addSuccess:
+    case editSuccess:
+      // TODO
+      return Object.assign({}, state, {});
+
+    case createSuccess:
       return Object.assign({}, state, {
         list: [...state.list, action.entity],
         loading: false,

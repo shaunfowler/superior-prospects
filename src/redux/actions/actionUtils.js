@@ -3,7 +3,7 @@ export const asyncActionNames = baseName => ({
   request: `${baseName}_REQUEST`,
   querySuccess: `${baseName}_QUERY_SUCCESS`,
   getSuccess: `${baseName}_GET_SUCCESS`,
-  addSuccess: `${baseName}_ADD_SUCCESS`,
+  createSuccess: `${baseName}_CREATE_SUCCESS`,
   editSuccess: `${baseName}_EDIT_SUCCESS`,
   deleteSuccess: `${baseName}_DELETE_SUCCESS`
 });
@@ -16,20 +16,24 @@ export const buildAsyncActions = actionName => ({
     type: actionName.failure,
     error
   }),
-  querySuccess: data => ({
+  querySuccess: entities => ({
     type: actionName.querySuccess,
-    data
+    entities
   }),
-  getSuccess: data => ({
+  getSuccess: entity => ({
     type: actionName.getSuccess,
-    data
+    entity
   }),
-  editSuccess: data => ({
+  createSuccess: entity => ({
+    type: actionName.createSuccess,
+    entity
+  }),
+  editSuccess: entity => ({
     type: actionName.updateSuccess,
-    data
+    entity
   }),
-  deleteSuccess: data => ({
+  deleteSuccess: id => ({
     type: actionName.deleteSuccess,
-    data
+    id
   })
 });

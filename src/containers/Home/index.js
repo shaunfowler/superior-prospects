@@ -3,7 +3,7 @@ import Home from "./Home";
 import {
   queryUpdates,
   deleteUpdate,
-  addUpdate
+  createUpdate
 } from "../../redux/actions/updatesActions";
 import { getProperties } from "../../redux/actions/propertiesActions";
 import "./Home.css";
@@ -20,7 +20,7 @@ const mapDispatchToProps = dispatch => {
   return {
     queryUpdates: () => dispatch(queryUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
-    addUpdate: update => dispatch(addUpdate(update)),
+    createUpdate: update => dispatch(createUpdate(update)),
     getProperties: () => dispatch(getProperties())
   };
 };
