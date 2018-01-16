@@ -14,8 +14,6 @@ function createUserFailure(error) {
   return { type: USER_ACTION_NAMES.failure, error };
 }
 
-// GET
-
 function createGetUserSuccess(entity) {
   return { type: USER_ACTION_NAMES.getSuccess, entity };
 }
