@@ -8,7 +8,8 @@ describe("updatesReducer", () => {
     expect(baseReducer(undefined, {}, TEST_ACTION_NAMES)).toEqual({
       loading: false,
       error: null,
-      list: []
+      list: [],
+      selected: null
     });
   });
 
@@ -24,7 +25,8 @@ describe("updatesReducer", () => {
     ).toEqual({
       loading: true,
       error: null,
-      list: []
+      list: [],
+      selected: null
     });
   });
 
@@ -39,7 +41,8 @@ describe("updatesReducer", () => {
     ).toEqual({
       loading: false,
       error: error,
-      list: []
+      list: [],
+      selected: null
     });
   });
 
@@ -59,7 +62,8 @@ describe("updatesReducer", () => {
     ).toEqual({
       loading: false,
       error: null,
-      list: entities
+      list: entities,
+      selected: null
     });
   });
 
@@ -94,7 +98,8 @@ describe("updatesReducer", () => {
     ).toEqual({
       loading: false,
       error: null,
-      list: [entity]
+      list: [entity],
+      selected: null
     });
   });
 
@@ -105,13 +110,15 @@ describe("updatesReducer", () => {
     const initialState = {
       loading: false,
       error: null,
-      list: [entity]
+      list: [entity],
+      selected: null
     };
 
     const newState = {
       loading: false,
       error: null,
-      list: []
+      list: [],
+      selected: null
     };
 
     expect(
