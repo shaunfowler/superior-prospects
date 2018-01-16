@@ -1,9 +1,9 @@
 import { connect } from "react-redux";
 import Home from "./Home";
 import {
-  getUpdates,
+  queryUpdates,
   deleteUpdate,
-  addUpdate
+  createUpdate
 } from "../../redux/actions/updatesActions";
 import { getProperties } from "../../redux/actions/propertiesActions";
 import "./Home.css";
@@ -18,9 +18,9 @@ const mapStateToProps = ({ updates, properties, user }) => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    getUpdates: () => dispatch(getUpdates()),
+    queryUpdates: () => dispatch(queryUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
-    addUpdate: update => dispatch(addUpdate(update)),
+    createUpdate: update => dispatch(createUpdate(update)),
     getProperties: () => dispatch(getProperties())
   };
 };

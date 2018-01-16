@@ -5,7 +5,7 @@ export default function locationsReducer(state, action) {
   return generateReducer(state, action, {
     request: types.LOCATIONS_REQUEST,
     failure: types.LOCATIONS_FAILURE,
-    getSuccess: types.GET_LOCATIONS_SUCCESS,
+    querySuccess: types.GET_LOCATIONS_SUCCESS,
     addSuccess: types.ADD_LOCATION_SUCCESS,
     deleteSuccess: types.DELETE_LOCATION_SUCCESS
   });

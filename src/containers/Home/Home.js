@@ -6,16 +6,16 @@ import AddUpdateForm from "../../components/AddUpdateForm";
 
 class Home extends Component {
   componentWillMount() {
-    this.props.getUpdates();
+    this.props.queryUpdates();
     this.props.getProperties();
   }
 
-  onDeleteUpdate = id => {
-    this.props.deleteUpdate(id);
+  onDeleteUpdate = update => {
+    this.props.deleteUpdate(update);
   };
 
-  onAddUpdate = update => {
-    this.props.addUpdate(update);
+  onCreateUpdate = update => {
+    this.props.createUpdate(update);
   };
 
   render() {
@@ -27,7 +27,9 @@ class Home extends Component {
         <div className="columns">
           <div className="column">
             <h1 className="title">Updates</h1>
-            {isAuthenticated && <AddUpdateForm onAdd={this.onAddUpdate} />}
+            {isAuthenticated && (
+              <AddUpdateForm onCreate={this.onCreateUpdate} />
+            )}
             {updates &&
               updates.map(u => (
                 <UpdateItem
