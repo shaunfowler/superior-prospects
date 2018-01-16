@@ -32,7 +32,6 @@ export default function baseReducer(
       });
 
     case querySuccess:
-      console.log(action);
       return Object.assign({}, state, {
         list: action.entities,
         loading: false
