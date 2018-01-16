@@ -1,13 +1,6 @@
-import * as types from "../actions/actionTypes";
 import generateReducer from "./baseReducer";
+import { PROPERTY_ACTION_NAMES } from "../actions/propertiesActions";
 
 export default function propertiesReducer(state, action) {
-  return generateReducer(state, action, {
-    request: types.PROPERTIES_REQUEST,
-    failure: types.PROPERTIES_FAILURE,
-    querySuccess: types.GET_PROPERTIES_SUCCESS,
-    getByIdSuccess: types.GET_PROPERTY_SUCCESS,
-    addSuccess: types.ADD_PROPERTY_SUCCESS,
-    deleteSuccess: types.DELETE_PROPERTY_SUCCESS
-  });
+  return generateReducer(state, action, PROPERTY_ACTION_NAMES);
 }

@@ -1,4 +1,4 @@
-import * as types from "../actions/actionTypes";
+import { USER_ACTION_NAMES } from "../actions/userActions";
 
 const initialState = {
   loading: false,
@@ -9,12 +9,12 @@ const initialState = {
 
 export default function userReducer(state = initialState, action) {
   switch (action.type) {
-    case types.GET_USER_REQUEST:
+    case USER_ACTION_NAMES.request:
       return Object.assign({}, state, {
         loading: true
       });
 
-    case types.GET_USER_SUCCESS:
+    case USER_ACTION_NAMES.getSuccess:
       const { data } = action;
       return Object.assign({}, state, {
         loading: false,
@@ -22,7 +22,7 @@ export default function userReducer(state = initialState, action) {
         isAuthenticated: true
       });
 
-    case types.GET_USER_FAILURE:
+    case USER_ACTION_NAMES.failure:
       const { error } = action;
       return Object.assign({}, state, {
         loading: false,

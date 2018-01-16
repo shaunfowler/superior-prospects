@@ -5,7 +5,7 @@ import {
   deleteUpdate,
   createUpdate
 } from "../../redux/actions/updatesActions";
-import { getProperties } from "../../redux/actions/propertiesActions";
+import { queryProperties } from "../../redux/actions/propertiesActions";
 import "./Home.css";
 
 const mapStateToProps = ({ updates, properties, user }) => {
@@ -21,7 +21,7 @@ const mapDispatchToProps = dispatch => {
     queryUpdates: () => dispatch(queryUpdates()),
     deleteUpdate: id => dispatch(deleteUpdate(id)),
     createUpdate: update => dispatch(createUpdate(update)),
-    getProperties: () => dispatch(getProperties())
+    queryProperties: () => dispatch(queryProperties())
   };
 };
 

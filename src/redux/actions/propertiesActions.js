@@ -1,62 +1,26 @@
 import axios from "axios";
-import {
-  PROPERTIES_REQUEST,
-  PROPERTIES_FAILURE,
-  GET_PROPERTIES_SUCCESS,
-  GET_PROPERTY_SUCCESS,
-  DELETE_PROPERTY_SUCCESS,
-  ADD_PROPERTY_SUCCESS
-} from "./actionTypes";
+import { asyncActionNames, buildAsyncActions } from "./actionUtils";
 
-function createPropertiesRequest() {
-  return { type: PROPERTIES_REQUEST };
-}
+export const PROPERTY_ACTION_NAMES = asyncActionNames("PROPERTY");
+export const PROPERTY_ACTIONS = buildAsyncActions(PROPERTY_ACTION_NAMES);
 
-function createPropertiesFailure(error) {
-  return { type: PROPERTIES_FAILURE, error };
-}
-
-// GET all
-
-function createGetPropertiesSuccess(entities) {
-  return { type: GET_PROPERTIES_SUCCESS, entities };
-}
-
-// GET by ID
-
-function createGetPropertySuccess(entity) {
-  return { type: GET_PROPERTY_SUCCESS, entity };
-}
-
-// DELETE
-
-function createDeletePropertySuccess(id) {
-  return { type: DELETE_PROPERTY_SUCCESS, id };
-}
-
-// ADD
-
-function createAddPropertySuccess(entity) {
-  return { type: ADD_PROPERTY_SUCCESS, entity };
-}
-
-export function getProperties() {
+export function queryProperties() {
   return dispatch => {
-    dispatch(createPropertiesRequest());
+    dispatch(PROPERTY_ACTIONS.request());
     return axios
       .get("/api/properties/visible")
       .then(response => {
-        dispatch(createGetPropertiesSuccess(response.data));
+        dispatch(PROPERTY_ACTIONS.querySuccess(response.data));
       })
       .catch(response => {
-        dispatch(createPropertiesFailure(response));
+        dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
 }
 
 export function getProperty(id) {
   return dispatch => {
-    dispatch(createPropertiesRequest());
+    dispatch(PROPERTY_ACTIONS.request());
     return Promise.all([
       axios.get(`/api/properties/${id}`),
       axios.get(`/api/properties/${id}/media`)
@@ -65,41 +29,41 @@ export function getProperty(id) {
         const propertyResponse = responses[0].data;
         const mediaResponse = responses[1].data;
         dispatch(
-          createGetPropertySuccess(
+          PROPERTY_ACTIONS.getSuccess(
             Object.assign({}, propertyResponse, { media: [...mediaResponse] })
           )
         );
       })
       .catch(response => {
-        dispatch(createPropertiesFailure(response));
+        dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
 }
 
-export function addProperty(property) {
+export function createProperty(property) {
   return dispatch => {
-    dispatch(createPropertiesRequest());
+    dispatch(PROPERTY_ACTIONS.request());
     return axios
       .post("/api/properties", property)
       .then(response => {
-        dispatch(createAddPropertySuccess(response.data));
+        dispatch(PROPERTY_ACTIONS.createSuccess(response.data));
       })
       .catch(response => {
-        dispatch(createPropertiesFailure(response));
+        dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
 }
 
 export function deleteProperty(id) {
   return dispatch => {
-    dispatch(createPropertiesRequest());
+    dispatch(PROPERTY_ACTIONS.request());
     return axios
       .delete(`/api/properties/${id}`)
       .then(() => {
-        dispatch(createDeletePropertySuccess(id));
+        dispatch(PROPERTY_ACTIONS.deleteSuccess(id));
       })
       .catch(response => {
-        dispatch(createPropertiesFailure(response));
+        dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
 }

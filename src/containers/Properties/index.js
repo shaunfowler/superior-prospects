@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { queryLocations } from "../../redux/actions/locationsActions";
-import { getProperties } from "../../redux/actions/propertiesActions";
+import { queryProperties } from "../../redux/actions/propertiesActions";
 import Properties from "./Properties";
 import "./Properties.css";
 
@@ -14,7 +14,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     queryLocations: () => dispatch(queryLocations()),
-    getProperties: () => dispatch(getProperties())
+    queryProperties: () => dispatch(queryProperties())
   };
 };
 

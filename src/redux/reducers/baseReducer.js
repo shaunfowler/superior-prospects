@@ -1,7 +1,8 @@
 const initialState = {
   loading: false,
   error: null,
-  list: []
+  list: [],
+  selected: null
 };
 
 export default function baseReducer(
