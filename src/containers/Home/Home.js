@@ -7,7 +7,7 @@ import AddUpdateForm from "../../components/AddUpdateForm";
 class Home extends Component {
   componentWillMount() {
     this.props.queryUpdates();
-    this.props.getProperties();
+    this.props.queryProperties();
   }
 
   onDeleteUpdate = update => {

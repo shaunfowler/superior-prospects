@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 class Properties extends Component {
   componentWillMount() {
     this.props.queryLocations();
-    this.props.getProperties();
+    this.props.queryProperties();
   }
 
   render() {

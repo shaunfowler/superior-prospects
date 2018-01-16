@@ -1,22 +1,23 @@
 import axios from "axios";
-import {
-  GET_USER_REQUEST,
-  GET_USER_FAILURE,
-  GET_USER_SUCCESS
-} from "./actionTypes";
+
+export const USER_ACTION_NAMES = {
+  request: "GET_USER_REQUEST",
+  getSuccess: "GET_USER_SUCCESS",
+  failure: "GET_USER_FAILURE"
+};
 
 function createUserRequest() {
-  return { type: GET_USER_REQUEST };
+  return { type: USER_ACTION_NAMES.request };
 }
 
 function createUserFailure(error) {
-  return { type: GET_USER_FAILURE, error };
+  return { type: USER_ACTION_NAMES.failure, error };
 }
 
 // GET
 
 function createGetUserSuccess(entity) {
-  return { type: GET_USER_SUCCESS, entity };
+  return { type: USER_ACTION_NAMES.getSuccess, entity };
 }
 
 export function getUser() {
