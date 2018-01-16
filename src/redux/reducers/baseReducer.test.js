@@ -43,7 +43,7 @@ describe("updatesReducer", () => {
     });
   });
 
-  // Get
+  // Query
 
   it("should populate the list", () => {
     const entities = [
@@ -63,14 +63,32 @@ describe("updatesReducer", () => {
     });
   });
 
-  // Add
+  // Get by ID
+
+  it("should populate the selected item", () => {
+    const entity = { id: 1, created: new Date(), body: "test1" };
+    expect(
+      baseReducer(
+        undefined,
+        { type: TEST_ACTION_NAMES.getSuccess, entity },
+        TEST_ACTION_NAMES
+      )
+    ).toEqual({
+      loading: false,
+      error: null,
+      list: [],
+      selected: entity
+    });
+  });
+
+  // Create
 
   it("should add to the list", () => {
     const entity = { id: 1, created: new Date(), body: "test" };
     expect(
       baseReducer(
         undefined,
-        { type: TEST_ACTION_NAMES.addSuccess, entity },
+        { type: TEST_ACTION_NAMES.createSuccess, entity },
         TEST_ACTION_NAMES
       )
     ).toEqual({

@@ -13,7 +13,7 @@ export default function baseReducer(
     request,
     failure,
     querySuccess,
-    getByIdSuccess,
+    getSuccess,
     editSuccess,
     createSuccess,
     deleteSuccess
@@ -37,7 +37,7 @@ export default function baseReducer(
         loading: false
       });
 
-    case getByIdSuccess:
+    case getSuccess:
       return Object.assign({}, state, {
         selected: action.entity,
         loading: false
