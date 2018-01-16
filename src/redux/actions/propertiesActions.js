@@ -1,4 +1,4 @@
-import * as model from "../models/properties";
+import axios from "axios";
 import {
   PROPERTIES_REQUEST,
   PROPERTIES_FAILURE,
@@ -43,8 +43,8 @@ function createAddPropertySuccess(entity) {
 export function getProperties() {
   return dispatch => {
     dispatch(createPropertiesRequest());
-    return model
-      .getProperties()
+    return axios
+      .get("/api/properties/visible")
       .then(response => {
         dispatch(createGetPropertiesSuccess(response.data));
       })
@@ -57,7 +57,10 @@ export function getProperties() {
 export function getProperty(id) {
   return dispatch => {
     dispatch(createPropertiesRequest());
-    return Promise.all([model.getProperty(id), model.getPropertyMedia(id)])
+    return Promise.all([
+      axios.get(`/api/properties/${id}`),
+      axios.get(`/api/properties/${id}/media`)
+    ])
       .then(responses => {
         const propertyResponse = responses[0].data;
         const mediaResponse = responses[1].data;
@@ -76,8 +79,8 @@ export function getProperty(id) {
 export function addProperty(property) {
   return dispatch => {
     dispatch(createPropertiesRequest());
-    return model
-      .addProperty(property)
+    return axios
+      .post("/api/properties", property)
       .then(response => {
         dispatch(createAddPropertySuccess(response.data));
       })
@@ -90,8 +93,8 @@ export function addProperty(property) {
 export function deleteProperty(id) {
   return dispatch => {
     dispatch(createPropertiesRequest());
-    return model
-      .deleteProperty(id)
+    return axios
+      .delete(`/api/properties/${id}`)
       .then(() => {
         dispatch(createDeletePropertySuccess(id));
       })
