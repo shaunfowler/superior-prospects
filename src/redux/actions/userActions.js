@@ -1,4 +1,4 @@
-import * as model from "../models/user";
+import axios from "axios";
 import {
   GET_USER_REQUEST,
   GET_USER_FAILURE,
@@ -22,8 +22,8 @@ function createGetUserSuccess(entity) {
 export function getUser() {
   return dispatch => {
     dispatch(createUserRequest());
-    return model
-      .getUser()
+    return axios
+      .get("/api/user")
       .then(response => {
         dispatch(createGetUserSuccess(response.data));
       })
