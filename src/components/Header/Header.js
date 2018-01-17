@@ -2,10 +2,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 const Header = () => (
-  <nav className="navbar header" aria-label="main navigation">
+  <nav className="navbar is-dark header" aria-label="main navigation">
     <div className="container">
       <div className="navbar-brand">
-        <Link className="navbar-item" to="/">
+        <Link className="navbar-item is-size-5 has-text-weight-bold" to="/">
           Superior Prospects Inc.
         </Link>
 

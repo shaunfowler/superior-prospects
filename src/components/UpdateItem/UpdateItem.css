@@ -1,3 +1,7 @@
 .updateItem {
   margin: 20px 0;
 }
+
+.updateItem .delete {
+  margin-left: 10px;
+}

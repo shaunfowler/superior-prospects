@@ -1,5 +1,22 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+import PropertyItem from "../../components/PropertyItem";
+
+const renderPropertiesForLocationId = (properties, locationId) => (
+  <div>
+    {properties &&
+      properties
+        .filter(p => p.locationRefId === locationId)
+        .map(p => (
+          <PropertyItem
+            key={p._id}
+            id={p._id}
+            name={p.name}
+            safeName={p.safeName}
+            description={p.description}
+          />
+        ))}
+  </div>
+);
 
 class Properties extends Component {
   componentWillMount() {
@@ -12,14 +29,13 @@ class Properties extends Component {
     const properties = this.props.properties.list;
     return (
       <div className="propertiesView container">
-        {locations && locations.map(l => <div key={l._id}>{l.name}</div>)}
-        <hr />
-        {properties &&
-          properties.map(p => (
-            <div key={p._id}>
-              <h3>{p.name}</h3>
-              <p>{p.description}</p>
-              <Link to={`properties/${p._id}`}>Details</Link>
+        <h1 className="title">Properties</h1>
+        {locations &&
+          locations.map(l => (
+            <div key={l._id} className="location">
+              <div className="is-size-4 has-text-weight-bold">{l.name}</div>
+              <div className="is-text-grey">{l.body}</div>
+              {renderPropertiesForLocationId(properties, l._id)}
             </div>
           ))}
       </div>

@@ -1,8 +1,12 @@
 .header {
-  border-bottom: 1px solid #eee;
+  background-color: #222;
 }
 
-.header .navbar-brand {
-  font-weight: 600;
-  font-size: 1.3em;
+.header .navbar-item {
+  border-bottom: 2px solid transparent;
+  transition: 200ms;
+}
+
+.header .navbar-item:hover {
+  border-bottom: 3px solid #fff;
 }
