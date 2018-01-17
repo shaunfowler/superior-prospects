@@ -5,7 +5,7 @@ import "./UpdateItem.css";
 const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
   <div className="updateItem">
     <div className="is-size-6 has-text-weight-bold">
-      {moment(created).format("dddd, MMMM Do YYYY")}
+      {moment(created).format("MMMM D, YYYY")}
       {isUserAuthenticated && (
         <button onClick={() => onDelete(id)} className="delete" />
       )}

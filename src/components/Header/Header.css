@@ -1,4 +1,12 @@
 .header {
-  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
-  background-color: transparent;
+  background-color: #222;
+}
+
+.header .navbar-item {
+  border-bottom: 2px solid transparent;
+  transition: 200ms;
+}
+
+.header .navbar-item:hover {
+  border-bottom: 3px solid #fff;
 }
