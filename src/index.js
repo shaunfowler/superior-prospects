@@ -1,8 +1,7 @@
 import React from "react";
 import { render } from "react-dom";
 import { Provider } from "react-redux";
-import { Route } from "react-router-dom";
-import { ConnectedRouter } from "react-router-redux";
+import { BrowserRouter, Route } from "react-router-dom";
 import "bulma/css/bulma.css";
 import configureStore from "./redux/store/configureStore";
 import { history } from "./redux/store/configureStore";
@@ -14,9 +13,9 @@ const store = configureStore();
 
 render(
   <Provider store={store}>
-    <ConnectedRouter>
+    <BrowserRouter>
       <Route component={withTracker(App, {})} />
-    </ConnectedRouter>
+    </BrowserRouter>
   </Provider>,
   document.getElementById("root")
 );
