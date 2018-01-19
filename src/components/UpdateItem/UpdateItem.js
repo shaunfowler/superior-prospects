@@ -10,7 +10,7 @@ const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
         <button onClick={() => onDelete(id)} className="delete" />
       )}
     </div>
-    <div className="has-text-grey">{body}</div>
+    <div className="has-text-grey description">{body}</div>
   </div>
 );
 

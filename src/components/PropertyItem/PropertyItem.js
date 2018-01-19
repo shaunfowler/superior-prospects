@@ -13,7 +13,7 @@ const PropertyItem = ({ id, name, description, created }) => (
         {moment(created).format("MMMM D, YYYY")}
       </div>
     )}
-    <div className="has-text-grey">{description}</div>
+    <div className="has-text-grey description">{description}</div>
   </div>
 );
 
