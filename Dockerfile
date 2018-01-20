@@ -8,6 +8,7 @@ ENV PATH=$PATH:/node_modules/.bin
 
 RUN yarn
 RUN npm install -g serve
+RUN npm rebuild node-sass --force
 RUN yarn build
 
 EXPOSE 3000
