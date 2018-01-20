@@ -27,15 +27,19 @@ jobs:
 
       - run: 
           name: Restore npm packages
-          command: npm install
+          command: yarn
+
+      - run: 
+        name: Fix node-sass
+        command: npm rebuild node-sass --force
 
       - run:
           name: Build
-          command: npm run build
+          command: yarn build
 
       - run:
           name: Test
-          command: npm run test
+          command: yarn test
 
       - run:
           name: Build Docker images

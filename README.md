@@ -8,11 +8,11 @@ The source for http://superiorprospects.com.
 
 ## Install Dependencies
 
-`npm install`
+`yarn`
 
 ## Build
 
-`npm run build`
+`yarn build`
 
 > To rebuild only the app image, run: `docker build -t shaunfowler/sp_client -f Dockerfile .`
 
