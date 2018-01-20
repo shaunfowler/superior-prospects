@@ -1,26 +1,30 @@
 .header {
-  background-color: #222;
-}
+  .navbar {
+    z-index: 10;
+    background: rgba(0, 0, 0, 0.7);
+  }
 
-.header .navbar-item {
-  border-bottom: 2px solid transparent;
-  transition: 200ms;
-}
+  .navbar-item {
+    border-bottom: 2px solid transparent;
+    transition: 200ms;
 
-.header .navbar-item:hover {
-  border-bottom: 3px solid #fff;
-}
+    &:hover {
+      border-bottom: 3px solid #fff;
+    }
+  }
 
-.jumbotron {
-  height: 200px;
-  background: #fafafa;
-  border-bottom: 1px solid #eee;
-  margin-bottom: 20px;
-  background-size: cover;
-  background-repeat: no-repeat;
-  background-position: center center;
-  position: absolute;
-  top: 52px;
-  left: 0;
-  right: 0;
+  .jumbotron {
+    z-index: 0;
+    height: 240px;
+    background: #fafafa;
+    border-bottom: 1px solid #eee;
+    margin-bottom: 20px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+  }
 }

@@ -3,8 +3,8 @@ import { Link } from "react-router-dom";
 import HeaderImage from "../../assets/header-clear.jpg";
 
 const Header = () => (
-  <div>
-    <nav className="navbar is-dark header" aria-label="main navigation">
+  <div className="header">
+    <nav className="navbar is-dark " aria-label="main navigation">
       <div className="container">
         <div className="navbar-brand">
           <Link className="navbar-item is-size-5 has-text-weight-bold" to="/">

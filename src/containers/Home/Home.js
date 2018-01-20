@@ -30,7 +30,7 @@ class Home extends Component {
         <div className="container">
           <div className="columns viewContainer">
             <div className="column">
-              <h1 className="is-size-4 has-text-weight-bold">News</h1>
+              <h1 className="title">News</h1>
               {isAuthenticated && (
                 <AddUpdateForm onCreate={this.onCreateUpdate} />
               )}
@@ -49,9 +49,7 @@ class Home extends Component {
                   ))}
             </div>
             <div className="column">
-              <h1 className="is-size-4 has-text-weight-bold">
-                Recently added properties
-              </h1>
+              <h1 className="title">Recently added properties</h1>
               {properties &&
                 properties
                   .sort(sortNewestToOldestPredicate)
