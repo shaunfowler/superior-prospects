@@ -4,7 +4,7 @@ import { Provider } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
 import "bulma/css/bulma.css";
 import configureStore from "./redux/store/configureStore";
-import "./index.css";
+import "./index.scss";
 import App from "./containers/App";
 
 const store = configureStore();

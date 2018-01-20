@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import "./PropertyItem.css";
+import "./PropertyItem.scss";
 
 const PropertyItem = ({ id, name, description, created }) => (
   <div className="propertyItem">

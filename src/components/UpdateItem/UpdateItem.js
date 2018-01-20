@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import "./UpdateItem.css";
+import "./UpdateItem.scss";
 
 const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
   <div className="updateItem">
