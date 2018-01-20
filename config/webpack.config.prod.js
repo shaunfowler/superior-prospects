@@ -153,7 +153,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new CleanWebpackPlugin([paths.appBuild], { root: paths.appDirectory }),
+    new CleanWebpackPlugin([paths.appBuild], { root: `${paths.appBuild}/../` }),
     new InterpolateHtmlPlugin({ PUBLIC_URL: process.env.PUBLIC_URL }),
     new HtmlWebpackPlugin({
       inject: true,
