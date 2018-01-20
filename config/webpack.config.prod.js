@@ -72,8 +72,7 @@ module.exports = {
             }
           },
           {
-            // test: /\.scss$/,
-            test: /\.css$/,
+            test: /\.scss$/,
             loader: ExtractTextPlugin.extract(
               Object.assign(
                 {
@@ -101,6 +100,39 @@ module.exports = {
                     },
                     {
                       loader: require.resolve("sass-loader")
+                    }
+                  ]
+                },
+                extractTextPluginOptions
+              )
+            )
+          },
+          {
+            test: /\.css$/,
+            loader: ExtractTextPlugin.extract(
+              Object.assign(
+                {
+                  fallback: {
+                    loader: require.resolve("style-loader"),
+                    options: {
+                      hmr: false
+                    }
+                  },
+                  use: [
+                    {
+                      loader: require.resolve("css-loader"),
+                      options: {
+                        importLoaders: 1,
+                        minimize: true,
+                        sourceMap: true
+                      }
+                    },
+                    {
+                      loader: require.resolve("postcss-loader"),
+                      options: {
+                        ident: "postcss",
+                        plugins: () => [autoprefixer()]
+                      }
                     }
                   ]
                 },

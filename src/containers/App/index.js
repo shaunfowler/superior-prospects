@@ -1,7 +1,7 @@
 import App from "./App";
 import { connect } from "react-redux";
 import { getUser } from "../../redux/actions/userActions";
-import "./App.css";
+import "./App.scss";
 
 const mapStateToProps = ({ user }) => {
   return {

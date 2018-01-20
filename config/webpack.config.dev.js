@@ -61,7 +61,6 @@ module.exports = {
             }
           },
           {
-            // test: /\.scss$/,
             test: /\.css$/,
             use: [
               require.resolve("style-loader"),
@@ -78,7 +77,26 @@ module.exports = {
                   plugins: () => [autoprefixer()]
                 }
               }
-              // require.resolve("sass-loader")
+            ]
+          },
+          {
+            test: /\.scss$/,
+            use: [
+              require.resolve("style-loader"),
+              {
+                loader: require.resolve("css-loader"),
+                options: {
+                  importLoaders: 1
+                }
+              },
+              {
+                loader: require.resolve("postcss-loader"),
+                options: {
+                  ident: "postcss",
+                  plugins: () => [autoprefixer()]
+                }
+              },
+              require.resolve("sass-loader")
             ]
           },
           {
