@@ -30,8 +30,8 @@ jobs:
           command: yarn
 
       - run: 
-        name: Fix node-sass
-        command: npm rebuild node-sass --force
+          name: Fix node-sass
+          command: npm rebuild node-sass --force
 
       - run:
           name: Build
