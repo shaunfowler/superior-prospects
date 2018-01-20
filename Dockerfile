@@ -6,12 +6,11 @@ COPY ./ /usr/app/
 ENV NODE_PATH=/node_modules
 ENV PATH=$PATH:/node_modules/.bin
 
-RUN yarn
+RUN npm install
 RUN npm install -g serve
-RUN npm rebuild node-sass --force
-RUN yarn build
+RUN npm build
 
 EXPOSE 3000
 EXPOSE 35729
 
-CMD ["yarn", "serve"]
+CMD ["npm", "run", "serve"]
