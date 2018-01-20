@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PropertyItem from "../../components/PropertyItem";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
-import HeaderImage from "../../assets/header-clear.jpg";
 
 const sortNewestToOldestPredicate = (a, b) =>
   new Date(b.created) - new Date(a.created);
@@ -28,12 +27,8 @@ class Home extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="homeView ">
-        <div
-          className="jumbotron"
-          style={{ backgroundImage: `url('${HeaderImage}')` }}
-        />
         <div className="container">
-          <div className="columns">
+          <div className="columns viewContainer">
             <div className="column">
               <h1 className="is-size-4 has-text-weight-bold">News</h1>
               {isAuthenticated && (
