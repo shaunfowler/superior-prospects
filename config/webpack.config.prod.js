@@ -8,7 +8,7 @@ const HtmlWebpackPlugin = require("html-webpack-plugin");
 const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const InterpolateHtmlPlugin = require("react-dev-utils/InterpolateHtmlPlugin");
 const ModuleScopePlugin = require("react-dev-utils/ModuleScopePlugin");
-// const CleanWebpackPlugin = require("clean-webpack-plugin");
+const CleanWebpackPlugin = require("clean-webpack-plugin");
 const eslintFormatter = require("react-dev-utils/eslintFormatter");
 const paths = require("./paths");
 
@@ -98,10 +98,10 @@ module.exports = {
                         ident: "postcss",
                         plugins: () => [autoprefixer()]
                       }
+                    },
+                    {
+                      loader: require.resolve("sass-loader")
                     }
-                    // {
-                    //   loader: require.resolve("sass-loader")
-                    // }
                   ]
                 },
                 extractTextPluginOptions
@@ -121,7 +121,7 @@ module.exports = {
     ]
   },
   plugins: [
-    // new CleanWebpackPlugin([paths.appBuild], { root: paths.appDirectory }),
+    new CleanWebpackPlugin([paths.appBuild], { root: paths.appDirectory }),
     new InterpolateHtmlPlugin({ PUBLIC_URL: process.env.PUBLIC_URL }),
     new HtmlWebpackPlugin({
       inject: true,
