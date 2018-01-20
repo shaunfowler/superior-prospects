@@ -133,6 +133,9 @@ module.exports = {
                         ident: "postcss",
                         plugins: () => [autoprefixer()]
                       }
+                    },
+                    {
+                      loader: require.resolve("sass-loader")
                     }
                   ]
                 },
