@@ -1,5 +1,5 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
 import HeaderImage from "../../assets/header-clear.jpg";
 
 const Header = () => (
@@ -19,15 +19,30 @@ const Header = () => (
         </div>
         <div className="navbar-menu">
           <div className="navbar-end">
-            <Link className="navbar-item" to="/">
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/"
+              activeClassName="active"
+            >
               Home
-            </Link>
-            <Link className="navbar-item" to="/properties">
+            </NavLink>
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/properties"
+              activeClassName="active"
+            >
               Properties
-            </Link>
-            <Link className="navbar-item" to="/about">
+            </NavLink>
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/about"
+              activeClassName="active"
+            >
               About
-            </Link>
+            </NavLink>
           </div>
         </div>
       </div>
