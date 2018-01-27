@@ -6,7 +6,7 @@ import {
   createUpdate
 } from "../../redux/actions/updatesActions";
 import { queryProperties } from "../../redux/actions/propertiesActions";
-import "./Home.scss";
+import "./Home.less";
 
 const mapStateToProps = ({ updates, properties, user }) => {
   return {

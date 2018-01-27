@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import "./About.scss";
+import "./About.less";
 
 class About extends Component {
   render() {
