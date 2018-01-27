@@ -15,7 +15,6 @@ class Property extends Component {
     this.props
       .getProperty(id)
       .then(response => {
-        console.log("hi", response);
         this.setState({ initialized: true });
       })
       .catch(() => {
