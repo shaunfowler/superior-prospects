@@ -72,7 +72,11 @@ class Home extends Component {
                   ))}
               <br />
               <Link to="/properties" className="button is-link">
-                View all properties
+                View all properties{" "}
+                <i
+                  className="fa fa-lg fa-angle-right"
+                  style={{ marginLeft: "10px" }}
+                />
               </Link>
             </div>
           </div>

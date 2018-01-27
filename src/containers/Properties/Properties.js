@@ -33,8 +33,11 @@ class Properties extends Component {
         {locations &&
           locations.map(l => (
             <div key={l._id} className="location">
-              <div className="is-size-4 has-text-weight-bold">{l.name}</div>
-              <div className="is-text-grey">{l.body}</div>
+              <div className="is-size-4 has-text-weight-bold">
+                <i className="fa fa-map-marker" />
+                {l.name}
+              </div>
+              <div className="description is-text-grey">{l.body}</div>
               {renderPropertiesForLocationId(properties, l._id)}
             </div>
           ))}
