@@ -57,7 +57,7 @@
   },
   "scripts": {
     "start":
-      "webpack-dev-server --config config/webpack.config.prod.js --port 3000 --host 0.0.0.0",
+      "webpack-dev-server --config config/webpack.config.dev.js --port 3000 --host 0.0.0.0",
     "serve": "serve -s build -p 3000",
     "build": "webpack --config config/webpack.config.prod.js",
     "test": "node scripts/test.js --env=jsdom",
