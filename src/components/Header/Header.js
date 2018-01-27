@@ -1,35 +1,57 @@
 import React from "react";
-import { Link } from "react-router-dom";
+import { NavLink, Link } from "react-router-dom";
+import HeaderImage from "../../assets/header-clear.jpg";
 
 const Header = () => (
-  <nav className="navbar is-dark header" aria-label="main navigation">
-    <div className="container">
-      <div className="navbar-brand">
-        <Link className="navbar-item is-size-5 has-text-weight-bold" to="/">
-          Superior Prospects Inc.
-        </Link>
+  <div className="header">
+    <nav className="navbar is-dark " aria-label="main navigation">
+      <div className="container">
+        <div className="navbar-brand">
+          <Link className="navbar-item is-size-5 has-text-weight-bold" to="/">
+            Superior Prospects Inc.
+          </Link>
 
-        <button className="button navbar-burger">
-          <span />
-          <span />
-          <span />
-        </button>
-      </div>
-      <div className="navbar-menu">
-        <div className="navbar-end">
-          <Link className="navbar-item" to="/">
-            Home
-          </Link>
-          <Link className="navbar-item" to="/properties">
-            Properties
-          </Link>
-          <Link className="navbar-item" to="/about">
-            About
-          </Link>
+          <button className="button navbar-burger">
+            <span />
+            <span />
+            <span />
+          </button>
+        </div>
+        <div className="navbar-menu">
+          <div className="navbar-end">
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/"
+              activeClassName="active"
+            >
+              Home
+            </NavLink>
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/properties"
+              activeClassName="active"
+            >
+              Properties
+            </NavLink>
+            <NavLink
+              exact
+              className="navbar-item"
+              to="/about"
+              activeClassName="active"
+            >
+              About
+            </NavLink>
+          </div>
         </div>
       </div>
-    </div>
-  </nav>
+    </nav>
+    <div
+      className="jumbotron"
+      style={{ backgroundImage: `url('${HeaderImage}')` }}
+    />
+  </div>
 );
 
 export default Header;

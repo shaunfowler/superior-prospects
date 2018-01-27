@@ -29,18 +29,22 @@ class Properties extends Component {
     const properties = this.props.properties.list;
     return (
       <div className="propertiesView container">
-        <h1 className="title">Properties</h1>
-        {locations &&
-          locations.map(l => (
-            <div key={l._id} className="location">
-              <div className="is-size-4 has-text-weight-bold">
-                <i className="fa fa-map-marker" />
-                {l.name}
-              </div>
-              <div className="description is-text-grey">{l.body}</div>
-              {renderPropertiesForLocationId(properties, l._id)}
-            </div>
-          ))}
+        <div className="viewContainer columns">
+          <div className="column">
+            <h1 className="title">Properties</h1>
+            {locations &&
+              locations.map(l => (
+                <div key={l._id} className="location">
+                  <div className="is-size-4 has-text-weight-bold">
+                    <i className="fa fa-map-marker" />
+                    {l.name}
+                  </div>
+                  <div className="description is-text-grey">{l.body}</div>
+                  {renderPropertiesForLocationId(properties, l._id)}
+                </div>
+              ))}
+          </div>
+        </div>
       </div>
     );
   }

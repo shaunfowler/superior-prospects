@@ -33,9 +33,11 @@ export function getProperty(id) {
             Object.assign({}, propertyResponse, { media: [...mediaResponse] })
           )
         );
+        return propertyResponse;
       })
       .catch(response => {
         dispatch(PROPERTY_ACTIONS.failure(response));
+        throw response;
       });
   };
 }
