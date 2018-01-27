@@ -29,10 +29,6 @@ jobs:
           name: Restore npm packages
           command: yarn
 
-      - run: 
-          name: Fix node-sass
-          command: npm rebuild node-sass --force
-
       - run:
           name: Build
           command: yarn build
