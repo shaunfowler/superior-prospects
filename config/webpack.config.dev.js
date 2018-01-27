@@ -80,7 +80,7 @@ module.exports = {
             ]
           },
           {
-            test: /\.scss$/,
+            test: /\.less$/,
             use: [
               require.resolve("style-loader"),
               {
@@ -96,7 +96,7 @@ module.exports = {
                   plugins: () => [autoprefixer()]
                 }
               },
-              require.resolve("sass-loader")
+              require.resolve("less-loader")
             ]
           },
           {
