@@ -15,10 +15,12 @@ const publicPath = "/";
 
 module.exports = {
   devtool: "cheap-module-source-map",
-  entry: [
-    require.resolve("react-dev-utils/webpackHotDevClient"),
-    paths.appIndexJs
-  ],
+  devServer: {
+    compress: true,
+    port: 3000,
+    proxy: { "/api/**": { target: "http://localhost:8888", secure: false } }
+  },
+  entry: [paths.appIndexJs],
   output: {
     filename: "static/js/bundle.js",
     chunkFilename: "static/js/[name].chunk.js",
