@@ -1,4 +1,4 @@
 import Header from "./Header";
-import "./Header.css";
+import "./Header.less";
 
 export default Header;

@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import PropertyItem from "../../components/PropertyItem";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
-import HeaderImage from "../../assets/header-clear.jpg";
 
 const sortNewestToOldestPredicate = (a, b) =>
   new Date(b.created) - new Date(a.created);
@@ -28,14 +27,10 @@ class Home extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="homeView ">
-        <div
-          className="jumbotron"
-          style={{ backgroundImage: `url('${HeaderImage}')` }}
-        />
         <div className="container">
-          <div className="columns">
+          <div className="columns viewContainer">
             <div className="column">
-              <h1 className="is-size-4 has-text-weight-bold">News</h1>
+              <h1 className="title">News</h1>
               {isAuthenticated && (
                 <AddUpdateForm onCreate={this.onCreateUpdate} />
               )}
@@ -54,9 +49,7 @@ class Home extends Component {
                   ))}
             </div>
             <div className="column">
-              <h1 className="is-size-4 has-text-weight-bold">
-                Recently added properties
-              </h1>
+              <h1 className="title">Recently added properties</h1>
               {properties &&
                 properties
                   .sort(sortNewestToOldestPredicate)
@@ -72,7 +65,11 @@ class Home extends Component {
                   ))}
               <br />
               <Link to="/properties" className="button is-link">
-                View all properties
+                View all properties{" "}
+                <i
+                  className="fa fa-lg fa-angle-right"
+                  style={{ marginLeft: "10px" }}
+                />
               </Link>
             </div>
           </div>

@@ -4,8 +4,8 @@ import { Provider } from "react-redux";
 import { BrowserRouter, Route } from "react-router-dom";
 import "bulma/css/bulma.css";
 import configureStore from "./redux/store/configureStore";
-import { history } from "./redux/store/configureStore";
-import "./index.css";
+// import { history } from "./redux/store/configureStore";
+import "./index.less";
 import App from "./containers/App";
 import withTracker from "./hocs/withTracker";
 

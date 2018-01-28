@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import moment from "moment";
-import "./PropertyItem.css";
+import "./PropertyItem.less";
 
 const PropertyItem = ({ id, name, description, created }) => (
   <div className="propertyItem">
@@ -13,7 +13,7 @@ const PropertyItem = ({ id, name, description, created }) => (
         {moment(created).format("MMMM D, YYYY")}
       </div>
     )}
-    <div className="has-text-grey">{description}</div>
+    <div className="has-text-grey description">{description}</div>
   </div>
 );
 

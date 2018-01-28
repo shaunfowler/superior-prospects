@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import "./UpdateItem.css";
+import "./UpdateItem.less";
 
 const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
   <div className="updateItem">
@@ -10,7 +10,7 @@ const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
         <button onClick={() => onDelete(id)} className="delete" />
       )}
     </div>
-    <div className="has-text-grey">{body}</div>
+    <div className="has-text-grey description">{body}</div>
   </div>
 );
 

@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import Property from "./Property";
 import { getProperty } from "../../redux/actions/propertiesActions";
-import "./Property.css";
+import "./Property.less";
 
 const mapStateToProps = state => {
   return {

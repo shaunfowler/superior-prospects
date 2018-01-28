@@ -1,4 +1,4 @@
 import Footer from "./Footer";
-import "./Footer.css";
+import "./Footer.less";
 
 export default Footer;
