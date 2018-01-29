@@ -3,10 +3,10 @@ import { Link } from "react-router-dom";
 import moment from "moment";
 import "./PropertyItem.less";
 
-const PropertyItem = ({ id, name, description, created }) => (
+const PropertyItem = ({ safeName, name, description, created }) => (
   <div className="propertyItem">
     <div className="is-size-5 has-text-weight-bold">
-      <Link to={`/properties/${id}`}>{name}</Link>
+      <Link to={`/properties/${safeName}`}>{name}</Link>
     </div>
     {created && (
       <div className="has-text-weight-bold">

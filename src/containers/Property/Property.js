@@ -15,6 +15,8 @@ class Property extends Component {
     this.props
       .getProperty(id)
       .then(response => {
+        const { name } = this.props.selected;
+        document.title = `${name} - Superior Prospects`;
         this.setState({ initialized: true });
       })
       .catch(() => {

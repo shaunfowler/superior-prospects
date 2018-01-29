@@ -1,13 +1,25 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
+import ReactGA from "react-ga";
 import HeaderImage from "../../assets/header-clear.jpg";
+
+const trackHeaderLink = () => {
+  ReactGA.event({
+    category: "Navigation",
+    action: "Logo home link"
+  });
+};
 
 const Header = () => (
   <div className="header">
     <nav className="navbar is-dark " aria-label="main navigation">
       <div className="container">
         <div className="navbar-brand">
-          <Link className="navbar-item is-size-5 has-text-weight-bold" to="/">
+          <Link
+            className="navbar-item is-size-5 has-text-weight-bold"
+            to="/"
+            onClick={() => trackHeaderLink()}
+          >
             Superior Prospects Inc.
           </Link>
 

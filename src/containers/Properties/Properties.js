@@ -20,6 +20,7 @@ const renderPropertiesForLocationId = (properties, locationId) => (
 
 class Properties extends Component {
   componentWillMount() {
+    document.title = "Properties - Superior Prospects";
     this.props.queryLocations();
     this.props.queryProperties();
   }
