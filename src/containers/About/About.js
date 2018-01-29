@@ -2,6 +2,10 @@ import React, { Component } from "react";
 import "./About.less";
 
 class About extends Component {
+  componentWillMount() {
+    document.title = "About - Superior Prospects";
+  }
+
   render() {
     return (
       <div className="aboutView container">

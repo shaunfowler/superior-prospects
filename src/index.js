@@ -8,7 +8,7 @@ import store, { history } from "./redux/store/configureStore";
 import "./index.less";
 import App from "./containers/App";
 
-ReactGA.initialize("UA-78822442-1");
+ReactGA.initialize("UA-78822442-1", { debug: true });
 
 render(
   <Provider store={store}>

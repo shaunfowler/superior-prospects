@@ -9,6 +9,7 @@ const sortNewestToOldestPredicate = (a, b) =>
 
 class Home extends Component {
   componentWillMount() {
+    document.title = "Superior Prospects";
     this.props.queryUpdates();
     this.props.queryProperties();
   }
