@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Route, BrowserRouter } from "react-router-dom";
+import { Route, Switch } from "react-router-dom";
 import Header from "../../components/Header";
 import Footer from "../../components/Footer";
 import Home from "../Home";
@@ -14,16 +14,16 @@ class App extends Component {
 
   render() {
     return (
-      <BrowserRouter>
-        <div className="app">
-          <Header />
+      <div className="app">
+        <Header />
+        <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/properties" component={Properties} />
           <Route path="/properties/:id" component={Property} />
           <Route exact path="/about" component={About} />
-          <Footer />
-        </div>
-      </BrowserRouter>
+        </Switch>
+        <Footer />
+      </div>
     );
   }
 }
