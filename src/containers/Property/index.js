@@ -1,17 +1,22 @@
 import { connect } from "react-redux";
 import Property from "./Property";
-import { getProperty } from "../../redux/actions/propertiesActions";
+import {
+  getProperty,
+  editProperty
+} from "../../redux/actions/propertiesActions";
 import "./Property.less";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ properties, user }) => {
   return {
-    selected: state.properties.selected
+    selected: properties.selected,
+    isAuthenticated: user.isAuthenticated
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    getProperty: id => dispatch(getProperty(id))
+    getProperty: id => dispatch(getProperty(id)),
+    editProperty: property => dispatch(editProperty(property))
   };
 };
 
