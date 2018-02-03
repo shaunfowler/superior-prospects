@@ -56,6 +56,21 @@ export function createProperty(property) {
   };
 }
 
+export function editProperty(property) {
+  const { _id } = property;
+  return dispatch => {
+    dispatch(PROPERTY_ACTIONS.request());
+    return axios
+      .put(`/api/properties/${_id}`, property)
+      .then(response => {
+        dispatch(PROPERTY_ACTIONS.editSuccess(response.data));
+      })
+      .catch(response => {
+        dispatch(PROPERTY_ACTIONS.failure(response));
+      });
+  };
+}
+
 export function deleteProperty(id) {
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());

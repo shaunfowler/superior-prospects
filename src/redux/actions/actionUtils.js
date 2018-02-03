@@ -29,7 +29,7 @@ export const buildAsyncActions = actionName => ({
     entity
   }),
   editSuccess: entity => ({
-    type: actionName.updateSuccess,
+    type: actionName.editSuccess,
     entity
   }),
   deleteSuccess: id => ({
