@@ -38,6 +38,7 @@ class Home extends Component {
               {updates &&
                 updates
                   .sort(sortNewestToOldestPredicate)
+                  .slice(0, 5)
                   .map(u => (
                     <UpdateItem
                       key={u._id}
@@ -54,6 +55,7 @@ class Home extends Component {
               {properties &&
                 properties
                   .sort(sortNewestToOldestPredicate)
+                  .slice(0, 3)
                   .map(p => (
                     <PropertyItem
                       key={p._id}
