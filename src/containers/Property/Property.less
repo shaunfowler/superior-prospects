@@ -1,3 +1,27 @@
 .propertyView {
   flex: 1;
+
+  .title,
+  .subtitle {
+    width: 100%;
+  }
+
+  .title input {
+    border-radius: 3px;
+    padding: 5px;
+    border: 1px solid #ddd;
+  }
+
+  .subtitle textarea {
+    margin-top: 5px;
+    border-color: #ddd;
+    border-radius: 3px;
+    padding: 10px;
+    height: 6rem;
+  }
+
+  h1[contenteditable='true'],
+  div[contenteditable='true'] {
+    resize: none;
+  }
 }

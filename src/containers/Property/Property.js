@@ -12,7 +12,8 @@ class Property extends Component {
     this.state = {
       initialized: false,
       errored: false,
-      editMode: false
+      editMode: false,
+      newName: ""
     };
   }
 
@@ -40,29 +41,69 @@ class Property extends Component {
     });
   };
 
+  onNameChange = event => {
+    this.setState({ newName: event.target.value });
+  };
+
+  onDescriptionChange = event => {
+    this.setState({
+      newDescription: event.target.value
+    });
+  };
+
   saveEditorContent = () => {
     const { editorState } = this.state;
-    this.setState({
-      editMode: false
-    });
+
     this.props.editProperty(
       Object.assign({}, this.props.selected, {
-        body: stateToHTML(editorState.getCurrentContent())
+        body: stateToHTML(editorState.getCurrentContent()),
+        name: this.state.newName,
+        description: this.state.newDescription
       })
     );
+
+    this.setState({
+      editMode: false,
+      newName: "",
+      newDescription: ""
+    });
   };
 
   enterEditMode = () => {
-    this.setState({ editMode: true });
+    this.setState({
+      editMode: true,
+      newName: this.props.selected.name,
+      newDescription: this.props.selected.description
+    });
   };
 
   renderTitle = () => {
     const { selected, isAuthenticated } = this.props;
-    const { editMode } = this.state;
+    const { editMode, newName, newDescription } = this.state;
     return (
       <div>
-        <h1 className="title">{selected.name}</h1>
-        <div className="subtitle">{selected.description}</div>
+        <h1 className="title">
+          {!editMode && selected.name}
+          {editMode && (
+            <input
+              type="text"
+              className="title"
+              onChange={this.onNameChange}
+              value={newName}
+            />
+          )}
+        </h1>
+        <div className="subtitle">
+          {!editMode && selected.description}
+          {editMode && (
+            <textarea
+              className="subtitle"
+              value={newDescription}
+              onChange={this.onDescriptionChange}
+            />
+          )}
+        </div>
+
         {editMode && (
           <button
             className="button is-link is-outlined"
