@@ -13,7 +13,8 @@ class Property extends Component {
       initialized: false,
       errored: false,
       editMode: false,
-      newName: ""
+      newName: "",
+      newDescription: ""
     };
   }
 
