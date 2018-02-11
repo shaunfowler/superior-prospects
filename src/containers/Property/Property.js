@@ -5,6 +5,9 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
+import Dropzone from "react-dropzone";
+import axios from "axios";
+
 class Property extends Component {
   constructor(props) {
     super(props);
@@ -76,6 +79,21 @@ class Property extends Component {
       newName: this.props.selected.name,
       newDescription: this.props.selected.description
     });
+  };
+
+  onFileDrop = files => {
+    const uploaders = files.map(file => {
+      const formData = new FormData();
+      formData.append("media", file);
+      // formData.append("propertyId", "1234edf");
+      return axios.post("/api/media/123", formData, {}).then(response => {
+        const data = response.data;
+        const fileURL = data.secure_url;
+        console.log(data, fileURL);
+      });
+    });
+
+    axios.all(uploaders).then(() => {});
   };
 
   renderTitle = () => {
@@ -154,20 +172,25 @@ class Property extends Component {
   renderMedia = () => {
     const { selected } = this.props;
     return (
-      <nav className="panel">
-        <p className="panel-heading">Media</p>
-        <p className="panel-tabs">
-          <a className="">all</a>
-          <a className="is-active">images</a>
-          <a>documents</a>
-        </p>
-        {selected.media &&
-          selected.media.map(m => (
-            <a className="panel-block" key={m._id}>
-              {m.fileName}
-            </a>
-          ))}
-      </nav>
+      <div>
+        <Dropzone onDrop={this.onFileDrop} multiple>
+          <p>Drop files here or click to upload.</p>
+        </Dropzone>
+        <nav className="panel">
+          <p className="panel-heading">Media</p>
+          <p className="panel-tabs">
+            <a className="">all</a>
+            <a className="is-active">images</a>
+            <a>documents</a>
+          </p>
+          {selected.media &&
+            selected.media.map(m => (
+              <a className="panel-block" key={m._id}>
+                {m.fileName}
+              </a>
+            ))}
+        </nav>
+      </div>
     );
   };
 
