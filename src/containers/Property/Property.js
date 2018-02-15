@@ -5,6 +5,9 @@ import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
+import Dropzone from "react-dropzone";
+import axios from "axios";
+
 class Property extends Component {
   constructor(props) {
     super(props);
@@ -76,6 +79,16 @@ class Property extends Component {
       newName: this.props.selected.name,
       newDescription: this.props.selected.description
     });
+  };
+
+  onFileDrop = files => {
+    const { _id } = this.props.selected;
+    const uploaders = files.map(file => {
+      const formData = new FormData();
+      formData.append("media", file);
+      return axios.post(`/api/media/${_id}`, formData, {});
+    });
+    axios.all(uploaders).then(() => {});
   };
 
   renderTitle = () => {
@@ -152,22 +165,44 @@ class Property extends Component {
   };
 
   renderMedia = () => {
-    const { selected } = this.props;
+    const { selected, isAuthenticated } = this.props;
     return (
-      <nav className="panel">
-        <p className="panel-heading">Media</p>
-        <p className="panel-tabs">
-          <a className="">all</a>
-          <a className="is-active">images</a>
-          <a>documents</a>
-        </p>
-        {selected.media &&
-          selected.media.map(m => (
-            <a className="panel-block" key={m._id}>
-              {m.fileName}
-            </a>
-          ))}
-      </nav>
+      <div>
+        {isAuthenticated && (
+          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
+            <p>Drop files here or click to upload.</p>
+            <p className="file-type-note">
+              Only <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+              <code>png</code>, <code>jpeg</code> are allowed.
+            </p>
+          </Dropzone>
+        )}
+        <nav className="panel">
+          <p className="panel-heading">Media</p>
+          {/* <p className="panel-tabs">
+            <a className="">all</a>
+            <a className="is-active">images</a>
+            <a>documents</a>
+          </p> */}
+          {selected.media &&
+            selected.media.map(m => (
+              <a
+                className="panel-block"
+                href={`/api/static/${m.fileName}`}
+                target="_blank"
+                key={m._id}
+              >
+                {m.fileName}
+              </a>
+            ))}
+          {selected.media &&
+            selected.media.length === 0 && (
+              <span className="panel-block">
+                There are no documents available.
+              </span>
+            )}
+        </nav>
+      </div>
     );
   };
 
@@ -175,10 +210,12 @@ class Property extends Component {
     const { editMode } = this.state;
     return (
       <div className="propertyView container">
-        <div className="columns viewContainer">
+        <div className="viewContainer">
           {this.state.initialized && (
-            <div className="column">
-              {this.renderTitle()}
+            <div>
+              <div className="columns">
+                <div className="column">{this.renderTitle()}</div>
+              </div>
               <div className="columns">
                 <div className="column is-three-quarters">
                   {editMode && this.renderEditor()}
