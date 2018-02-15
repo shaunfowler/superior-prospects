@@ -82,17 +82,12 @@ class Property extends Component {
   };
 
   onFileDrop = files => {
+    const { _id } = this.props.selected;
     const uploaders = files.map(file => {
       const formData = new FormData();
       formData.append("media", file);
-      // formData.append("propertyId", "1234edf");
-      return axios.post("/api/media/123", formData, {}).then(response => {
-        const data = response.data;
-        const fileURL = data.secure_url;
-        console.log(data, fileURL);
-      });
+      return axios.post(`/api/media/${_id}`, formData, {});
     });
-
     axios.all(uploaders).then(() => {});
   };
 
@@ -170,25 +165,42 @@ class Property extends Component {
   };
 
   renderMedia = () => {
-    const { selected } = this.props;
+    const { selected, isAuthenticated } = this.props;
     return (
       <div>
-        <Dropzone onDrop={this.onFileDrop} multiple>
-          <p>Drop files here or click to upload.</p>
-        </Dropzone>
+        {isAuthenticated && (
+          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
+            <p>Drop files here or click to upload.</p>
+            <p className="file-type-note">
+              Only <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+              <code>png</code>, <code>jpeg</code> are allowed.
+            </p>
+          </Dropzone>
+        )}
         <nav className="panel">
           <p className="panel-heading">Media</p>
-          <p className="panel-tabs">
+          {/* <p className="panel-tabs">
             <a className="">all</a>
             <a className="is-active">images</a>
             <a>documents</a>
-          </p>
+          </p> */}
           {selected.media &&
             selected.media.map(m => (
-              <a className="panel-block" key={m._id}>
+              <a
+                className="panel-block"
+                href={`/api/static/${m.fileName}`}
+                target="_blank"
+                key={m._id}
+              >
                 {m.fileName}
               </a>
             ))}
+          {selected.media &&
+            selected.media.length === 0 && (
+              <span className="panel-block">
+                There are no documents available.
+              </span>
+            )}
         </nav>
       </div>
     );
@@ -198,10 +210,12 @@ class Property extends Component {
     const { editMode } = this.state;
     return (
       <div className="propertyView container">
-        <div className="columns viewContainer">
+        <div className="viewContainer">
           {this.state.initialized && (
-            <div className="column">
-              {this.renderTitle()}
+            <div>
+              <div className="columns">
+                <div className="column">{this.renderTitle()}</div>
+              </div>
               <div className="columns">
                 <div className="column is-three-quarters">
                   {editMode && this.renderEditor()}
