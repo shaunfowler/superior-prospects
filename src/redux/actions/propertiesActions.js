@@ -4,7 +4,7 @@ import { asyncActionNames, buildAsyncActions } from "./actionUtils";
 export const PROPERTY_ACTION_NAMES = asyncActionNames("PROPERTY");
 export const PROPERTY_ACTIONS = buildAsyncActions(PROPERTY_ACTION_NAMES);
 
-export function queryProperties() {
+export const queryProperties = () => {
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());
     return axios
@@ -16,9 +16,9 @@ export function queryProperties() {
         dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
-}
+};
 
-export function getProperty(id) {
+export const getProperty = id => {
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());
     return Promise.all([
@@ -40,9 +40,9 @@ export function getProperty(id) {
         throw response;
       });
   };
-}
+};
 
-export function createProperty(property) {
+export const createProperty = property => {
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());
     return axios
@@ -54,9 +54,9 @@ export function createProperty(property) {
         dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
-}
+};
 
-export function editProperty(property) {
+export const editProperty = property => {
   const { _id } = property;
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());
@@ -69,9 +69,9 @@ export function editProperty(property) {
         dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
-}
+};
 
-export function deleteProperty(id) {
+export const deleteProperty = id => {
   return dispatch => {
     dispatch(PROPERTY_ACTIONS.request());
     return axios
@@ -83,4 +83,4 @@ export function deleteProperty(id) {
         dispatch(PROPERTY_ACTIONS.failure(response));
       });
   };
-}
+};
