@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Button from "material-ui/Button";
-import Paper from "material-ui/Paper";
-import Grid from "material-ui/Grid";
-import Typography from "material-ui/Typography";
-import PropertyItem from "../../components/PropertyItem";
+import { Button, List, Grid, Paper, Typography } from "material-ui";
 import UpdateItem from "../../components/UpdateItem";
+import PropertyItem from "../../components/PropertyItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
 
 const sortNewestToOldestPredicate = (a, b) =>
@@ -41,20 +38,22 @@ class Home extends Component {
               {isAuthenticated && (
                 <AddUpdateForm onCreate={this.onCreateUpdate} />
               )}
-              {updates &&
-                updates
-                  .sort(sortNewestToOldestPredicate)
-                  .slice(0, 5)
-                  .map(u => (
-                    <UpdateItem
-                      key={u._id}
-                      id={u._id}
-                      body={u.body}
-                      created={u.created}
-                      onDelete={this.onDeleteUpdate}
-                      isUserAuthenticated={isAuthenticated}
-                    />
-                  ))}
+              <List>
+                {updates &&
+                  updates
+                    .sort(sortNewestToOldestPredicate)
+                    .slice(0, 5)
+                    .map(u => (
+                      <UpdateItem
+                        key={u._id}
+                        id={u._id}
+                        body={u.body}
+                        created={u.created}
+                        onDelete={this.onDeleteUpdate}
+                        isUserAuthenticated={isAuthenticated}
+                      />
+                    ))}
+              </List>
             </Paper>
           </Grid>
           <Grid item sm={6}>
@@ -62,20 +61,22 @@ class Home extends Component {
               <Typography variant="headline" gutterBottom>
                 Recently added properties
               </Typography>
-              {properties &&
-                properties
-                  .sort(sortNewestToOldestPredicate)
-                  .slice(0, 3)
-                  .map(p => (
-                    <PropertyItem
-                      key={p._id}
-                      id={p._id}
-                      name={p.name}
-                      created={p.created}
-                      safeName={p.safeName}
-                      description={p.description}
-                    />
-                  ))}
+              <List>
+                {properties &&
+                  properties
+                    .sort(sortNewestToOldestPredicate)
+                    .slice(0, 3)
+                    .map(p => (
+                      <PropertyItem
+                        key={p._id}
+                        id={p._id}
+                        name={p.name}
+                        created={p.created}
+                        safeName={p.safeName}
+                        description={p.description}
+                      />
+                    ))}
+              </List>
               <br />
               <Link to="/properties">
                 <Button variant="raised" color="primary">

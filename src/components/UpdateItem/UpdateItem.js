@@ -1,26 +1,32 @@
 import React from "react";
 import moment from "moment";
-import { Button } from "material-ui";
+import {
+  ListItem,
+  ListItemText,
+  ListItemSecondaryAction,
+  IconButton
+} from "material-ui";
+import { MoreVert as MoreVertIcon } from "material-ui-icons";
 import "./UpdateItem.less";
 
 const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
-  <div className="updateItem">
-    <div>
-      <div>{moment(created).format("MMMM D, YYYY")}</div>
-      {isUserAuthenticated && (
-        <Button
-          color="primary"
-          size="small"
-          onClick={() => onDelete(id)}
-          aria-label="Delete"
-        >
-          Delete
-        </Button>
-      )}
-    </div>
-
-    <div>{body}</div>
-  </div>
+  <ListItem>
+    <ListItemText
+      primary={moment(created).format("MMMM D, YYYY")}
+      secondary={body}
+    />
+    {isUserAuthenticated && (
+      <ListItemSecondaryAction
+        onClick={() => {
+          onDelete(id);
+        }}
+      >
+        <IconButton aria-label="Delete">
+          <MoreVertIcon />
+        </IconButton>
+      </ListItemSecondaryAction>
+    )}
+  </ListItem>
 );
 
 export default UpdateItem;

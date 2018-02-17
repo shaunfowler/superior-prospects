@@ -23,7 +23,11 @@ class AddUpdateForm extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <div>
+      <div
+        style={{
+          margin: "20px"
+        }}
+      >
         <TextField
           label="Summary of news"
           multiline
