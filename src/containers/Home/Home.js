@@ -1,5 +1,9 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Button from "material-ui/Button";
+import Paper from "material-ui/Paper";
+import Grid from "material-ui/Grid";
+import Typography from "material-ui/Typography";
 import PropertyItem from "../../components/PropertyItem";
 import UpdateItem from "../../components/UpdateItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
@@ -27,11 +31,13 @@ class Home extends Component {
     const properties = this.props.properties.list;
     const { isAuthenticated } = this.props;
     return (
-      <div className="homeView ">
-        <div className="container">
-          <div className="columns viewContainer">
-            <div className="column">
-              <h1 className="title">News</h1>
+      <div className="homeView container">
+        <Grid container spacing={24}>
+          <Grid item sm={6}>
+            <Paper className="paper">
+              <Typography variant="headline" gutterBottom>
+                News
+              </Typography>
               {isAuthenticated && (
                 <AddUpdateForm onCreate={this.onCreateUpdate} />
               )}
@@ -49,9 +55,13 @@ class Home extends Component {
                       isUserAuthenticated={isAuthenticated}
                     />
                   ))}
-            </div>
-            <div className="column">
-              <h1 className="title">Recently added properties</h1>
+            </Paper>
+          </Grid>
+          <Grid item sm={6}>
+            <Paper className="paper">
+              <Typography variant="headline" gutterBottom>
+                Recently added properties
+              </Typography>
               {properties &&
                 properties
                   .sort(sortNewestToOldestPredicate)
@@ -67,16 +77,14 @@ class Home extends Component {
                     />
                   ))}
               <br />
-              <Link to="/properties" className="button is-link">
-                View all properties{" "}
-                <i
-                  className="fa fa-lg fa-angle-right"
-                  style={{ marginLeft: "10px" }}
-                />
+              <Link to="/properties">
+                <Button variant="raised" color="primary">
+                  View all properties
+                </Button>
               </Link>
-            </div>
-          </div>
-        </div>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }

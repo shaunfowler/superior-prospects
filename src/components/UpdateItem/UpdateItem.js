@@ -1,16 +1,25 @@
 import React from "react";
 import moment from "moment";
+import { Button } from "material-ui";
 import "./UpdateItem.less";
 
 const UpdateItem = ({ id, body, created, onDelete, isUserAuthenticated }) => (
   <div className="updateItem">
-    <div className="is-size-6 has-text-weight-bold">
-      {moment(created).format("MMMM D, YYYY")}
+    <div>
+      <div>{moment(created).format("MMMM D, YYYY")}</div>
       {isUserAuthenticated && (
-        <button onClick={() => onDelete(id)} className="delete" />
+        <Button
+          color="primary"
+          size="small"
+          onClick={() => onDelete(id)}
+          aria-label="Delete"
+        >
+          Delete
+        </Button>
       )}
     </div>
-    <div className="has-text-grey description">{body}</div>
+
+    <div>{body}</div>
   </div>
 );
 

@@ -1,4 +1,6 @@
 import React from "react";
+import TextField from "material-ui/TextField";
+import Button from "material-ui/Button";
 
 class AddUpdateForm extends React.Component {
   constructor(state) {
@@ -10,8 +12,7 @@ class AddUpdateForm extends React.Component {
     this.setState({ text: event.target.value });
   };
 
-  onSubmit = event => {
-    event.preventDefault();
+  onSubmit = () => {
     this.props.onCreate({
       body: this.state.text,
       created: new Date()
@@ -22,25 +23,25 @@ class AddUpdateForm extends React.Component {
   render() {
     const { text } = this.state;
     return (
-      <form className="box" onSubmit={this.onSubmit}>
-        <div className="field">
-          <label className="label">Add a new update</label>
-          <div className="control">
-            <textarea
-              value={text}
-              onChange={this.onTextChange}
-              className="textarea"
-              placeholder="Enter the update text"
-            />
-          </div>
-        </div>
-
-        <div className="field">
-          <div className="control">
-            <input type="submit" className="button is-link" value="Add" />
-          </div>
-        </div>
-      </form>
+      <div>
+        <TextField
+          label="Summary of news"
+          multiline
+          rows="2"
+          margin="normal"
+          value={text}
+          onChange={this.onTextChange}
+          style={{ width: "100%" }}
+        />
+        <br />
+        <Button
+          variant="raised"
+          color="primary"
+          onClick={() => this.onSubmit()}
+        >
+          Add
+        </Button>
+      </div>
     );
   }
 }
