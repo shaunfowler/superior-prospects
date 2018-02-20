@@ -31,7 +31,7 @@ class Home extends Component {
       <div className="homeView container">
         <Grid container spacing={24}>
           <Grid item sm={6}>
-            <Paper className="paper">
+            <Paper className="paper" elevation={1}>
               <Typography variant="headline" gutterBottom>
                 News
               </Typography>
@@ -57,7 +57,7 @@ class Home extends Component {
             </Paper>
           </Grid>
           <Grid item sm={6}>
-            <Paper className="paper">
+            <Paper className="paper" elevation={1}>
               <Typography variant="headline" gutterBottom>
                 Recently added properties
               </Typography>

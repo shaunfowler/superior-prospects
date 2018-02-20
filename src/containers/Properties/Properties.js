@@ -1,8 +1,10 @@
 import React, { Component } from "react";
+import { List, Grid, Paper } from "material-ui";
 import PropertyItem from "../../components/PropertyItem";
+import { Typography, Button } from "material-ui";
 
 const renderPropertiesForLocationId = (properties, locationId) => (
-  <div>
+  <List>
     {properties &&
       properties
         .filter(p => p.locationRefId === locationId)
@@ -15,7 +17,7 @@ const renderPropertiesForLocationId = (properties, locationId) => (
             description={p.description}
           />
         ))}
-  </div>
+  </List>
 );
 
 class Properties extends Component {
@@ -190,41 +192,37 @@ class Properties extends Component {
 
     return (
       <div className="propertiesView container">
-        {showLocationModal && this.renderLocationModal()}
-        {showPropertyModal && this.renderPropertyModal()}
-        <div className="viewContainer columns">
-          <div className="column">
-            <h1 className="title">
-              Properties
-              <div className="buttons">
-                <a
-                  className="button is-link is-outlined"
-                  onClick={() => this.onAddLocationClicked()}
-                >
-                  Add Location
-                </a>
-                <a
-                  className="button is-link is-outlined"
-                  onClick={() => this.onAddPropertyClicked()}
-                >
-                  Add Property
-                </a>
-              </div>
-            </h1>
+        <Grid container spacing={24}>
+          <Grid item xs={12}>
+            <Paper className="paper" elevation={1}>
+              {showLocationModal && this.renderLocationModal()}
+              {showPropertyModal && this.renderPropertyModal()}
+              <div className="viewContainer columns">
+                <div className="column">
+                  <Typography variant="headline">Properties</Typography>
+                  <Button onClick={() => this.onAddLocationClicked()}>
+                    Add Location
+                  </Button>
+                  <Button
+                    className="button is-link is-outlined"
+                    onClick={() => this.onAddPropertyClicked()}
+                  >
+                    Add Property
+                  </Button>
 
-            {locations &&
-              locations.map(l => (
-                <div key={l._id} className="location">
-                  <div className="is-size-4 has-text-weight-bold">
-                    <i className="fa fa-map-marker" />
-                    {l.name}
-                  </div>
-                  <div className="description is-text-grey">{l.body}</div>
-                  {renderPropertiesForLocationId(properties, l._id)}
+                  {locations &&
+                    locations.map(l => (
+                      <div key={l._id}>
+                        <Typography variant="title">{l.name}</Typography>
+                        <Typography variant="body1">{l.body}</Typography>
+                        {renderPropertiesForLocationId(properties, l._id)}
+                      </div>
+                    ))}
                 </div>
-              ))}
-          </div>
-        </div>
+              </div>
+            </Paper>
+          </Grid>
+        </Grid>
       </div>
     );
   }
