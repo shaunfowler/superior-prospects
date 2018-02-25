@@ -5,7 +5,6 @@ import AppBar from "material-ui/AppBar";
 import Toolbar from "material-ui/Toolbar";
 import Button from "material-ui/Button";
 import Typography from "material-ui/Typography";
-// import HeaderImage from "../../assets/header-clear.jpg";
 
 const trackHeaderLink = () => {
   ReactGA.event({
@@ -15,7 +14,7 @@ const trackHeaderLink = () => {
 };
 
 const Header = () => (
-  <AppBar position="fixed">
+  <AppBar className="app-bar" position="">
     <Toolbar className="header container">
       <Link to="/" onClick={() => trackHeaderLink()} className="logo">
         <Typography variant="title" color="inherit">

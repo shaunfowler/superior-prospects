@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { Button, List, Grid, Paper, Typography } from "material-ui";
+import { Button, IconButton, List, Grid, Paper, Typography } from "material-ui";
+import { MoreVert as MoreVertIcon } from "material-ui-icons";
 import UpdateItem from "../../components/UpdateItem";
 import PropertyItem from "../../components/PropertyItem";
 import AddUpdateForm from "../../components/AddUpdateForm";
@@ -32,8 +33,11 @@ class Home extends Component {
         <Grid container spacing={24}>
           <Grid item sm={6}>
             <Paper className="paper" elevation={1}>
-              <Typography variant="headline" gutterBottom>
+              <Typography variant="title" className="paper__title">
                 News
+                <IconButton aria-label="Delete" className="paper__edit-icon">
+                  <MoreVertIcon />
+                </IconButton>
               </Typography>
               {isAuthenticated && (
                 <AddUpdateForm onCreate={this.onCreateUpdate} />
@@ -58,7 +62,7 @@ class Home extends Component {
           </Grid>
           <Grid item sm={6}>
             <Paper className="paper" elevation={1}>
-              <Typography variant="headline" gutterBottom>
+              <Typography variant="title" className="paper__title">
                 Recently added properties
               </Typography>
               <List>
@@ -79,7 +83,12 @@ class Home extends Component {
               </List>
               <br />
               <Link to="/properties">
-                <Button variant="raised" color="primary">
+                <Button
+                  variant="raised"
+                  color="primary"
+                  size="small"
+                  className="view-all-properties-button"
+                >
                   View all properties
                 </Button>
               </Link>

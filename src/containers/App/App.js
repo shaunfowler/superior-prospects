@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
 import Reboot from "material-ui/Reboot";
 import Header from "../../components/Header";
+import Jumbotron from "../../components/Jumbotron";
 import Footer from "../../components/Footer";
 import Home from "../Home";
 import Properties from "../Properties";
@@ -18,6 +19,7 @@ class App extends Component {
       <div className="app">
         <Reboot />
         <Header />
+        <Jumbotron />
         <Switch>
           <Route exact path="/" component={Home} />
           <Route exact path="/properties" component={Properties} />
