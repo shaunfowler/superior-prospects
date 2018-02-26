@@ -22,7 +22,9 @@ const Header = () => (
         </Typography>
       </Link>
       <NavLink exact className="navbar-item" to="/" activeClassName="active">
-        <Button color="inherit">Home</Button>
+        <Button color="inherit" size="large">
+          Home
+        </Button>
       </NavLink>
       <NavLink
         exact
@@ -30,7 +32,9 @@ const Header = () => (
         to="/properties"
         activeClassName="active"
       >
-        <Button color="inherit">Properties</Button>
+        <Button color="inherit" size="large">
+          Properties
+        </Button>
       </NavLink>
       <NavLink
         exact
@@ -38,7 +42,9 @@ const Header = () => (
         to="/about"
         activeClassName="active"
       >
-        <Button color="inherit">About</Button>
+        <Button color="inherit" size="large">
+          About
+        </Button>
       </NavLink>
     </Toolbar>
   </AppBar>

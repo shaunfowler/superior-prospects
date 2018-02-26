@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import {
   Button,
   List,
@@ -64,7 +64,7 @@ class Home extends Component {
 
     return (
       <div className="homeView container">
-        <Grid container spacing={24}>
+        <Grid container spacing={8}>
           <Grid item sm={6}>
             <Paper className="paper" elevation={1}>
               <div className="paper__title">
@@ -165,8 +165,7 @@ class Home extends Component {
                       />
                     ))}
               </List>
-              <br />
-              <Link to="/properties">
+              {/* <Link to="/properties">
                 <Button
                   variant="raised"
                   color="primary"
@@ -174,7 +173,7 @@ class Home extends Component {
                 >
                   View all properties
                 </Button>
-              </Link>
+              </Link> */}
             </Paper>
           </Grid>
         </Grid>
