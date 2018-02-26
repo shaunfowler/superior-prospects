@@ -197,19 +197,23 @@ class Properties extends Component {
             <Paper className="paper" elevation={1}>
               {showLocationModal && this.renderLocationModal()}
               {showPropertyModal && this.renderPropertyModal()}
-              <div className="viewContainer columns">
-                <div className="column">
-                  <Typography variant="headline">Properties</Typography>
-                  <Button onClick={() => this.onAddLocationClicked()}>
+              <div className="viewContainer">
+                <div className="paper__title">
+                  <Typography variant="title">Properties</Typography>
+                  <Button
+                    color="primary"
+                    onClick={() => this.onAddLocationClicked()}
+                  >
                     Add Location
                   </Button>
                   <Button
-                    className="button is-link is-outlined"
+                    color="primary"
                     onClick={() => this.onAddPropertyClicked()}
                   >
                     Add Property
                   </Button>
-
+                </div>
+                <div>
                   {locations &&
                     locations.map(l => (
                       <div key={l._id}>
