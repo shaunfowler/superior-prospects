@@ -14,7 +14,7 @@ const trackHeaderLink = () => {
 };
 
 const Header = () => (
-  <AppBar className="app-bar" position="">
+  <AppBar className="app-bar" position="static">
     <Toolbar className="header container">
       <Link to="/" onClick={() => trackHeaderLink()} className="logo">
         <Typography variant="title" color="inherit">
