@@ -1,5 +1,20 @@
 import React, { Component } from "react";
-import { List, Paper, Tabs, Tab } from "material-ui";
+import {
+  List,
+  Paper,
+  Tabs,
+  Tab,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+  FormControl,
+  Select,
+  MenuItem,
+  InputLabel
+} from "material-ui";
 import PropertyItem from "../../components/PropertyItem";
 import { Typography, Button } from "material-ui";
 
@@ -11,8 +26,7 @@ class Properties extends Component {
       showLocationModal: false,
       newEntityName: "",
       selectedLocationId: null,
-      tabIndex: 0,
-      modalOpen: false
+      tabIndex: 0
     };
   }
 
@@ -30,10 +44,18 @@ class Properties extends Component {
   };
 
   onAddPropertyClicked = () => {
-    this.setState({
+    const locations = this.props.locations.list;
+    const { selectedLocationId } = this.state;
+
+    const newState = {
       showPropertyModal: true,
       showLocationModal: false
-    });
+    };
+    if (!selectedLocationId && locations.length) {
+      newState.selectedLocationId = locations[0]._id;
+    }
+
+    this.setState(newState);
   };
 
   onNewEntityNameChanged = event => {
@@ -194,6 +216,72 @@ class Properties extends Component {
     );
   };
 
+  renderPropertyDialog = () => {
+    const { newEntityName, selectedLocationId, showPropertyModal } = this.state;
+    const { createProperty } = this.props;
+    const locations = this.props.locations.list;
+    return (
+      <Dialog
+        open={showPropertyModal}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
+        <DialogContent>
+          <DialogContentText style={{ marginBottom: "20px" }}>
+            Enter a short summary of the news or announcement.
+          </DialogContentText>
+          <TextField
+            autoFocus
+            label="Property Name"
+            type="text"
+            value={newEntityName}
+            onChange={this.onNewEntityNameChanged}
+            fullWidth
+          />
+          <br />
+          <br />
+          <FormControl>
+            <InputLabel htmlFor="location">Location</InputLabel>
+            <Select
+              value={selectedLocationId}
+              onChange={this.onSelectedLocationChanged}
+              inputProps={{
+                name: "location",
+                id: "location"
+              }}
+              fullWidth
+            >
+              {locations.map(l => (
+                <MenuItem value={l._id} key={l._id}>
+                  {l.name}
+                </MenuItem>
+              ))}
+            </Select>
+          </FormControl>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.hideModals} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={event => {
+              createProperty({
+                name: newEntityName,
+                locationRefId: selectedLocationId,
+                visible: true
+              }).then(() => this.hideModals());
+            }}
+            color="primary"
+            disabled={newEntityName === ""}
+          >
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
+  };
+
   renderPropertyModal = () => {
     const { newEntityName, selectedLocationId } = this.state;
     const { createProperty } = this.props;
@@ -261,13 +349,14 @@ class Properties extends Component {
 
   render() {
     const locations = this.props.locations.list;
-    const { showLocationModal, showPropertyModal, tabIndex } = this.state;
+    const { isAuthenticated } = this.props;
+    const { tabIndex } = this.state;
 
     return (
       <div className="propertiesView container">
         <Paper className="paper" elevation={1}>
-          {showLocationModal && this.renderLocationModal()}
-          {showPropertyModal && this.renderPropertyModal()}
+          {isAuthenticated && this.renderLocationModal()}
+          {this.renderPropertyDialog()}
           {this.renderTitle()}
           {this.renderLocationTabs()}
           {tabIndex !== 0 &&
