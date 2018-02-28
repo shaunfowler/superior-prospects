@@ -1,24 +1,7 @@
 import React, { Component } from "react";
-import { List, Grid, Paper } from "material-ui";
+import { List, Paper, Tabs, Tab } from "material-ui";
 import PropertyItem from "../../components/PropertyItem";
 import { Typography, Button } from "material-ui";
-
-const renderPropertiesForLocationId = (properties, locationId) => (
-  <List>
-    {properties &&
-      properties
-        .filter(p => p.locationRefId === locationId)
-        .map(p => (
-          <PropertyItem
-            key={p._id}
-            id={p._id}
-            name={p.name}
-            safeName={p.safeName}
-            description={p.description}
-          />
-        ))}
-  </List>
-);
 
 class Properties extends Component {
   constructor(props) {
@@ -27,7 +10,8 @@ class Properties extends Component {
       showPropertyModal: false,
       showLocationModal: false,
       newEntityName: "",
-      selectedLocationId: null
+      selectedLocationId: null,
+      tabIndex: 0
     };
   }
 
@@ -63,6 +47,10 @@ class Properties extends Component {
     });
   };
 
+  onTabIndexChanged = (event, value) => {
+    this.setState({ tabIndex: value });
+  };
+
   hideModals = () => {
     this.setState({
       showPropertyModal: false,
@@ -70,6 +58,83 @@ class Properties extends Component {
       newEntityName: "",
       selectedLocationId: null
     });
+  };
+
+  renderTitle = () => {
+    return (
+      <div className="paper__title">
+        <Typography variant="title">Properties</Typography>
+        <Button color="primary" onClick={() => this.onAddLocationClicked()}>
+          Add Location
+        </Button>
+        <Button color="primary" onClick={() => this.onAddPropertyClicked()}>
+          Add Property
+        </Button>
+      </div>
+    );
+  };
+
+  renderLocationTabs = () => {
+    const locations = this.props.locations.list;
+    return (
+      <Tabs
+        className="location-tabs"
+        value={this.state.tabIndex}
+        onChange={this.onTabIndexChanged}
+        indicatorColor="primary"
+        textColor="primary"
+        fullWidth
+      >
+        <Tab label="All Locations" />
+        {locations && locations.map(l => <Tab key={l._id} label={l.name} />)}
+      </Tabs>
+    );
+  };
+
+  renderPropertiesForLocationId = locationId => {
+    const properties = this.props.properties.list;
+    return (
+      <List>
+        {properties &&
+          properties
+            .filter(p => p.locationRefId === locationId)
+            .map(p => (
+              <PropertyItem
+                key={p._id}
+                id={p._id}
+                name={p.name}
+                safeName={p.safeName}
+                description={p.description}
+              />
+            ))}
+      </List>
+    );
+  };
+
+  renderProperties = () => {
+    const properties = this.props.properties.list;
+    return (
+      <List>
+        {properties &&
+          properties.map(p => (
+            <PropertyItem
+              key={p._id}
+              id={p._id}
+              name={p.name}
+              safeName={p.safeName}
+              description={p.description}
+            />
+          ))}
+      </List>
+    );
+  };
+
+  renderLocationSummary = location => {
+    return location ? (
+      <Typography variant="subheading" className="location-summary">
+        {location.body}
+      </Typography>
+    ) : null;
   };
 
   renderLocationModal = () => {
@@ -187,46 +252,21 @@ class Properties extends Component {
 
   render() {
     const locations = this.props.locations.list;
-    const properties = this.props.properties.list;
-    const { showLocationModal, showPropertyModal } = this.state;
+    const { showLocationModal, showPropertyModal, tabIndex } = this.state;
 
     return (
       <div className="propertiesView container">
-        <Grid container spacing={24}>
-          <Grid item xs={12}>
-            <Paper className="paper" elevation={1}>
-              {showLocationModal && this.renderLocationModal()}
-              {showPropertyModal && this.renderPropertyModal()}
-              <div className="viewContainer">
-                <div className="paper__title">
-                  <Typography variant="title">Properties</Typography>
-                  <Button
-                    color="primary"
-                    onClick={() => this.onAddLocationClicked()}
-                  >
-                    Add Location
-                  </Button>
-                  <Button
-                    color="primary"
-                    onClick={() => this.onAddPropertyClicked()}
-                  >
-                    Add Property
-                  </Button>
-                </div>
-                <div>
-                  {locations &&
-                    locations.map(l => (
-                      <div key={l._id}>
-                        <Typography variant="title">{l.name}</Typography>
-                        <Typography variant="body1">{l.body}</Typography>
-                        {renderPropertiesForLocationId(properties, l._id)}
-                      </div>
-                    ))}
-                </div>
-              </div>
-            </Paper>
-          </Grid>
-        </Grid>
+        <Paper className="paper" elevation={1}>
+          {showLocationModal && this.renderLocationModal()}
+          {showPropertyModal && this.renderPropertyModal()}
+          {this.renderTitle()}
+          {this.renderLocationTabs()}
+          {tabIndex !== 0 &&
+            this.renderLocationSummary(locations[tabIndex - 1])}
+          {tabIndex === 0
+            ? this.renderProperties()
+            : this.renderPropertiesForLocationId(locations[tabIndex - 1]._id)}
+        </Paper>
       </div>
     );
   }

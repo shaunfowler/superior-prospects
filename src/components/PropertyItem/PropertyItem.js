@@ -10,7 +10,7 @@ import { MoreVert as MoreVertIcon } from "material-ui-icons";
 import "./PropertyItem.less";
 
 const PropertyItem = ({ safeName, name, description }) => (
-  <Link to={`/properties/${safeName}`}>
+  <Link to={`/properties/${safeName}`} className="property-item">
     <ListItem>
       <ListItemText primary={name} secondary={description} />
       <ListItemSecondaryAction>
