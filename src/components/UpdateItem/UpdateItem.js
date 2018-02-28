@@ -44,6 +44,16 @@ class UpdateItem extends React.Component {
         <MenuItem
           onClick={event => {
             this.handleClose(event);
+          }}
+        >
+          <ListItemIcon>
+            <EditIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Edit" />
+        </MenuItem>
+        <MenuItem
+          onClick={event => {
+            this.handleClose(event);
             onDelete(id);
           }}
         >
@@ -51,16 +61,6 @@ class UpdateItem extends React.Component {
             <DeleteIcon />
           </ListItemIcon>
           <ListItemText inset primary="Delete" />
-        </MenuItem>
-        <MenuItem
-          onClick={event => {
-            this.handleClose(event);
-          }}
-        >
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          <ListItemText inset primary="Edit" />
         </MenuItem>
       </Menu>
     );

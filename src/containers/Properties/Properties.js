@@ -11,7 +11,8 @@ class Properties extends Component {
       showLocationModal: false,
       newEntityName: "",
       selectedLocationId: null,
-      tabIndex: 0
+      tabIndex: 0,
+      modalOpen: false
     };
   }
 
@@ -135,6 +136,14 @@ class Properties extends Component {
         {location.body}
       </Typography>
     ) : null;
+  };
+
+  handleClickOpenDialog = () => {
+    this.setState({ modalOpen: true });
+  };
+
+  handleCloseDialog = () => {
+    this.setState({ modalOpen: false });
   };
 
   renderLocationModal = () => {
