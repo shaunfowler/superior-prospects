@@ -1,5 +1,16 @@
 import React, { Component } from "react";
-import { Paper, Button, Typography, TextField } from "material-ui";
+import {
+  Paper,
+  Grid,
+  Button,
+  Typography,
+  TextField,
+  Avatar
+} from "material-ui";
+import {
+  Folder as FolderIcon,
+  FileUpload as FileUploadIcon
+} from "material-ui-icons";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -167,27 +178,55 @@ class Property extends Component {
   renderMedia = () => {
     const { selected, isAuthenticated } = this.props;
     return (
-      <div>
-        {isAuthenticated && (
-          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
-            <p>Drop files here or click to upload.</p>
-            <p className="file-type-note">
-              Only <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
-              <code>png</code>, <code>jpeg</code> are allowed.
-            </p>
-          </Dropzone>
-        )}
-        {selected.media &&
-          selected.media.map(m => (
-            <a
-              className="panel-block"
-              href={`/api/static/${m.fileName}`}
-              target="_blank"
-              key={m._id}
-            >
-              {m.fileName}
-            </a>
-          ))}
+      <div className="media">
+        <Grid container spacing={24}>
+          {isAuthenticated && (
+            <Grid item lg={3} md={3} sm={4} xs={6}>
+              <Paper className="media__item" elevation={1}>
+                <Avatar className="media__item__avatar">
+                  <FileUploadIcon />
+                </Avatar>
+                <div className="media__item__text">
+                  <Dropzone
+                    onDrop={this.onFileDrop}
+                    className="dropzone"
+                    multiple
+                  >
+                    <div className="name">
+                      Drop files here or click to upload.
+                    </div>
+                    <div className="date">
+                      Only <code>xlsx</code>, <code>docx</code>,{" "}
+                      <code>pdf</code>, <code>png</code>, <code>jpeg</code> are
+                      allowed.
+                    </div>
+                  </Dropzone>
+                </div>
+              </Paper>
+            </Grid>
+          )}
+          {selected.media &&
+            selected.media.map(m => (
+              <Grid key={m._id} item lg={3} md={3} sm={4} xs={6}>
+                <a
+                  className="panel-block"
+                  href={`/api/static/${m.fileName}`}
+                  target="_blank"
+                  key={m._id}
+                >
+                  <Paper className="media__item" elevation={1}>
+                    <Avatar className="media__item__avatar">
+                      <FolderIcon />
+                    </Avatar>
+                    <div className="media__item__text">
+                      <div className="name">{m.fileName}</div>
+                      <div className="date">{m.created}</div>
+                    </div>
+                  </Paper>
+                </a>
+              </Grid>
+            ))}
+        </Grid>
       </div>
     );
   };
@@ -200,8 +239,8 @@ class Property extends Component {
             <div>
               {this.renderTitle()}
               {this.renderDescription()}
-              {this.renderBody()}
               {this.renderMedia()}
+              {this.renderBody()}
             </div>
           )}
         </Paper>

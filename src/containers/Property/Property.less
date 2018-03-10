@@ -2,16 +2,20 @@
   display: flex;
   margin-top: (-64px - 54px);
 
-  .description {
+  .description,
+  .body,
+  .media {
     padding: 15px;
+  }
+
+  .body {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
   }
 
   textarea {
     width: 100%;
-  }
-
-  .body {
-    padding: 15px;
   }
 
   .title {
@@ -22,21 +26,32 @@
     width: 100%;
   }
 
-  .dropzone {
-    color: #3273dc;
-    font-weight: 800;
-    border: 2px dashed #3273dc;
-    cursor: pointer;
-    border-radius: 3px;
-    width: auto;
-    text-align: center;
-    padding: 20px 10px;
-    margin-bottom: 20px;
+  .media {
+    &__item {
+      display: flex;
+      padding: 5px 10px;
+      cursor: pointer;
 
-    .file-type-note {
-      font-weight: 400;
-      margin-top: 20px;
-      font-size: 12px;
+      &__avatar {
+        margin-right: 10px;
+        background: rgba(255, 183, 49, 0.699);
+      }
+
+      &__text {
+        align-self: center;
+        .name {
+          font-size: 13px;
+          line-height: 13px;
+          color: #333;
+          margin-bottom: 4px;
+        }
+
+        .date {
+          font-size: 12px;
+          line-height: 12px;
+          color: #999;
+        }
+      }
     }
   }
 
