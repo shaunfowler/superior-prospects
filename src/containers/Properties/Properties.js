@@ -7,7 +7,6 @@ import {
   Dialog,
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle,
   TextField,
   FormControl,
@@ -114,40 +113,28 @@ class Properties extends Component {
     );
   };
 
-  renderPropertiesForLocationId = locationId => {
+  renderProperties = (locationId = null) => {
     const properties = this.props.properties.list;
-    return (
-      <List>
-        {properties &&
-          properties
-            .filter(p => p.locationRefId === locationId)
-            .map(p => (
-              <PropertyItem
-                key={p._id}
-                id={p._id}
-                name={p.name}
-                safeName={p.safeName}
-                description={p.description}
-              />
-            ))}
-      </List>
-    );
-  };
+    if (!properties) {
+      return null;
+    }
 
-  renderProperties = () => {
-    const properties = this.props.properties.list;
+    let filtered = properties;
+    if (locationId) {
+      filtered = properties.filter(p => p.locationRefId === locationId);
+    }
+
     return (
       <List>
-        {properties &&
-          properties.map(p => (
-            <PropertyItem
-              key={p._id}
-              id={p._id}
-              name={p.name}
-              safeName={p.safeName}
-              description={p.description}
-            />
-          ))}
+        {filtered.map(p => (
+          <PropertyItem
+            key={p._id}
+            id={p._id}
+            name={p.name}
+            safeName={p.safeName}
+            description={p.description}
+          />
+        ))}
       </List>
     );
   };
@@ -160,59 +147,44 @@ class Properties extends Component {
     ) : null;
   };
 
-  handleClickOpenDialog = () => {
-    this.setState({ modalOpen: true });
-  };
-
-  handleCloseDialog = () => {
-    this.setState({ modalOpen: false });
-  };
-
-  renderLocationModal = () => {
-    const { newEntityName } = this.state;
+  renderLocationDialog = () => {
+    const { newEntityName, showLocationModal } = this.state;
     const { createLocation } = this.props;
     return (
-      <div className="modal is-active">
-        <div className="modal-background" />
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Add Location</p>
-            <button
-              className="delete"
-              aria-label="close"
-              onClick={() => this.hideModals()}
-            />
-          </header>
-          <section className="modal-card-body">
-            <div className="field">
-              <label className="label">Location Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  value={newEntityName}
-                  onChange={this.onNewEntityNameChanged}
-                />
-              </div>
-            </div>
-          </section>
-          <footer className="modal-card-foot">
-            <button
-              className="button is-success"
-              onClick={() =>
-                createLocation({ name: newEntityName }).then(() =>
-                  this.hideModals()
-                )
-              }
-            >
-              Save
-            </button>
-            <button className="button" onClick={() => this.hideModals()}>
-              Cancel
-            </button>
-          </footer>
-        </div>
-      </div>
+      <Dialog
+        open={showLocationModal}
+        onClose={this.handleClose}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            label="Location Name"
+            type="text"
+            value={newEntityName}
+            onChange={this.onNewEntityNameChanged}
+            fullWidth
+          />
+        </DialogContent>
+
+        <DialogActions>
+          <Button onClick={this.hideModals} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={event => {
+              createLocation({
+                name: newEntityName
+              }).then(() => this.hideModals());
+            }}
+            color="primary"
+            disabled={newEntityName === ""}
+          >
+            Add
+          </Button>
+        </DialogActions>
+      </Dialog>
     );
   };
 
@@ -228,9 +200,6 @@ class Properties extends Component {
       >
         <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
         <DialogContent>
-          <DialogContentText style={{ marginBottom: "20px" }}>
-            Enter a short summary of the news or announcement.
-          </DialogContentText>
           <TextField
             autoFocus
             label="Property Name"
@@ -282,80 +251,14 @@ class Properties extends Component {
     );
   };
 
-  renderPropertyModal = () => {
-    const { newEntityName, selectedLocationId } = this.state;
-    const { createProperty } = this.props;
-    const locations = this.props.locations.list;
-    return (
-      <div className="modal is-active">
-        <div className="modal-background" />
-        <div className="modal-card">
-          <header className="modal-card-head">
-            <p className="modal-card-title">Add Property</p>
-            <button
-              className="delete"
-              aria-label="close"
-              onClick={() => this.hideModals()}
-            />
-          </header>
-          <section className="modal-card-body">
-            <div className="field">
-              <label className="label">Property Name</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  value={newEntityName}
-                  onChange={this.onNewEntityNameChanged}
-                />
-              </div>
-            </div>
-            <div className="field">
-              <label className="label">Location</label>
-              <div className="control">
-                <div className="select">
-                  <select onChange={this.onSelectedLocationChanged}>
-                    {locations.map(l => (
-                      <option value={l._id} key={l._id}>
-                        {l.name}
-                      </option>
-                    ))}
-                  </select>
-                </div>
-              </div>
-            </div>
-          </section>
-          <footer className="modal-card-foot">
-            <button
-              className="button is-success"
-              onClick={() =>
-                createProperty({
-                  name: newEntityName,
-                  locationRefId: selectedLocationId,
-                  visible: true
-                }).then(() => this.hideModals())
-              }
-            >
-              Save
-            </button>
-            <button className="button" onClick={() => this.hideModals()}>
-              Cancel
-            </button>
-          </footer>
-        </div>
-      </div>
-    );
-  };
-
   render() {
     const locations = this.props.locations.list;
-    const { isAuthenticated } = this.props;
     const { tabIndex } = this.state;
 
     return (
       <div className="propertiesView container">
         <Paper className="paper" elevation={1}>
-          {isAuthenticated && this.renderLocationModal()}
+          {this.renderLocationDialog()}
           {this.renderPropertyDialog()}
           {this.renderTitle()}
           {this.renderLocationTabs()}
@@ -363,7 +266,7 @@ class Properties extends Component {
             this.renderLocationSummary(locations[tabIndex - 1])}
           {tabIndex === 0
             ? this.renderProperties()
-            : this.renderPropertiesForLocationId(locations[tabIndex - 1]._id)}
+            : this.renderProperties(locations[tabIndex - 1]._id)}
         </Paper>
       </div>
     );
