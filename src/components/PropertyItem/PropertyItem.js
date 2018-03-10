@@ -1,23 +1,12 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import {
-  ListItem,
-  ListItemText,
-  ListItemSecondaryAction,
-  IconButton
-} from "material-ui";
-import { MoreVert as MoreVertIcon } from "material-ui-icons";
+import { ListItem, ListItemText } from "material-ui";
 import "./PropertyItem.less";
 
 const PropertyItem = ({ safeName, name, description }) => (
   <Link to={`/properties/${safeName}`} className="property-item">
     <ListItem>
       <ListItemText primary={name} secondary={description} />
-      <ListItemSecondaryAction>
-        <IconButton aria-label="More">
-          <MoreVertIcon />
-        </IconButton>
-      </ListItemSecondaryAction>
     </ListItem>
   </Link>
 );
