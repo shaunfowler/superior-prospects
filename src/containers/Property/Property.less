@@ -1,32 +1,25 @@
 .propertyView {
-  flex: 1;
+  display: flex;
+  margin-top: (-64px - 54px);
 
-  .title,
-  .subtitle {
+  .description {
+    padding: 15px;
+  }
+
+  textarea {
     width: 100%;
   }
 
+  .body {
+    padding: 15px;
+  }
+
+  .title {
+    width: 50%;
+  }
+
   .subtitle {
-    min-height: 20px;
-  }
-
-  .title input {
-    border-radius: 3px;
-    padding: 5px;
-    border: 1px solid #ddd;
-  }
-
-  .subtitle textarea {
-    margin-top: 5px;
-    border-color: #ddd;
-    border-radius: 3px;
-    padding: 10px;
-    height: 6rem;
-  }
-
-  h1[contenteditable='true'],
-  div[contenteditable='true'] {
-    resize: none;
+    width: 100%;
   }
 
   .dropzone {

@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { Paper, Button, Typography, TextField } from "material-ui";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -93,73 +94,72 @@ class Property extends Component {
 
   renderTitle = () => {
     const { selected, isAuthenticated } = this.props;
-    const { editMode, newName, newDescription } = this.state;
+    const { editMode, newName } = this.state;
     return (
-      <div>
-        <h1 className="title">
+      <div className="paper__title">
+        <Typography variant="title">
           {!editMode && selected.name}
           {editMode && (
-            <input
-              type="text"
+            <TextField
               className="title"
               onChange={this.onNameChange}
               value={newName}
             />
           )}
-        </h1>
-        <div className="subtitle">
-          {!editMode && selected.description}
-          {editMode && (
-            <textarea
-              className="subtitle"
-              value={newDescription}
-              onChange={this.onDescriptionChange}
-            />
-          )}
-        </div>
+        </Typography>
 
         {editMode && (
-          <button
-            className="button is-link is-outlined"
-            onClick={() => this.saveEditorContent()}
-          >
+          <Button color="primary" onClick={() => this.saveEditorContent()}>
             Save
-          </button>
+          </Button>
         )}
         {isAuthenticated &&
           !editMode && (
-            <button
-              className="button is-link is-outlined"
-              onClick={() => this.enterEditMode()}
-            >
+            <Button color="primary" onClick={() => this.enterEditMode()}>
               Edit
-            </button>
+            </Button>
           )}
       </div>
     );
   };
 
-  renderEditor() {
-    const { editorState, editMode } = this.state;
-    return (
-      <div>
-        <Editor
-          editorState={editorState}
-          toolbarClassName="toolbarClassName"
-          wrapperClassName="wrapperClassName"
-          editorClassName="editorClassName"
-          onEditorStateChange={this.onEditorStateChange}
-          readOnly={!editMode}
-        />
-      </div>
-    );
-  }
-
-  renderBody = () => {
+  renderDescription = () => {
+    const { editMode, newDescription } = this.state;
     const { selected } = this.props;
     return (
-      <div className="content">
-        {selected.body && renderHTML(selected.body)}
+      <div className="description">
+        {!editMode && <Typography>{selected.description}</Typography>}
+        {editMode && (
+          <TextField
+            type="text"
+            label="Description"
+            multiline={true}
+            rowsMax={5}
+            className="subtitle"
+            value={newDescription}
+            onChange={this.onDescriptionChange}
+          />
+        )}
+      </div>
+    );
+  };
+
+  renderBody = () => {
+    const { editorState, editMode } = this.state;
+    const { selected } = this.props;
+    return (
+      <div className="body">
+        {editMode ? (
+          <Editor
+            editorState={editorState}
+            toolbarClassName="toolbarClassName"
+            wrapperClassName="wrapperClassName"
+            editorClassName="editorClassName"
+            onEditorStateChange={this.onEditorStateChange}
+          />
+        ) : (
+          renderHTML(selected.body)
+        )}
       </div>
     );
   };
@@ -177,57 +177,34 @@ class Property extends Component {
             </p>
           </Dropzone>
         )}
-        <nav className="panel">
-          <p className="panel-heading">Media</p>
-          {/* <p className="panel-tabs">
-            <a className="">all</a>
-            <a className="is-active">images</a>
-            <a>documents</a>
-          </p> */}
-          {selected.media &&
-            selected.media.map(m => (
-              <a
-                className="panel-block"
-                href={`/api/static/${m.fileName}`}
-                target="_blank"
-                key={m._id}
-              >
-                {m.fileName}
-              </a>
-            ))}
-          {selected.media &&
-            selected.media.length === 0 && (
-              <span className="panel-block">
-                There are no documents available.
-              </span>
-            )}
-        </nav>
+        {selected.media &&
+          selected.media.map(m => (
+            <a
+              className="panel-block"
+              href={`/api/static/${m.fileName}`}
+              target="_blank"
+              key={m._id}
+            >
+              {m.fileName}
+            </a>
+          ))}
       </div>
     );
   };
 
   render() {
-    const { editMode } = this.state;
     return (
       <div className="propertyView container">
-        <div className="viewContainer">
+        <Paper className="paper" elevation={1}>
           {this.state.initialized && (
             <div>
-              <div className="columns">
-                <div className="column">{this.renderTitle()}</div>
-              </div>
-              <div className="columns">
-                <div className="column is-three-quarters">
-                  {editMode && this.renderEditor()}
-                  {!editMode && this.renderBody()}
-                </div>
-                <div className="column is-one-quarter">
-                  {this.renderMedia()}
-                </div>
-              </div>
+              {this.renderTitle()}
+              {this.renderDescription()}
+              {this.renderBody()}
+              {this.renderMedia()}
             </div>
           )}
-        </div>
+        </Paper>
       </div>
     );
   }
