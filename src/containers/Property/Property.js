@@ -177,6 +177,11 @@ class Property extends Component {
 
   renderMedia = () => {
     const { selected, isAuthenticated } = this.props;
+
+    if (!isAuthenticated && selected.media && selected.media.length === 0) {
+      return null;
+    }
+
     return (
       <div className="media">
         <Grid container spacing={24}>
@@ -192,13 +197,10 @@ class Property extends Component {
                     className="dropzone"
                     multiple
                   >
-                    <div className="name">
-                      Drop files here or click to upload.
-                    </div>
+                    <div className="name">Upload new items</div>
                     <div className="date">
-                      Only <code>xlsx</code>, <code>docx</code>,{" "}
-                      <code>pdf</code>, <code>png</code>, <code>jpeg</code> are
-                      allowed.
+                      <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+                      <code>png</code>, <code>jpeg</code>
                     </div>
                   </Dropzone>
                 </div>

@@ -29,6 +29,7 @@
   .media {
     &__item {
       display: flex;
+      align-items: center;
       padding: 5px 10px;
       cursor: pointer;
 
@@ -39,6 +40,11 @@
 
       &__text {
         align-self: center;
+        height: 52px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+
         .name {
           font-size: 13px;
           line-height: 13px;
