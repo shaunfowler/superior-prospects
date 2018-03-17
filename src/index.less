@@ -1,23 +1,51 @@
-@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 
 body {
-  background-color: #f4f4f4;
-  font-family: 'Source Sans Pro', sans-serif;
+  font-family: 'Open Sans', sans-serif;
+  background: #eee !important;
 }
 
-.column {
-  padding: 2rem;
+a,
+a:hover,
+a:active,
+a:focus {
+  text-decoration: none;
+  color: inherit;
 }
 
-.viewContainer {
-  background-color: #fff;
-  border-radius: 2px;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 2px 4px;
-  min-height: 300px;
-  margin-top: -120px;
-  margin-bottom: 20px;
+.container {
+  width: 80%;
+  min-width: 960px;
+  max-width: 1600px;
+  margin: auto;
+  z-index: 10;
+
+  & > .paper {
+    width: 100%;
+  }
 }
 
-input {
-  box-shadow: none !important;
+h1,
+h2 {
+  margin: 0;
+}
+
+.paper {
+  &__title {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid #eee;
+    height: 54px;
+    padding: 0 15px;
+    box-sizing: border-box;
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      flex: 1;
+    }
+  }
 }

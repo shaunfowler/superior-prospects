@@ -1,32 +1,23 @@
+// overrides
+.app-bar {
+  background: transparent !important;
+  box-shadow: none !important;
+}
+
 .header {
-  .navbar {
-    z-index: 10;
-    background: rgba(0, 0, 0, 0.7);
+  display: flex;
+  text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
+
+  button {
+    text-shadow: 0 0 15px rgba(0, 0, 0, 0.4);
   }
 
-  .navbar-item {
-    border-bottom: 2px solid transparent;
-    transition: 200ms;
-    margin: 0 5px;
-
-    &.active,
-    &:hover {
-      border-bottom: 2px solid #fff;
-      background: rgba(0, 0, 0, 0.1) !important;
-    }
+  &.container {
+    padding-left: 15px;
+    padding-right: 0;
   }
 
-  .jumbotron {
-    z-index: 0;
-    height: 240px;
-    background: #fafafa;
-    border-bottom: 1px solid #eee;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center center;
-    position: relative;
-    top: -52px;
-    left: 0;
-    right: 0;
+  .logo {
+    flex: 1;
   }
 }

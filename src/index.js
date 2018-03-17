@@ -3,17 +3,27 @@ import { render } from "react-dom";
 import { Provider } from "react-redux";
 import { ConnectedRouter } from "react-router-redux";
 import ReactGA from "react-ga";
-import "bulma/css/bulma.css";
+import { createMuiTheme, MuiThemeProvider } from "material-ui/styles";
+import { blue, orange } from "material-ui/colors";
 import store, { history } from "./redux/store/configureStore";
 import "./index.less";
 import App from "./containers/App";
 
 ReactGA.initialize("UA-78822442-1", { debug: true });
 
+const theme = createMuiTheme({
+  palette: {
+    primary: blue,
+    secondary: orange
+  }
+});
+
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>
-      <App />
+      <MuiThemeProvider theme={theme}>
+        <App />
+      </MuiThemeProvider>
     </ConnectedRouter>
   </Provider>,
   document.getElementById("root")

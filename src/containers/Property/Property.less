@@ -1,49 +1,63 @@
 .propertyView {
-  flex: 1;
+  display: flex;
+  margin-top: (-64px - 54px);
 
-  .title,
+  .description,
+  .body,
+  .media {
+    padding: 15px;
+  }
+
+  .body {
+    font-size: 14px;
+    line-height: 20px;
+    color: #333;
+  }
+
+  textarea {
+    width: 100%;
+  }
+
+  .title {
+    width: 50%;
+  }
+
   .subtitle {
     width: 100%;
   }
 
-  .subtitle {
-    min-height: 20px;
-  }
+  .media {
+    &__item {
+      display: flex;
+      align-items: center;
+      padding: 5px 10px;
+      cursor: pointer;
 
-  .title input {
-    border-radius: 3px;
-    padding: 5px;
-    border: 1px solid #ddd;
-  }
+      &__avatar {
+        margin-right: 10px;
+        background: rgba(255, 183, 49, 0.699);
+      }
 
-  .subtitle textarea {
-    margin-top: 5px;
-    border-color: #ddd;
-    border-radius: 3px;
-    padding: 10px;
-    height: 6rem;
-  }
+      &__text {
+        align-self: center;
+        height: 52px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
 
-  h1[contenteditable='true'],
-  div[contenteditable='true'] {
-    resize: none;
-  }
+        .name {
+          font-size: 13px;
+          line-height: 13px;
+          color: #333;
+          margin-bottom: 4px;
+        }
 
-  .dropzone {
-    color: #3273dc;
-    font-weight: 800;
-    border: 2px dashed #3273dc;
-    cursor: pointer;
-    border-radius: 3px;
-    width: auto;
-    text-align: center;
-    padding: 20px 10px;
-    margin-bottom: 20px;
-
-    .file-type-note {
-      font-weight: 400;
-      margin-top: 20px;
-      font-size: 12px;
+        .date {
+          font-size: 12px;
+          line-height: 12px;
+          color: #999;
+        }
+      }
     }
   }
 

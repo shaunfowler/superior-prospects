@@ -1,7 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import ReactGA from "react-ga";
-import HeaderImage from "../../assets/header-clear.jpg";
+import AppBar from "material-ui/AppBar";
+import Toolbar from "material-ui/Toolbar";
+import Button from "material-ui/Button";
+import Typography from "material-ui/Typography";
 
 const trackHeaderLink = () => {
   ReactGA.event({
@@ -11,59 +14,40 @@ const trackHeaderLink = () => {
 };
 
 const Header = () => (
-  <div className="header">
-    <nav className="navbar is-dark " aria-label="main navigation">
-      <div className="container">
-        <div className="navbar-brand">
-          <Link
-            className="navbar-item is-size-5 has-text-weight-bold"
-            to="/"
-            onClick={() => trackHeaderLink()}
-          >
-            Superior Prospects Inc.
-          </Link>
-
-          <button className="button navbar-burger">
-            <span />
-            <span />
-            <span />
-          </button>
-        </div>
-        <div className="navbar-menu">
-          <div className="navbar-end">
-            <NavLink
-              exact
-              className="navbar-item"
-              to="/"
-              activeClassName="active"
-            >
-              Home
-            </NavLink>
-            <NavLink
-              exact
-              className="navbar-item"
-              to="/properties"
-              activeClassName="active"
-            >
-              Properties
-            </NavLink>
-            <NavLink
-              exact
-              className="navbar-item"
-              to="/about"
-              activeClassName="active"
-            >
-              About
-            </NavLink>
-          </div>
-        </div>
-      </div>
-    </nav>
-    <div
-      className="jumbotron"
-      style={{ backgroundImage: `url('${HeaderImage}')` }}
-    />
-  </div>
+  <AppBar className="app-bar" position="static">
+    <Toolbar className="header container">
+      <Link to="/" onClick={() => trackHeaderLink()} className="logo">
+        <Typography variant="title" color="inherit">
+          Superior Prospects Inc.
+        </Typography>
+      </Link>
+      <NavLink exact className="navbar-item" to="/" activeClassName="active">
+        <Button color="inherit" size="large">
+          Home
+        </Button>
+      </NavLink>
+      <NavLink
+        exact
+        className="navbar-item"
+        to="/properties"
+        activeClassName="active"
+      >
+        <Button color="inherit" size="large">
+          Properties
+        </Button>
+      </NavLink>
+      <NavLink
+        exact
+        className="navbar-item"
+        to="/about"
+        activeClassName="active"
+      >
+        <Button color="inherit" size="large">
+          About
+        </Button>
+      </NavLink>
+    </Toolbar>
+  </AppBar>
 );
 
 export default Header;
