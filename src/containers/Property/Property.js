@@ -7,10 +7,7 @@ import {
   TextField,
   Avatar
 } from "material-ui";
-import {
-  Folder as FolderIcon,
-  FileUpload as FileUploadIcon
-} from "material-ui-icons";
+import { FileUpload as FileUploadIcon } from "material-ui-icons";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
@@ -19,6 +16,13 @@ import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
 import Dropzone from "react-dropzone";
 import axios from "axios";
+import moment from "moment";
+import fileTypeToIcon from "../../utils/fileTypeToIcon";
+
+const stripFileExtension = filename =>
+  filename.substring(0, filename.lastIndexOf("."));
+
+const formatMediaDate = date => moment(date).format("MMMM Do YYYY");
 
 class Property extends Component {
   constructor(props) {
@@ -175,6 +179,33 @@ class Property extends Component {
     );
   };
 
+  renderDropZone = () => {
+    const { isAuthenticated } = this.props;
+    if (!isAuthenticated) {
+      return null;
+    }
+    return (
+      <Grid item lg={3} md={3} sm={4} xs={6}>
+        <Paper className="media__item" elevation={1}>
+          <div className="media__item__avatar">
+            <Avatar>
+              <FileUploadIcon />
+            </Avatar>
+          </div>
+          <div className="media__item__text">
+            <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
+              <div className="name">Upload new items</div>
+              <div className="date">
+                <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+                <code>png</code>, <code>jpeg</code>
+              </div>
+            </Dropzone>
+          </div>
+        </Paper>
+      </Grid>
+    );
+  };
+
   renderMedia = () => {
     const { selected, isAuthenticated } = this.props;
 
@@ -184,29 +215,8 @@ class Property extends Component {
 
     return (
       <div className="media">
-        <Grid container spacing={24}>
-          {isAuthenticated && (
-            <Grid item lg={3} md={3} sm={4} xs={6}>
-              <Paper className="media__item" elevation={1}>
-                <Avatar className="media__item__avatar">
-                  <FileUploadIcon />
-                </Avatar>
-                <div className="media__item__text">
-                  <Dropzone
-                    onDrop={this.onFileDrop}
-                    className="dropzone"
-                    multiple
-                  >
-                    <div className="name">Upload new items</div>
-                    <div className="date">
-                      <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
-                      <code>png</code>, <code>jpeg</code>
-                    </div>
-                  </Dropzone>
-                </div>
-              </Paper>
-            </Grid>
-          )}
+        <Grid container spacing={8}>
+          {this.renderDropZone()}
           {selected.media &&
             selected.media.map(m => (
               <Grid key={m._id} item lg={3} md={3} sm={4} xs={6}>
@@ -217,12 +227,14 @@ class Property extends Component {
                   key={m._id}
                 >
                   <Paper className="media__item" elevation={1}>
-                    <Avatar className="media__item__avatar">
-                      <FolderIcon />
-                    </Avatar>
+                    <div className="media__item__avatar">
+                      {fileTypeToIcon(m.fileName)}
+                    </div>
                     <div className="media__item__text">
-                      <div className="name">{m.fileName}</div>
-                      <div className="date">{m.created}</div>
+                      <div className="name">
+                        {stripFileExtension(m.fileName)}
+                      </div>
+                      <div className="date">{formatMediaDate(m.created)}</div>
                     </div>
                   </Paper>
                 </a>

@@ -83,15 +83,20 @@ class Properties extends Component {
   };
 
   renderTitle = () => {
+    const { isAuthenticated } = this.props;
     return (
       <div className="paper__title">
         <Typography variant="title">Properties</Typography>
-        <Button color="primary" onClick={() => this.onAddLocationClicked()}>
-          Add Location
-        </Button>
-        <Button color="primary" onClick={() => this.onAddPropertyClicked()}>
-          Add Property
-        </Button>
+        {isAuthenticated && (
+          <div>
+            <Button color="primary" onClick={() => this.onAddLocationClicked()}>
+              Add Location
+            </Button>
+            <Button color="primary" onClick={() => this.onAddPropertyClicked()}>
+              Add Property
+            </Button>
+          </div>
+        )}
       </div>
     );
   };
