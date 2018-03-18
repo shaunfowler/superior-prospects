@@ -15,7 +15,8 @@ it("renders without crashing", () => {
     properties: {
       loading: false,
       list: []
-    }
+    },
+    user: {}
   };
   const store = mockStore(initialState);
   const div = document.createElement("div");
