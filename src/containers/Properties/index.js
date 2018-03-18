@@ -10,10 +10,11 @@ import {
 import Properties from "./Properties";
 import "./Properties.less";
 
-const mapStateToProps = state => {
+const mapStateToProps = ({ locations, properties, user }) => {
   return {
-    locations: state.locations,
-    properties: state.properties
+    locations,
+    properties,
+    isAuthenticated: user.isAuthenticated
   };
 };
 
