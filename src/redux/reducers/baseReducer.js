@@ -46,7 +46,7 @@ export default function baseReducer(
 
     case editSuccess:
       return Object.assign({}, state, {
-        selected: action.entity,
+        selected: { ...state.selected, ...action.entity },
         loading: false
       });
 

@@ -4,6 +4,7 @@ import {
   getProperty,
   editProperty
 } from "../../redux/actions/propertiesActions";
+import { createMedia } from "../../redux/actions/mediaActions";
 import "./Property.less";
 
 const mapStateToProps = ({ properties, user }) => {
@@ -16,7 +17,8 @@ const mapStateToProps = ({ properties, user }) => {
 const mapDispatchToProps = dispatch => {
   return {
     getProperty: id => dispatch(getProperty(id)),
-    editProperty: property => dispatch(editProperty(property))
+    editProperty: property => dispatch(editProperty(property)),
+    createMedia: (file, propertyId) => dispatch(createMedia(file, propertyId))
   };
 };
 
