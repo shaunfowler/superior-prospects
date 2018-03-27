@@ -99,12 +99,8 @@ class Property extends Component {
 
   onFileDrop = files => {
     const { _id } = this.props.selected;
-    const uploaders = files.map(file => {
-      const formData = new FormData();
-      formData.append("media", file);
-      return axios.post(`/api/media/${_id}`, formData, {});
-    });
-    axios.all(uploaders).then(() => {});
+    const { createMedia } = this.props;
+    files.map(file => createMedia(file, _id));
   };
 
   renderTitle = () => {

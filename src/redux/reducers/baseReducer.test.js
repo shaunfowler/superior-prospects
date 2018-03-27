@@ -1,5 +1,5 @@
 import baseReducer from "./baseReducer";
-import { asyncActionNames, buildAsyncActions } from "../actions/actionUtils";
+import { asyncActionNames } from "../actions/actionUtils";
 
 describe("updatesReducer", () => {
   const TEST_ACTION_NAMES = asyncActionNames("TEST");
