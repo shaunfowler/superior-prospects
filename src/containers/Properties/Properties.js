@@ -119,7 +119,7 @@ class Properties extends Component {
   };
 
   renderProperties = (locationId = null) => {
-    const properties = this.props.properties.list;
+    const properties = [...this.props.properties.list];
     if (!properties) {
       return null;
     }

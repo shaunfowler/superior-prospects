@@ -15,7 +15,6 @@ import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
 import Dropzone from "react-dropzone";
-import axios from "axios";
 import moment from "moment";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 

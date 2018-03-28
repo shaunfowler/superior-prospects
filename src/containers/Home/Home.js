@@ -101,7 +101,7 @@ class Home extends Component {
   };
 
   renderUpdatesList = () => {
-    const updates = this.props.updates.list;
+    const updates = [...this.props.updates.list];
     const { isAuthenticated } = this.props;
     return (
       <List>
@@ -124,7 +124,7 @@ class Home extends Component {
   };
 
   renderPropertiesList = () => {
-    const properties = this.props.properties.list;
+    const properties = [...this.props.properties.list];
     return (
       <List>
         {properties &&
