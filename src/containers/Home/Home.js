@@ -30,6 +30,7 @@ class Home extends Component {
     document.title = "Superior Prospects";
     this.props.queryUpdates();
     this.props.queryProperties();
+    this.props.queryLocations();
   }
 
   onDeleteUpdate = update => {
@@ -125,6 +126,16 @@ class Home extends Component {
 
   renderPropertiesList = () => {
     const properties = [...this.props.properties.list];
+    const locations = this.props.locations.list;
+
+    const getLocationName = locationId => {
+      const location = locations.find(l => l._id === locationId);
+      if (location) {
+        return location.name;
+      }
+      return null;
+    };
+
     return (
       <List>
         {properties &&
@@ -139,6 +150,7 @@ class Home extends Component {
                 created={p.created}
                 safeName={p.safeName}
                 description={p.description}
+                locationName={getLocationName(p.locationRefId)}
               />
             ))}
       </List>
