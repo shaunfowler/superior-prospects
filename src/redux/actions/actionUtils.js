@@ -14,7 +14,7 @@ export const buildAsyncActions = actionName => ({
   }),
   failure: error => ({
     type: actionName.failure,
-    error
+    error: JSON.stringify(error)
   }),
   querySuccess: entities => ({
     type: actionName.querySuccess,
