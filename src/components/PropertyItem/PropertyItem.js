@@ -16,18 +16,16 @@ const PropertyItem = ({
       <ListItemText
         primary={
           <div>
-            <span className="property-name">{name}</span>
+            <span className="property-item__name">{name}</span>
             {locationName && (
               <span>
                 {" "}
                 &middot;{" "}
-                <span style={{ fontSize: "14px", opacity: 0.7 }}>
-                  {locationName}
-                </span>
+                <span className="property-item__location">{locationName}</span>
               </span>
             )}
             {created && (
-              <div style={{ fontSize: "14px" }}>
+              <div className="property-item__created">
                 {moment(created).format("MMMM D, YYYY")}
               </div>
             )}
