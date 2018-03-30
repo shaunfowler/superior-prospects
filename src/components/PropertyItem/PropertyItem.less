@@ -1,12 +1,26 @@
 .property-item {
-  margin: 20px 0;
+  margin: 25px 0;
 
-  h3 {
-    transition: 200ms;
+  li,
+  .property-item__name {
+    transition: 250ms;
+  }
+
+  &__location {
+    font-size: 14px;
+    color: #999;
+  }
+
+  &__created {
+    font-size: 14px;
   }
 
   &:hover {
-    h3 {
+    & > li {
+      background-color: #f6f6f6;
+    }
+
+    .property-item__name {
       color: #2196f3;
     }
   }

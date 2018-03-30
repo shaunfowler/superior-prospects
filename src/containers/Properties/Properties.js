@@ -120,6 +120,7 @@ class Properties extends Component {
 
   renderProperties = (locationId = null) => {
     const properties = [...this.props.properties.list];
+    const locations = this.props.locations.list;
     if (!properties) {
       return null;
     }
@@ -129,17 +130,25 @@ class Properties extends Component {
       filtered = properties.filter(p => p.locationRefId === locationId);
     }
 
+    const getLocationName = locationId => {
+      const location = locations.find(l => l._id === locationId);
+      return location && location.name;
+    };
+
     return (
       <List>
-        {filtered.map(p => (
-          <PropertyItem
-            key={p._id}
-            id={p._id}
-            name={p.name}
-            safeName={p.safeName}
-            description={p.description}
-          />
-        ))}
+        {filtered
+          .sort((a, b) => (a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0))
+          .map(p => (
+            <PropertyItem
+              key={p._id}
+              id={p._id}
+              name={p.name}
+              safeName={p.safeName}
+              description={p.description}
+              locationName={!locationId && getLocationName(p.locationRefId)}
+            />
+          ))}
       </List>
     );
   };
