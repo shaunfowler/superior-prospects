@@ -18,6 +18,30 @@ import Dropzone from "react-dropzone";
 import moment from "moment";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 
+const leftColumnSizing = {
+  xs: 12,
+  sm: 8,
+  md: 8,
+  lg: 7,
+  xl: 8
+};
+
+const rightColumnSizing = {
+  xs: 12 - leftColumnSizing.xs || 12,
+  sm: 12 - leftColumnSizing.sm || 12,
+  md: 12 - leftColumnSizing.md || 12,
+  lg: 12 - leftColumnSizing.lg || 12,
+  xl: 12 - leftColumnSizing.xl || 12
+};
+
+const mediaItemSizing = {
+  xs: 12,
+  sm: 12,
+  md: 12,
+  lg: 6,
+  xl: 6
+};
+
 const stripFileExtension = filename =>
   filename.substring(0, filename.lastIndexOf("."));
 
@@ -180,7 +204,7 @@ class Property extends Component {
       return null;
     }
     return (
-      <Grid item lg={3} md={3} sm={4} xs={6}>
+      <Grid item {...mediaItemSizing}>
         <Paper className="media__item" elevation={1}>
           <div className="media__item__avatar">
             <Avatar>
@@ -214,9 +238,8 @@ class Property extends Component {
           {this.renderDropZone()}
           {selected.media &&
             selected.media.map(m => (
-              <Grid key={m._id} item lg={3} md={3} sm={4} xs={6}>
+              <Grid key={m._id} item {...mediaItemSizing}>
                 <a
-                  className="panel-block"
                   href={`/api/static/${m.fileName}`}
                   target="_blank"
                   key={m._id}
@@ -245,12 +268,18 @@ class Property extends Component {
       <div className="propertyView container">
         <Paper className="paper" elevation={1}>
           {this.state.initialized && (
-            <div>
-              {this.renderTitle()}
-              {this.renderDescription()}
-              {this.renderMedia()}
-              {this.renderBody()}
-            </div>
+            <Grid container spacing={24}>
+              <Grid item xs={12}>
+                {this.renderTitle()}
+                {this.renderDescription()}
+              </Grid>
+              <Grid item {...leftColumnSizing}>
+                {this.renderBody()}
+              </Grid>
+              <Grid item {...rightColumnSizing}>
+                {this.renderMedia()}
+              </Grid>
+            </Grid>
           )}
         </Paper>
       </div>
