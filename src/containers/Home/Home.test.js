@@ -17,6 +17,10 @@ it("renders when unauthenticated", () => {
       loading: false,
       list: []
     },
+    locations: {
+      loading: false,
+      list: []
+    },
     user: {
       isAuthenticated: false
     }
@@ -38,6 +42,10 @@ it("renders when authenticated", () => {
       list: []
     },
     properties: {
+      loading: false,
+      list: []
+    },
+    locations: {
       loading: false,
       list: []
     },
