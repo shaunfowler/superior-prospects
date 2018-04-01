@@ -141,7 +141,7 @@ class Home extends Component {
         {properties &&
           properties
             .sort(sortNewestToOldestPredicate)
-            .slice(0, 3)
+            .slice(0, 5)
             .map(p => (
               <PropertyItem
                 key={p._id}

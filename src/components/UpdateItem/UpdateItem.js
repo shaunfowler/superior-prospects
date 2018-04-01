@@ -17,6 +17,7 @@ import {
   Delete as DeleteIcon,
   Edit as EditIcon
 } from "material-ui-icons";
+import { blue } from "material-ui/colors";
 import "./UpdateItem.less";
 
 class UpdateItem extends React.Component {
@@ -72,7 +73,10 @@ class UpdateItem extends React.Component {
       <div>
         <ListItem className="update-item">
           <ListItemAvatar>
-            <Avatar className="update-item__icon">
+            <Avatar
+              className="update-item__icon"
+              style={{ backgroundColor: blue[300] }}
+            >
               <NotificationsIcon />
             </Avatar>
           </ListItemAvatar>
