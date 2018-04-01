@@ -1,16 +1,9 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import moment from "moment";
 import { ListItem, ListItemText, Typography } from "material-ui";
 import "./PropertyItem.less";
 
-const PropertyItem = ({
-  safeName,
-  name,
-  description,
-  created,
-  locationName
-}) => (
+const PropertyItem = ({ safeName, name, description, locationName }) => (
   <Link to={`/properties/${safeName}`} className="property-item">
     <ListItem>
       <ListItemText
@@ -23,11 +16,6 @@ const PropertyItem = ({
                 &middot;{" "}
                 <span className="property-item__location">{locationName}</span>
               </span>
-            )}
-            {created && (
-              <div className="property-item__created">
-                {moment(created).format("MMMM D, YYYY")}
-              </div>
             )}
           </div>
         }

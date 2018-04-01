@@ -147,7 +147,6 @@ class Home extends Component {
                 key={p._id}
                 id={p._id}
                 name={p.name}
-                created={p.created}
                 safeName={p.safeName}
                 description={p.description}
                 locationName={getLocationName(p.locationRefId)}
