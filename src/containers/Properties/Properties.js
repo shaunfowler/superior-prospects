@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {
   List,
-  Paper,
   Tabs,
   Tab,
   Dialog,
@@ -30,7 +29,6 @@ class Properties extends Component {
   }
 
   componentWillMount() {
-    document.title = "Properties - Superior Prospects";
     this.props.queryLocations();
     this.props.queryProperties();
   }
@@ -270,18 +268,15 @@ class Properties extends Component {
     const { tabIndex } = this.state;
 
     return (
-      <div className="propertiesView container">
-        <Paper className="paper" elevation={1}>
-          {this.renderLocationDialog()}
-          {this.renderPropertyDialog()}
-          {this.renderTitle()}
-          {this.renderLocationTabs()}
-          {tabIndex !== 0 &&
-            this.renderLocationSummary(locations[tabIndex - 1])}
-          {tabIndex === 0
-            ? this.renderProperties()
-            : this.renderProperties(locations[tabIndex - 1]._id)}
-        </Paper>
+      <div className="propertiesView">
+        {this.renderLocationDialog()}
+        {this.renderPropertyDialog()}
+        {this.renderTitle()}
+        {this.renderLocationTabs()}
+        {tabIndex !== 0 && this.renderLocationSummary(locations[tabIndex - 1])}
+        {tabIndex === 0
+          ? this.renderProperties()
+          : this.renderProperties(locations[tabIndex - 1]._id)}
       </div>
     );
   }

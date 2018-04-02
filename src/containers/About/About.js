@@ -20,7 +20,7 @@ class About extends Component {
                 <Typography variant="subheading">
                   Related Experience and Training (Brian Fowler)
                 </Typography>
-                <Typography variant="body1">
+                <p>
                   I have been interested in rocks since the age of seven and
                   have been a member of several rock and mineral clubs providing
                   me with numerous field trips rock-hounding. During the summer
@@ -29,15 +29,15 @@ class About extends Component {
                   pursue a Bachelor of Science degree, geology major. My return
                   to the work force in 1981 prevented my continuation of this
                   post secondary education.
-                </Typography>
-                <Typography variant="body1">
+                </p>
+                <p>
                   I moved to Marathon in 1982 to do some prospecting with my
                   grandfather Arthur Wright during the Hemlo rush. My
                   grandfather was instrumental in my initial interest as a rock
                   collector, having been involved in the mining industry all his
                   life.
-                </Typography>
-                <Typography variant="body1">
+                </p>
+                <p>
                   In October 1982, I hired on with David Bell, who was then
                   conducting a drill program on the Goliath/Golden Sceptre
                   properties in the Hemlo camp. My chief duties involved core
@@ -53,8 +53,8 @@ class About extends Component {
                   local pulp mill. My employment ended when the mill shut down
                   in March 2009 and I moved to Pinawa, Manitoba, where I
                   currently work for Atomic Energy of Canada.
-                </Typography>
-                <Typography variant="body1">
+                </p>
+                <p>
                   During the period from 1982-2009, I have actively explored the
                   Schreiber-Hemlo greenstone belt searching for both precious
                   and base metals. During the summer months a Thunder Bay
@@ -66,8 +66,8 @@ class About extends Component {
                   Symposium in Thunder Bay. I have visited and gone underground
                   at all three Hemlo gold mines, the Geco base metal mine and
                   the Winston Lake base metal mine.
-                </Typography>
-                <Typography variant="body1">
+                </p>
+                <p>
                   I have gathered a good sound knowledge of mining exploration
                   and gained invaluable advice from numerous Company and
                   Ministry geologists. Having spent the majority of my time in
@@ -76,7 +76,7 @@ class About extends Component {
                   west and Manitouwadge in the north. I use this to my advantage
                   to acquire properties in the belt with good potential for both
                   base metal and precious metal discoveries.
-                </Typography>
+                </p>
               </div>
             </Paper>
           </Grid>

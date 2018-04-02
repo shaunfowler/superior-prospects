@@ -29,11 +29,11 @@ const Header = () => (
       <NavLink
         exact
         className="navbar-item"
-        to="/properties"
+        to="/contact"
         activeClassName="active"
       >
         <Button color="inherit" size="large">
-          Properties
+          Contact
         </Button>
       </NavLink>
       <NavLink
