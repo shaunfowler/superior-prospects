@@ -1,0 +1,207 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Properties container renders when authenticated 1`] = `
+<div
+  className="propertiesView"
+>
+  <WithStyles(Dialog)
+    aria-labelledby="form-dialog-title"
+    open={false}
+  >
+    <WithStyles(DialogTitle)
+      id="form-dialog-title"
+    >
+      Add Property
+    </WithStyles(DialogTitle)>
+    <WithStyles(DialogContent)>
+      <TextField
+        autoFocus={true}
+        fullWidth={true}
+        label="Location Name"
+        onChange={[Function]}
+        required={false}
+        select={false}
+        type="text"
+        value=""
+      />
+    </WithStyles(DialogContent)>
+    <WithStyles(DialogActions)>
+      <WithStyles(Button)
+        color="primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </WithStyles(Button)>
+      <WithStyles(Button)
+        color="primary"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Add
+      </WithStyles(Button)>
+    </WithStyles(DialogActions)>
+  </WithStyles(Dialog)>
+  <WithStyles(Dialog)
+    aria-labelledby="form-dialog-title"
+    open={false}
+  >
+    <WithStyles(DialogTitle)
+      id="form-dialog-title"
+    >
+      Add Property
+    </WithStyles(DialogTitle)>
+    <WithStyles(DialogContent)>
+      <TextField
+        autoFocus={true}
+        fullWidth={true}
+        label="Property Name"
+        onChange={[Function]}
+        required={false}
+        select={false}
+        type="text"
+        value=""
+      />
+      <br />
+      <br />
+      <WithStyles(FormControl)>
+        <WithStyles(InputLabel)
+          htmlFor="location"
+        >
+          Location
+        </WithStyles(InputLabel)>
+        <WithStyles(Select)
+          fullWidth={true}
+          inputProps={
+            Object {
+              "id": "location",
+              "name": "location",
+            }
+          }
+          onChange={[Function]}
+          value={null}
+        />
+      </WithStyles(FormControl)>
+    </WithStyles(DialogContent)>
+    <WithStyles(DialogActions)>
+      <WithStyles(Button)
+        color="primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </WithStyles(Button)>
+      <WithStyles(Button)
+        color="primary"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Add
+      </WithStyles(Button)>
+    </WithStyles(DialogActions)>
+  </WithStyles(Dialog)>
+  <div
+    className="paper__title"
+  >
+    <WithStyles(Typography)
+      variant="title"
+    >
+      Properties
+    </WithStyles(Typography)>
+    <div>
+      <WithStyles(Button)
+        color="primary"
+        onClick={[Function]}
+      >
+        Add Location
+      </WithStyles(Button)>
+      <WithStyles(Button)
+        color="primary"
+        onClick={[Function]}
+      >
+        Add Property
+      </WithStyles(Button)>
+    </div>
+  </div>
+  <WithStyles(Tabs)
+    className="location-tabs"
+    fullWidth={true}
+    indicatorColor="primary"
+    onChange={[Function]}
+    textColor="primary"
+    value={0}
+  >
+    <WithStyles(Tab)
+      label="All Locations"
+    />
+  </WithStyles(Tabs)>
+  <WithStyles(List) />
+</div>
+`;
+
+exports[`Properties container renders when not authenticated 1`] = `
+<div
+  className="propertiesView"
+>
+  <div
+    className="paper__title"
+  >
+    <WithStyles(Typography)
+      variant="title"
+    >
+      Properties
+    </WithStyles(Typography)>
+  </div>
+  <WithStyles(Tabs)
+    className="location-tabs"
+    fullWidth={true}
+    indicatorColor="primary"
+    onChange={[Function]}
+    textColor="primary"
+    value={0}
+  >
+    <WithStyles(Tab)
+      label="All Locations"
+    />
+  </WithStyles(Tabs)>
+  <WithStyles(List) />
+</div>
+`;
+
+exports[`Properties container renders with properties and locations 1`] = `
+<div
+  className="propertiesView"
+>
+  <div
+    className="paper__title"
+  >
+    <WithStyles(Typography)
+      variant="title"
+    >
+      Properties
+    </WithStyles(Typography)>
+  </div>
+  <WithStyles(Tabs)
+    className="location-tabs"
+    fullWidth={true}
+    indicatorColor="primary"
+    onChange={[Function]}
+    textColor="primary"
+    value={0}
+  >
+    <WithStyles(Tab)
+      label="All Locations"
+    />
+    <WithStyles(Tab)
+      key="abc"
+      label="loc 1"
+    />
+  </WithStyles(Tabs)>
+  <WithStyles(List)>
+    <PropertyItem
+      id="123"
+      key="123"
+      locationName="loc 1"
+      name="prop 1"
+    />
+  </WithStyles(List)>
+</div>
+`;

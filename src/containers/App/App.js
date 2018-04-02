@@ -5,7 +5,6 @@ import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
 import Footer from "../../components/Footer";
 import Home from "../Home";
-import Properties from "../Properties";
 import Property from "../Property";
 import About from "../About";
 
@@ -22,7 +21,6 @@ class App extends Component {
         <Jumbotron />
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route exact path="/properties" component={Properties} />
           <Route path="/properties/:id" component={Property} />
           <Route exact path="/about" component={About} />
         </Switch>

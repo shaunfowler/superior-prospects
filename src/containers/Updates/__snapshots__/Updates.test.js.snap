@@ -1,0 +1,106 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Updates container renders when authenticated 1`] = `
+<div>
+  <div
+    className="paper__title"
+  >
+    <WithStyles(Typography)
+      variant="title"
+    >
+      News
+    </WithStyles(Typography)>
+    <WithStyles(Button)
+      aria-label="More"
+      className="paper__edit-icon"
+      color="primary"
+      onClick={[Function]}
+    >
+      Add a news item
+    </WithStyles(Button)>
+  </div>
+  <WithStyles(Dialog)
+    aria-labelledby="form-dialog-title"
+    open={false}
+  >
+    <WithStyles(DialogTitle)
+      id="form-dialog-title"
+    >
+      Add a news item
+    </WithStyles(DialogTitle)>
+    <WithStyles(DialogContent)>
+      <WithStyles(DialogContentText)
+        style={
+          Object {
+            "marginBottom": "20px",
+          }
+        }
+      >
+        Enter a short summary of the news or announcement.
+      </WithStyles(DialogContentText)>
+      <TextField
+        autoFocus={true}
+        fullWidth={true}
+        id="news"
+        label="News text"
+        multiline={true}
+        onChange={[Function]}
+        required={false}
+        rowsMax={5}
+        select={false}
+        type="text"
+        value=""
+      />
+    </WithStyles(DialogContent)>
+    <WithStyles(DialogActions)>
+      <WithStyles(Button)
+        color="primary"
+        onClick={[Function]}
+      >
+        Cancel
+      </WithStyles(Button)>
+      <WithStyles(Button)
+        color="primary"
+        disabled={true}
+        onClick={[Function]}
+      >
+        Add
+      </WithStyles(Button)>
+    </WithStyles(DialogActions)>
+  </WithStyles(Dialog)>
+  <WithStyles(List)>
+    <UpdateItem
+      body="test body"
+      created="test created"
+      id="abc"
+      isUserAuthenticated={true}
+      key="abc"
+      onDelete={[Function]}
+    />
+  </WithStyles(List)>
+</div>
+`;
+
+exports[`Updates container renders when unauthenticated 1`] = `
+<div>
+  <div
+    className="paper__title"
+  >
+    <WithStyles(Typography)
+      variant="title"
+    >
+      News
+    </WithStyles(Typography)>
+  </div>
+  <WithStyles(List)>
+    <UpdateItem
+      body="test body"
+      created="test created"
+      id="abc"
+      isUserAuthenticated={false}
+      key="abc"
+      onDelete={[Function]}
+    />
+  </WithStyles(List)>
+</div>
+`;

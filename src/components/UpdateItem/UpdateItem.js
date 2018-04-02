@@ -1,11 +1,9 @@
 import React from "react";
 import moment from "moment";
 import {
-  Avatar,
   ListItem,
   ListItemText,
   ListItemIcon,
-  ListItemAvatar,
   ListItemSecondaryAction,
   IconButton,
   Menu,
@@ -13,11 +11,9 @@ import {
 } from "material-ui";
 import {
   MoreVert as MoreVertIcon,
-  Notifications as NotificationsIcon,
   Delete as DeleteIcon,
   Edit as EditIcon
 } from "material-ui-icons";
-import { blue } from "material-ui/colors";
 import "./UpdateItem.less";
 
 class UpdateItem extends React.Component {
@@ -72,14 +68,6 @@ class UpdateItem extends React.Component {
     return (
       <div>
         <ListItem className="update-item">
-          <ListItemAvatar>
-            <Avatar
-              className="update-item__icon"
-              style={{ backgroundColor: blue[300] }}
-            >
-              <NotificationsIcon />
-            </Avatar>
-          </ListItemAvatar>
           <ListItemText
             primary={moment(created).format("MMMM D, YYYY")}
             secondary={body}

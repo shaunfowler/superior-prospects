@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Home container renders without crashing 1`] = `
+<div
+  className="homeView container"
+>
+  <WithStyles(GridWrapper)
+    container={true}
+    spacing={8}
+  >
+    <WithStyles(GridWrapper)
+      item={true}
+      sm={3}
+    >
+      <WithStyles(Paper)
+        className="paper"
+        elevation={1}
+      >
+        <Connect(Updates) />
+      </WithStyles(Paper)>
+    </WithStyles(GridWrapper)>
+    <WithStyles(GridWrapper)
+      item={true}
+      sm={9}
+    >
+      <WithStyles(Paper)
+        className="paper"
+        elevation={1}
+      >
+        <Connect(Properties) />
+      </WithStyles(Paper)>
+    </WithStyles(GridWrapper)>
+  </WithStyles(GridWrapper)>
+</div>
+`;
