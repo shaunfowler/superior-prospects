@@ -137,10 +137,11 @@ class Updates extends Component {
   };
 
   render() {
+    const { isAuthenticated } = this.props;
     return (
       <div>
         {this.renderUpdatesTitle()}
-        {this.renderDialog()}
+        {isAuthenticated && this.renderDialog()}
         {this.renderUpdatesList()}
       </div>
     );

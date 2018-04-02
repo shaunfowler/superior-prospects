@@ -1,8 +1,11 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { shallow } from "enzyme";
+import { shallowToJson } from "enzyme-to-json";
 import Home from "./";
 
-it("renders without crashing", () => {
-  const div = document.createElement("div");
-  ReactDOM.render(<Home />, div);
+describe("Home container", () => {
+  it("renders without crashing", () => {
+    const output = shallow(<Home />);
+    expect(shallowToJson(output)).toMatchSnapshot();
+  });
 });

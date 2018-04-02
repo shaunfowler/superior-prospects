@@ -265,12 +265,13 @@ class Properties extends Component {
 
   render() {
     const locations = this.props.locations.list;
+    const { isAuthenticated } = this.props;
     const { tabIndex } = this.state;
 
     return (
       <div className="propertiesView">
-        {this.renderLocationDialog()}
-        {this.renderPropertyDialog()}
+        {isAuthenticated && this.renderLocationDialog()}
+        {isAuthenticated && this.renderPropertyDialog()}
         {this.renderTitle()}
         {this.renderLocationTabs()}
         {tabIndex !== 0 && this.renderLocationSummary(locations[tabIndex - 1])}
