@@ -3,21 +3,13 @@ import ReactDOM from "react-dom";
 import { MemoryRouter } from "react-router-dom";
 import configureStore from "redux-mock-store";
 import thunk from "redux-thunk";
-import Home from "./";
+import Updates from "./";
 
 const mockStore = configureStore([thunk]);
 
 it("renders when unauthenticated", () => {
   const initialState = {
     updates: {
-      loading: false,
-      list: []
-    },
-    properties: {
-      loading: false,
-      list: []
-    },
-    locations: {
       loading: false,
       list: []
     },
@@ -29,7 +21,7 @@ it("renders when unauthenticated", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <MemoryRouter>
-      <Home store={store} />
+      <Updates store={store} />
     </MemoryRouter>,
     div
   );
@@ -41,14 +33,6 @@ it("renders when authenticated", () => {
       loading: false,
       list: []
     },
-    properties: {
-      loading: false,
-      list: []
-    },
-    locations: {
-      loading: false,
-      list: []
-    },
     user: {
       isAuthenticated: true
     }
@@ -57,7 +41,7 @@ it("renders when authenticated", () => {
   const div = document.createElement("div");
   ReactDOM.render(
     <MemoryRouter>
-      <Home store={store} />
+      <Updates store={store} />
     </MemoryRouter>,
     div
   );
