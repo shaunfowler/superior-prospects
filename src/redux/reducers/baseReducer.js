@@ -45,10 +45,23 @@ export default function baseReducer(
       });
 
     case editSuccess:
-      return Object.assign({}, state, {
-        selected: { ...state.selected, ...action.entity },
+      const newState = {
         loading: false
-      });
+      };
+
+      const item = state.list.find(i => i._id === action.entity._id);
+      if (item) {
+        const editedItem = { ...item, ...action.entity };
+        newState.list = [...state.list]
+          .filter(i => i._id !== item._id)
+          .concat(editedItem);
+      }
+
+      if (state.selected) {
+        newState.selected = { ...state.selected, ...action.entity };
+      }
+
+      return Object.assign({}, state, newState);
 
     case createSuccess:
       return Object.assign({}, state, {

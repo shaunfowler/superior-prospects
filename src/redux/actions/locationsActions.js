@@ -18,11 +18,25 @@ export const queryLocations = () => {
   };
 };
 
-export const createLocation = ({ name }) => {
+export const updateLocation = ({ _id, name, description }) => {
   return dispatch => {
     dispatch(LOCATION_ACTIONS.request());
     return axios
-      .post("/api/locations", { name })
+      .put(`/api/locations/${_id}`, { name, body: description })
+      .then(response => {
+        dispatch(LOCATION_ACTIONS.editSuccess(response.data));
+      })
+      .catch(response => {
+        dispatch(LOCATION_ACTIONS.failure(response));
+      });
+  };
+};
+
+export const createLocation = ({ name, description }) => {
+  return dispatch => {
+    dispatch(LOCATION_ACTIONS.request());
+    return axios
+      .post("/api/locations", { name, body: description })
       .then(response => {
         dispatch(LOCATION_ACTIONS.createSuccess(response.data));
       })

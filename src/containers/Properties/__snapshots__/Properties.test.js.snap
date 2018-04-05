@@ -11,15 +11,30 @@ exports[`Properties container renders when authenticated 1`] = `
     <WithStyles(DialogTitle)
       id="form-dialog-title"
     >
-      Add Property
+      Add Location
     </WithStyles(DialogTitle)>
-    <WithStyles(DialogContent)>
+    <WithStyles(DialogContent)
+      className="dialog-md"
+    >
       <TextField
         autoFocus={true}
         fullWidth={true}
-        label="Location Name"
+        label="Name"
         onChange={[Function]}
         required={false}
+        select={false}
+        type="text"
+        value=""
+      />
+    </WithStyles(DialogContent)>
+    <WithStyles(DialogContent)>
+      <TextField
+        fullWidth={true}
+        label="Description"
+        multiline={true}
+        onChange={[Function]}
+        required={false}
+        rowsMax={15}
         select={false}
         type="text"
         value=""
@@ -37,7 +52,7 @@ exports[`Properties container renders when authenticated 1`] = `
         disabled={true}
         onClick={[Function]}
       >
-        Add
+        Update
       </WithStyles(Button)>
     </WithStyles(DialogActions)>
   </WithStyles(Dialog)>
@@ -50,7 +65,9 @@ exports[`Properties container renders when authenticated 1`] = `
     >
       Add Property
     </WithStyles(DialogTitle)>
-    <WithStyles(DialogContent)>
+    <WithStyles(DialogContent)
+      className="dialog-md"
+    >
       <TextField
         autoFocus={true}
         fullWidth={true}
