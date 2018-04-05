@@ -132,4 +132,42 @@ describe("updatesReducer", () => {
       )
     ).toEqual(newState);
   });
+
+  // Edit
+
+  it("should edit and item in the list", () => {
+    const entity = { _id: 1, created: new Date(), body: "test" };
+    const editedEntity = {
+      ...entity,
+      body: "test new body"
+    };
+
+    const initialState = {
+      loading: false,
+      error: null,
+      list: [entity],
+      selected: null
+    };
+
+    const newState = {
+      loading: false,
+      error: null,
+      list: [editedEntity],
+      selected: null
+    };
+
+    expect(
+      baseReducer(
+        initialState,
+        {
+          type: TEST_ACTION_NAMES.editSuccess,
+          entity: {
+            _id: entity._id,
+            body: editedEntity.body
+          }
+        },
+        TEST_ACTION_NAMES
+      )
+    ).toEqual(newState);
+  });
 });

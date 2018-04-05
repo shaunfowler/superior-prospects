@@ -1,7 +1,8 @@
 import { connect } from "react-redux";
 import {
   queryLocations,
-  createLocation
+  createLocation,
+  updateLocation
 } from "../../redux/actions/locationsActions";
 import {
   queryProperties,
@@ -23,7 +24,8 @@ const mapDispatchToProps = dispatch => {
     queryLocations: () => dispatch(queryLocations()),
     queryProperties: () => dispatch(queryProperties()),
     createLocation: entity => dispatch(createLocation(entity)),
-    createProperty: entity => dispatch(createProperty(entity))
+    createProperty: entity => dispatch(createProperty(entity)),
+    updateLocation: entity => dispatch(updateLocation(entity))
   };
 };
 

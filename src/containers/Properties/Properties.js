@@ -16,13 +16,24 @@ import {
 import PropertyItem from "../../components/PropertyItem";
 import { Typography, Button } from "material-ui";
 
+const Modes = {
+  EDIT: 0,
+  CREATE: 1
+};
+
+const alphabeticalSortPredicate = (a, b) =>
+  a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0;
+
 class Properties extends Component {
   constructor(props) {
     super(props);
     this.state = {
       showPropertyModal: false,
       showLocationModal: false,
-      newEntityName: "",
+      entityId: null,
+      entityName: "",
+      entityDescription: "",
+      modalMode: null,
       selectedLocationId: null,
       tabIndex: 0
     };
@@ -36,7 +47,18 @@ class Properties extends Component {
   onAddLocationClicked = () => {
     this.setState({
       showLocationModal: true,
-      showPropertyModal: false
+      showPropertyModal: false,
+      modalMode: Modes.CREATE
+    });
+  };
+
+  onEditLocationClicked = location => {
+    this.setState({
+      showLocationModal: true,
+      entityId: location._id,
+      entityName: location.name,
+      entityDescription: location.body,
+      modalMode: Modes.EDIT
     });
   };
 
@@ -46,7 +68,8 @@ class Properties extends Component {
 
     const newState = {
       showPropertyModal: true,
-      showLocationModal: false
+      showLocationModal: false,
+      modalMode: Modes.CREATE
     };
     if (!selectedLocationId && locations.length) {
       newState.selectedLocationId = locations[0]._id;
@@ -55,9 +78,15 @@ class Properties extends Component {
     this.setState(newState);
   };
 
-  onNewEntityNameChanged = event => {
+  onEntityNameChanged = event => {
     this.setState({
-      newEntityName: event.target.value
+      entityName: event.target.value
+    });
+  };
+
+  onEntityDescriptionChanged = event => {
+    this.setState({
+      entityDescription: event.target.value
     });
   };
 
@@ -75,7 +104,8 @@ class Properties extends Component {
     this.setState({
       showPropertyModal: false,
       showLocationModal: false,
-      newEntityName: "",
+      entityName: "",
+      entityDescription: "",
       selectedLocationId: null
     });
   };
@@ -111,7 +141,10 @@ class Properties extends Component {
         fullWidth
       >
         <Tab label="All Locations" />
-        {locations && locations.map(l => <Tab key={l._id} label={l.name} />)}
+        {locations &&
+          locations
+            .sort(alphabeticalSortPredicate)
+            .map(l => <Tab key={l._id} label={l.name} />)}
       </Tabs>
     );
   };
@@ -136,7 +169,7 @@ class Properties extends Component {
     return (
       <List>
         {filtered
-          .sort((a, b) => (a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0))
+          .sort(alphabeticalSortPredicate)
           .map(p => (
             <PropertyItem
               key={p._id}
@@ -152,30 +185,66 @@ class Properties extends Component {
   };
 
   renderLocationSummary = location => {
-    return location ? (
+    if (!location) {
+      return null;
+    }
+
+    const { isAuthenticated } = this.props;
+
+    return (
       <Typography variant="subheading" className="location-summary">
+        {isAuthenticated && (
+          <div className="location-toolbar">
+            <Button
+              color="primary"
+              onClick={() => this.onEditLocationClicked(location)}
+            >
+              Edit {location.name}
+            </Button>
+          </div>
+        )}
         {location.body}
       </Typography>
-    ) : null;
+    );
   };
 
   renderLocationDialog = () => {
-    const { newEntityName, showLocationModal } = this.state;
-    const { createLocation } = this.props;
+    const {
+      entityId,
+      entityName,
+      entityDescription,
+      showLocationModal,
+      modalMode
+    } = this.state;
+    const { createLocation, updateLocation } = this.props;
     return (
       <Dialog
         open={showLocationModal}
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
-        <DialogContent>
+        <DialogTitle id="form-dialog-title">
+          {modalMode === Modes.CREATE ? "Add Location" : `Update ${entityName}`}
+        </DialogTitle>
+        <DialogContent className="dialog-md">
           <TextField
             autoFocus
-            label="Location Name"
+            label="Name"
             type="text"
-            value={newEntityName}
-            onChange={this.onNewEntityNameChanged}
+            value={entityName}
+            onChange={this.onEntityNameChanged}
+            fullWidth
+          />
+        </DialogContent>
+
+        <DialogContent>
+          <TextField
+            label="Description"
+            type="text"
+            multiline={true}
+            rowsMax={15}
+            value={entityDescription}
+            onChange={this.onEntityDescriptionChanged}
             fullWidth
           />
         </DialogContent>
@@ -186,14 +255,25 @@ class Properties extends Component {
           </Button>
           <Button
             onClick={event => {
-              createLocation({
-                name: newEntityName
-              }).then(() => this.hideModals());
+              let request;
+              if (modalMode === Modes.CREATE) {
+                request = createLocation({
+                  name: entityName,
+                  description: entityDescription
+                });
+              } else {
+                request = updateLocation({
+                  _id: entityId,
+                  name: entityName,
+                  description: entityDescription
+                });
+              }
+              request.then(() => this.hideModals());
             }}
             color="primary"
-            disabled={newEntityName === ""}
+            disabled={entityName === ""}
           >
-            Add
+            {modalMode === Modes.CREATE ? "Add" : "Update"}
           </Button>
         </DialogActions>
       </Dialog>
@@ -201,7 +281,7 @@ class Properties extends Component {
   };
 
   renderPropertyDialog = () => {
-    const { newEntityName, selectedLocationId, showPropertyModal } = this.state;
+    const { entityName, selectedLocationId, showPropertyModal } = this.state;
     const { createProperty } = this.props;
     const locations = this.props.locations.list;
     return (
@@ -211,13 +291,13 @@ class Properties extends Component {
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">Add Property</DialogTitle>
-        <DialogContent>
+        <DialogContent className="dialog-md">
           <TextField
             autoFocus
             label="Property Name"
             type="text"
-            value={newEntityName}
-            onChange={this.onNewEntityNameChanged}
+            value={entityName}
+            onChange={this.onEntityNameChanged}
             fullWidth
           />
           <br />
@@ -248,13 +328,13 @@ class Properties extends Component {
           <Button
             onClick={event => {
               createProperty({
-                name: newEntityName,
+                name: entityName,
                 locationRefId: selectedLocationId,
                 visible: true
               }).then(() => this.hideModals());
             }}
             color="primary"
-            disabled={newEntityName === ""}
+            disabled={entityName === ""}
           >
             Add
           </Button>
