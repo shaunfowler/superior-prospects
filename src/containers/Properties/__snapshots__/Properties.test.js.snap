@@ -11,7 +11,7 @@ exports[`Properties container renders when authenticated 1`] = `
     <WithStyles(DialogTitle)
       id="form-dialog-title"
     >
-      Add Location
+      Update 
     </WithStyles(DialogTitle)>
     <WithStyles(DialogContent)
       className="dialog-md"

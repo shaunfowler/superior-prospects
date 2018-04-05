@@ -223,7 +223,9 @@ class Properties extends Component {
         onClose={this.handleClose}
         aria-labelledby="form-dialog-title"
       >
-        <DialogTitle id="form-dialog-title">Add Location</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          {modalMode === Modes.CREATE ? "Add Location" : `Update ${entityName}`}
+        </DialogTitle>
         <DialogContent className="dialog-md">
           <TextField
             autoFocus
