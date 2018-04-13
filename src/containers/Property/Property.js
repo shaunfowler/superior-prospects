@@ -62,8 +62,10 @@ class Property extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    this.props
-      .getProperty(id)
+    const { queryLocations, getProperty } = this.props;
+
+    queryLocations();
+    getProperty(id)
       .then(response => {
         const { name, body } = this.props.selected;
         document.title = `${name} - Superior Prospects`;
@@ -127,12 +129,13 @@ class Property extends Component {
   };
 
   renderTitle = () => {
-    const { selected, isAuthenticated } = this.props;
+    const { selected, isAuthenticated, location } = this.props;
     const { editMode, newName } = this.state;
     return (
       <div className="paper__title">
         <Typography variant="title">
           {!editMode && selected.name}
+          <span>{location && location.name}</span>
           {editMode && (
             <TextField
               className="title"
