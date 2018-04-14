@@ -5,8 +5,11 @@ import {
   Button,
   Typography,
   TextField,
-  Avatar
+  Avatar,
+  Select,
+  MenuItem
 } from "material-ui";
+import { red } from "material-ui/colors";
 import { FileUpload as FileUploadIcon } from "material-ui-icons";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
@@ -16,6 +19,7 @@ import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
 import Dropzone from "react-dropzone";
 import moment from "moment";
+import { withRouter } from "react-router";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 
 const leftColumnSizing = {
@@ -56,7 +60,8 @@ class Property extends Component {
       errored: false,
       editMode: false,
       newName: "",
-      newDescription: ""
+      newDescription: "",
+      newLocationRefId: ""
     };
   }
 
@@ -96,29 +101,44 @@ class Property extends Component {
     });
   };
 
+  onLocationChange = event => {
+    this.setState({
+      newLocationRefId: event.target.value
+    });
+  };
+
   saveEditorContent = () => {
-    const { editorState } = this.state;
+    const {
+      editorState,
+      newName,
+      newDescription,
+      newLocationRefId
+    } = this.state;
 
     this.props.editProperty(
       Object.assign({}, this.props.selected, {
         body: stateToHTML(editorState.getCurrentContent()),
-        name: this.state.newName,
-        description: this.state.newDescription
+        name: newName,
+        description: newDescription,
+        locationRefId: newLocationRefId
       })
     );
 
     this.setState({
       editMode: false,
       newName: "",
-      newDescription: ""
+      newDescription: "",
+      newLocationRefId: ""
     });
   };
 
   enterEditMode = () => {
+    const { name, description, locationRefId } = this.props.selected;
     this.setState({
       editMode: true,
-      newName: this.props.selected.name,
-      newDescription: this.props.selected.description
+      newName: name,
+      newDescription: description,
+      newLocationRefId: locationRefId
     });
   };
 
@@ -128,14 +148,24 @@ class Property extends Component {
     files.map(file => createMedia(file, _id));
   };
 
+  deleteProperty = async () => {
+    const { selected, deleteProperty, history } = this.props;
+    await deleteProperty(selected._id);
+    history.push("/");
+  };
+
   renderTitle = () => {
-    const { selected, isAuthenticated, location } = this.props;
-    const { editMode, newName } = this.state;
+    const {
+      selected,
+      isAuthenticated,
+      location,
+      locations,
+    } = this.props;
+    const { editMode, newName, newLocationRefId } = this.state;
     return (
       <div className="paper__title">
         <Typography variant="title">
           {!editMode && selected.name}
-          <span>{location && location.name}</span>
           {editMode && (
             <TextField
               className="title"
@@ -143,7 +173,40 @@ class Property extends Component {
               value={newName}
             />
           )}
+
+          {!editMode && (
+            <span className="location">{location && location.name}</span>
+          )}
+          {editMode &&
+            locations && (
+              <Select
+                className="location-select"
+                value={newLocationRefId}
+                onChange={this.onLocationChange}
+                inputProps={{
+                  name: "age",
+                  id: "age-simple"
+                }}
+              >
+                {locations.map(l => (
+                  <MenuItem key={l._id} value={l._id}>
+                    {l.name}
+                  </MenuItem>
+                ))}
+              </Select>
+            )}
         </Typography>
+
+        {isAuthenticated &&
+          !editMode && (
+            <Button
+              color="default"
+              style={{ color: red[400] }}
+              onClick={() => this.deleteProperty()}
+            >
+              Delete
+            </Button>
+          )}
 
         {editMode && (
           <Button color="primary" onClick={() => this.saveEditorContent()}>
@@ -195,7 +258,7 @@ class Property extends Component {
             onEditorStateChange={this.onEditorStateChange}
           />
         ) : (
-          renderHTML(selected.body)
+          selected.body && renderHTML(selected.body)
         )}
       </div>
     );
@@ -290,4 +353,4 @@ class Property extends Component {
   }
 }
 
-export default Property;
+export default withRouter(Property);
