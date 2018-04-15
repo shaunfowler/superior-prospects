@@ -24,7 +24,7 @@ const extractTextPluginOptions = shouldUseRelativeAssetPaths
 module.exports = {
   bail: true,
   devtool: "source-map",
-  entry: [paths.appIndexJs],
+  entry: ["babel-polyfill", paths.appIndexJs],
   output: {
     path: paths.appBuild,
     filename: "js/[name].[chunkhash:8].js",

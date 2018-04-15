@@ -7,7 +7,12 @@ import {
   TextField,
   Avatar,
   Select,
-  MenuItem
+  MenuItem,
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  DialogContentText,
+  DialogActions
 } from "material-ui";
 import { red } from "material-ui/colors";
 import { FileUpload as FileUploadIcon } from "material-ui-icons";
@@ -22,30 +27,6 @@ import moment from "moment";
 import { withRouter } from "react-router";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 
-const leftColumnSizing = {
-  xs: 12,
-  sm: 8,
-  md: 8,
-  lg: 7,
-  xl: 8
-};
-
-const rightColumnSizing = {
-  xs: 12 - leftColumnSizing.xs || 12,
-  sm: 12 - leftColumnSizing.sm || 12,
-  md: 12 - leftColumnSizing.md || 12,
-  lg: 12 - leftColumnSizing.lg || 12,
-  xl: 12 - leftColumnSizing.xl || 12
-};
-
-const mediaItemSizing = {
-  xs: 12,
-  sm: 12,
-  md: 12,
-  lg: 6,
-  xl: 6
-};
-
 const stripFileExtension = filename =>
   filename.substring(0, filename.lastIndexOf("."));
 
@@ -59,6 +40,7 @@ class Property extends Component {
       initialized: false,
       errored: false,
       editMode: false,
+      showDeletePropertyDialog: false,
       newName: "",
       newDescription: "",
       newLocationRefId: ""
@@ -148,20 +130,66 @@ class Property extends Component {
     files.map(file => createMedia(file, _id));
   };
 
-  deleteProperty = async () => {
+  performDelete = async () => {
     const { selected, deleteProperty, history } = this.props;
     await deleteProperty(selected._id);
     history.push("/");
+    this.hideDeletePropertyDialog();
+  };
+
+  showDeletePropertyDialog = () => {
+    this.setState({
+      showDeletePropertyDialog: true
+    });
+  };
+
+  hideDeletePropertyDialog = () => {
+    this.setState({
+      showDeletePropertyDialog: false
+    });
+  };
+
+  renderDeleteConfirmationDialog = () => {
+    const { selected } = this.props;
+    if (!selected) {
+      return null;
+    }
+
+    return (
+      <Dialog
+        open={this.state.showDeletePropertyDialog}
+        onClose={this.handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          Delete {selected.name}?
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>This cannot be undone.</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={this.hideDeletePropertyDialog} color="primary">
+            Cancel
+          </Button>
+          <Button
+            onClick={this.performDelete}
+            color="default"
+            style={{ color: red[400] }}
+            autoFocus
+          >
+            Delete
+          </Button>
+        </DialogActions>
+      </Dialog>
+    );
   };
 
   renderTitle = () => {
-    const {
-      selected,
-      isAuthenticated,
-      location,
-      locations,
-    } = this.props;
+    const { selected, isAuthenticated, locations } = this.props;
     const { editMode, newName, newLocationRefId } = this.state;
+    const location = locations.find(l => l._id === selected.locationRefId);
+
     return (
       <div className="paper__title">
         <Typography variant="title">
@@ -202,7 +230,7 @@ class Property extends Component {
             <Button
               color="default"
               style={{ color: red[400] }}
-              onClick={() => this.deleteProperty()}
+              onClick={() => this.showDeletePropertyDialog()}
             >
               Delete
             </Button>
@@ -270,24 +298,22 @@ class Property extends Component {
       return null;
     }
     return (
-      <Grid item {...mediaItemSizing}>
-        <Paper className="media__item" elevation={1}>
-          <div className="media__item__avatar">
-            <Avatar>
-              <FileUploadIcon />
-            </Avatar>
-          </div>
-          <div className="media__item__text">
-            <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
-              <div className="name">Upload new items</div>
-              <div className="date">
-                <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
-                <code>png</code>, <code>jpeg</code>
-              </div>
-            </Dropzone>
-          </div>
-        </Paper>
-      </Grid>
+      <div className="media__item">
+        <div className="media__item__avatar">
+          <Avatar>
+            <FileUploadIcon />
+          </Avatar>
+        </div>
+        <div className="media__item__text">
+          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
+            <div className="name">Upload new items</div>
+            <div className="date">
+              <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+              <code>png</code>, <code>jpeg</code>
+            </div>
+          </Dropzone>
+        </div>
+      </div>
     );
   };
 
@@ -300,36 +326,42 @@ class Property extends Component {
 
     return (
       <div className="media">
-        <Grid container spacing={8}>
-          {this.renderDropZone()}
-          {selected.media &&
-            selected.media.map(m => (
-              <Grid key={m._id} item {...mediaItemSizing}>
-                <a
-                  href={`/api/static/${m.fileName}`}
-                  target="_blank"
-                  key={m._id}
-                >
-                  <Paper className="media__item" elevation={1}>
-                    <div className="media__item__avatar">
-                      {fileTypeToIcon(m.fileName)}
-                    </div>
-                    <div className="media__item__text">
-                      <div className="name">
-                        {stripFileExtension(m.fileName)}
-                      </div>
-                      <div className="date">{formatMediaDate(m.created)}</div>
-                    </div>
-                  </Paper>
-                </a>
-              </Grid>
-            ))}
-        </Grid>
+        {this.renderDropZone()}
+        {selected.media &&
+          selected.media.map(m => (
+            <a href={`/api/static/${m.fileName}`} target="_blank" key={m._id}>
+              <div className="media__item">
+                <div className="media__item__avatar">
+                  {fileTypeToIcon(m.fileName)}
+                </div>
+                <div className="media__item__text">
+                  <div className="name">{stripFileExtension(m.fileName)}</div>
+                  <div className="date">{formatMediaDate(m.created)}</div>
+                </div>
+              </div>
+            </a>
+          ))}
       </div>
     );
   };
 
   render() {
+    const leftColumnSizing = {
+      xs: 12,
+      sm: 12,
+      md: 8,
+      lg: 8,
+      xl: 9
+    };
+
+    const rightColumnSizing = {
+      xs: 12 - leftColumnSizing.xs || 12,
+      sm: 12 - leftColumnSizing.sm || 12,
+      md: 12 - leftColumnSizing.md || 12,
+      lg: 12 - leftColumnSizing.lg || 12,
+      xl: 12 - leftColumnSizing.xl || 12
+    };
+
     return (
       <div className="propertyView container">
         <Paper className="paper" elevation={1}>
@@ -348,6 +380,7 @@ class Property extends Component {
             </Grid>
           )}
         </Paper>
+        {this.renderDeleteConfirmationDialog()}
       </div>
     );
   }

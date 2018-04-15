@@ -11,7 +11,7 @@
   }
 
   .media {
-    padding: 15px 15px 15px 0;
+    padding: 15px;
   }
 
   .body {
@@ -50,6 +50,16 @@
       align-items: center;
       padding: 5px 10px;
       cursor: pointer;
+      transition: 300ms;
+
+      &:hover {
+        background-color: #f6f6f6;
+        border-radius: 3px;
+
+        .name {
+          color: #2196f3;
+        }
+      }
 
       &__avatar {
         margin-right: 10px;
