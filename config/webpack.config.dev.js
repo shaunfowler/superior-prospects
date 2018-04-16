@@ -18,10 +18,11 @@ module.exports = {
   devServer: {
     compress: true,
     port: 3000,
+    host: "0.0.0.0",
     proxy: { "/api/**": { target: "http://localhost:8888", secure: false } },
     historyApiFallback: true
   },
-  entry: [paths.appIndexJs],
+  entry: ["babel-polyfill", paths.appIndexJs],
   output: {
     filename: "static/js/bundle.js",
     chunkFilename: "static/js/[name].chunk.js",

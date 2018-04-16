@@ -2,24 +2,25 @@ import { connect } from "react-redux";
 import Property from "./Property";
 import {
   getProperty,
-  editProperty
+  editProperty,
+  deleteProperty
 } from "../../redux/actions/propertiesActions";
+import { queryLocations } from "../../redux/actions/locationsActions";
 import { createMedia } from "../../redux/actions/mediaActions";
 import "./Property.less";
 
-const mapStateToProps = ({ properties, user }) => {
+const mapStateToProps = ({ properties, user, locations }) => {
   return {
     selected: properties.selected,
+    locations: locations.list,
     isAuthenticated: user.isAuthenticated
   };
 };
 
-const mapDispatchToProps = dispatch => {
-  return {
-    getProperty: id => dispatch(getProperty(id)),
-    editProperty: property => dispatch(editProperty(property)),
-    createMedia: (file, propertyId) => dispatch(createMedia(file, propertyId))
-  };
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(Property);
+export default connect(mapStateToProps, {
+  getProperty,
+  editProperty,
+  deleteProperty,
+  createMedia,
+  queryLocations
+})(Property);
