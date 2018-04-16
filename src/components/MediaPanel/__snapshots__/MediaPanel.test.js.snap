@@ -1,0 +1,148 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Properties container renders when authenticated 1`] = `
+<div
+  className="media"
+>
+  <div
+    className="media__item"
+  >
+    <div
+      className="media__item__avatar"
+    >
+      <WithStyles(Avatar)>
+        <pure(FileUpload) />
+      </WithStyles(Avatar)>
+    </div>
+    <div
+      className="media__item__text"
+    >
+      <t
+        className="dropzone"
+        disableClick={false}
+        disablePreview={false}
+        disabled={false}
+        maxSize={Infinity}
+        minSize={0}
+        multiple={true}
+        preventDropOnDocument={true}
+      >
+        <div
+          className="name"
+        >
+          Upload new items
+        </div>
+        <div
+          className="date"
+        >
+          <code>
+            xlsx
+          </code>
+          , 
+          <code>
+            docx
+          </code>
+          , 
+          <code>
+            pdf
+          </code>
+          ,
+           
+          <code>
+            png
+          </code>
+          , 
+          <code>
+            jpeg
+          </code>
+        </div>
+      </t>
+    </div>
+  </div>
+  <div>
+    <a
+      href="/api/static/test.png"
+      key="1234"
+      target="_blank"
+    >
+      <div
+        className="media__item"
+      >
+        <div
+          className="media__item__avatar"
+        >
+          <WithStyles(Avatar)
+            style={
+              Object {
+                "backgroundColor": "#ffcc80",
+              }
+            }
+          >
+            <pure(Photo) />
+          </WithStyles(Avatar)>
+        </div>
+        <div
+          className="media__item__text"
+        >
+          <div
+            className="name"
+          >
+            test
+          </div>
+          <div
+            className="date"
+          >
+            April 15th 2018
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;
+
+exports[`Properties container renders when not authenticated 1`] = `
+<div
+  className="media"
+>
+  <div>
+    <a
+      href="/api/static/test.png"
+      key="1234"
+      target="_blank"
+    >
+      <div
+        className="media__item"
+      >
+        <div
+          className="media__item__avatar"
+        >
+          <WithStyles(Avatar)
+            style={
+              Object {
+                "backgroundColor": "#ffcc80",
+              }
+            }
+          >
+            <pure(Photo) />
+          </WithStyles(Avatar)>
+        </div>
+        <div
+          className="media__item__text"
+        >
+          <div
+            className="name"
+          >
+            test
+          </div>
+          <div
+            className="date"
+          >
+            April 15th 2018
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>
+`;

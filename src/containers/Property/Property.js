@@ -5,7 +5,6 @@ import {
   Button,
   Typography,
   TextField,
-  Avatar,
   Select,
   MenuItem,
   Dialog,
@@ -15,22 +14,14 @@ import {
   DialogActions
 } from "material-ui";
 import { red } from "material-ui/colors";
-import { FileUpload as FileUploadIcon } from "material-ui-icons";
 import { EditorState } from "draft-js";
 import { Editor } from "react-draft-wysiwyg";
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
 import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
-import Dropzone from "react-dropzone";
-import moment from "moment";
 import { withRouter } from "react-router";
-import fileTypeToIcon from "../../utils/fileTypeToIcon";
-
-const stripFileExtension = filename =>
-  filename.substring(0, filename.lastIndexOf("."));
-
-const formatMediaDate = date => moment(date).format("MMMM Do YYYY");
+import MediaPanel from "../../components/MediaPanel";
 
 class Property extends Component {
   constructor(props) {
@@ -52,6 +43,7 @@ class Property extends Component {
     const { queryLocations, getProperty } = this.props;
 
     queryLocations();
+
     getProperty(id)
       .then(response => {
         const { name, body } = this.props.selected;
@@ -292,76 +284,14 @@ class Property extends Component {
     );
   };
 
-  renderDropZone = () => {
-    const { isAuthenticated } = this.props;
-    if (!isAuthenticated) {
-      return null;
-    }
-    return (
-      <div className="media__item">
-        <div className="media__item__avatar">
-          <Avatar>
-            <FileUploadIcon />
-          </Avatar>
-        </div>
-        <div className="media__item__text">
-          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
-            <div className="name">Upload new items</div>
-            <div className="date">
-              <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
-              <code>png</code>, <code>jpeg</code>
-            </div>
-          </Dropzone>
-        </div>
-      </div>
-    );
-  };
-
   renderMedia = () => {
     const { selected, isAuthenticated } = this.props;
-
-    if (!isAuthenticated && selected.media && selected.media.length === 0) {
-      return null;
-    }
-
     return (
-      <div className="media">
-        {this.renderDropZone()}
-        {selected.media &&
-          selected.media.map(m => (
-            <a href={`/api/static/${m.fileName}`} target="_blank" key={m._id}>
-              <div className="media__item">
-                <div className="media__item__avatar">
-                  {fileTypeToIcon(m.fileName)}
-                </div>
-                <div className="media__item__text">
-                  <div className="name">{stripFileExtension(m.fileName)}</div>
-                  <div className="date">{formatMediaDate(m.created)}</div>
-                </div>
-              </div>
-            </a>
-          ))}
-      </div>
+      <MediaPanel media={selected.media} isAuthenticated={isAuthenticated} />
     );
   };
 
   render() {
-    const leftColumnSizing = {
-      xs: 12,
-      sm: 12,
-      md: 8,
-      lg: 8,
-      xl: 9
-    };
-
-    const rightColumnSizing = {
-      xs: 12 - leftColumnSizing.xs || 12,
-      sm: 12 - leftColumnSizing.sm || 12,
-      md: 12 - leftColumnSizing.md || 12,
-      lg: 12 - leftColumnSizing.lg || 12,
-      xl: 12 - leftColumnSizing.xl || 12
-    };
-
     return (
       <div className="propertyView container">
         <Paper className="paper" elevation={1}>
@@ -371,10 +301,10 @@ class Property extends Component {
                 {this.renderTitle()}
                 {this.renderDescription()}
               </Grid>
-              <Grid item {...leftColumnSizing}>
+              <Grid item xs={12} sm={12} md={8} lg={8} xl={9}>
                 {this.renderBody()}
               </Grid>
-              <Grid item {...rightColumnSizing}>
+              <Grid item xs={12} sm={12} md={4} lg={4} xl={3}>
                 {this.renderMedia()}
               </Grid>
             </Grid>

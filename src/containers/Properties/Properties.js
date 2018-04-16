@@ -130,7 +130,7 @@ class Properties extends Component {
   };
 
   renderLocationTabs = () => {
-    const locations = this.props.locations.list;
+    const locations = [...this.props.locations.list];
     return (
       <Tabs
         className="location-tabs"

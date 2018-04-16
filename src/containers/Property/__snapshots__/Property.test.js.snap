@@ -1,12 +1,7 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
 exports[`Property container renders without crashing 1`] = `
-<div
-  className="propertyView container"
->
-  <WithStyles(Paper)
-    className="paper"
-    elevation={1}
-  />
-</div>
+<Route
+  render={[Function]}
+/>
 `;
