@@ -5,7 +5,7 @@ import MediaPanel from "./";
 
 describe("Properties container", () => {
   const media = [
-    { _id: "1234", fileName: "test.png", created: "2018-04-16T03:41:28+00:00" }
+    { _id: "1234", fileName: "test.png", created: "2018-04-16T12:00:00+00:00" }
   ];
 
   it("renders when not authenticated", () => {
