@@ -10,32 +10,15 @@ import {
   DialogActions,
   TextField
 } from "material-ui";
-import ReactGA from "react-ga";
+import {
+  trackOpenCreateUpdateModal,
+  trackPerformCreateUpdate,
+  trackPerformDeleteUpdate
+} from "../../analytics/updatesAnalytics";
 import UpdateItem from "../../components/UpdateItem";
 
 const sortNewestToOldestPredicate = (a, b) =>
   new Date(b.created) - new Date(a.created);
-
-const trackOpenCreateUpdateModal = () => {
-  ReactGA.event({
-    category: "Updates",
-    action: "Add button click (modal open)"
-  });
-};
-
-const trackPerformCreateUpdate = () => {
-  ReactGA.event({
-    category: "Updates",
-    action: "Create"
-  });
-};
-
-const trackPerformDeleteUpdate = () => {
-  ReactGA.event({
-    category: "Updates",
-    action: "Delete"
-  });
-};
 
 class Updates extends Component {
   state = {
@@ -68,7 +51,6 @@ class Updates extends Component {
 
   onOpenDialog = () => {
     trackOpenCreateUpdateModal();
-    ReactGA.modalview("/updates-create-modal");
     this.setState({ dialogOpen: true });
   };
 

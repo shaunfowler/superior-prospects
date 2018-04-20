@@ -21,48 +21,14 @@ import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
 import { withRouter } from "react-router";
-import ReactGA from "react-ga";
+import {
+  trackSaveProperty,
+  trackEditButtonClick,
+  trackFileUpload,
+  trackPropertyDelete,
+  trackOpenDeletePropertyModal
+} from "../../analytics/propertyAnalytics";
 import MediaPanel from "../../components/MediaPanel";
-
-const trackSaveProperty = safeName => {
-  ReactGA.event({
-    category: "Property (CM)",
-    action: "Save button click",
-    label: safeName
-  });
-};
-
-const trackEditButtonClick = safeName => {
-  ReactGA.event({
-    category: "Property (CM)",
-    action: "Edit button click",
-    label: safeName
-  });
-};
-
-const trackFileUpload = safeName => {
-  ReactGA.event({
-    category: "Media (CM)",
-    action: "File upload request",
-    label: safeName
-  });
-};
-
-const trackPropertyDelete = safeName => {
-  ReactGA.event({
-    category: "Property (CM)",
-    action: "Delete",
-    label: safeName
-  });
-};
-
-const trackOpenDeletePropertyModal = safeName => {
-  ReactGA.event({
-    category: "Property (CM)",
-    action: "Delete button click (modal open)",
-    label: safeName
-  });
-};
 
 class Property extends Component {
   constructor(props) {

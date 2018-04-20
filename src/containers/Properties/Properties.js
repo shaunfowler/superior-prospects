@@ -13,7 +13,15 @@ import {
   MenuItem,
   InputLabel
 } from "material-ui";
-import ReactGA from "react-ga";
+import {
+  trackOpenCreateLocationModal,
+  trackCreateLocation,
+  trackOpenEditLocationModal,
+  trackEditLocation,
+  trackOpenCreatePropertyModal,
+  trackCreateProperty,
+  trackTabIndexChange
+} from "../../analytics/propertiesAnalytics";
 import PropertyItem from "../../components/PropertyItem";
 import { Typography, Button } from "material-ui";
 
@@ -24,58 +32,6 @@ const Modes = {
 
 const alphabeticalSortPredicate = (a, b) =>
   a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0;
-
-const trackOpenCreateLocationModal = () => {
-  ReactGA.event({
-    category: "Properties - Location (CM)",
-    action: "Create button click (modal open)"
-  });
-};
-
-const trackCreateLocation = () => {
-  ReactGA.event({
-    category: "Properties - Location (CM)",
-    action: "Create"
-  });
-};
-
-const trackOpenEditLocationModal = safeName => {
-  ReactGA.event({
-    category: "Properties - Location (CM)",
-    action: "Edit button click (modal open)",
-    label: safeName
-  });
-};
-
-const trackEditLocation = safeName => {
-  ReactGA.event({
-    category: "Properties - Location (CM)",
-    action: "Edit",
-    label: safeName
-  });
-};
-
-const trackOpenCreatePropertyModal = () => {
-  ReactGA.event({
-    category: "Properties (CM)",
-    action: "Create button click (modal open)"
-  });
-};
-
-const trackCreateProperty = () => {
-  ReactGA.event({
-    category: "Properties (CM)",
-    action: "Create"
-  });
-};
-
-const trackTabIndexChange = index => {
-  ReactGA.event({
-    category: "Properties (CM)",
-    action: "Location tab click",
-    label: `Index ${index}`
-  });
-};
 
 class Properties extends Component {
   constructor(props) {
