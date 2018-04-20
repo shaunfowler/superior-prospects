@@ -10,10 +10,32 @@ import {
   DialogActions,
   TextField
 } from "material-ui";
+import ReactGA from "react-ga";
 import UpdateItem from "../../components/UpdateItem";
 
 const sortNewestToOldestPredicate = (a, b) =>
   new Date(b.created) - new Date(a.created);
+
+const trackOpenCreateUpdateModal = () => {
+  ReactGA.event({
+    category: "Updates",
+    action: "Add button click (modal open)"
+  });
+};
+
+const trackPerformCreateUpdate = () => {
+  ReactGA.event({
+    category: "Updates",
+    action: "Create"
+  });
+};
+
+const trackPerformDeleteUpdate = () => {
+  ReactGA.event({
+    category: "Updates",
+    action: "Delete"
+  });
+};
 
 class Updates extends Component {
   state = {
@@ -27,6 +49,7 @@ class Updates extends Component {
   }
 
   onDeleteUpdate = update => {
+    trackPerformDeleteUpdate();
     this.props.deleteUpdate(update);
   };
 
@@ -35,6 +58,7 @@ class Updates extends Component {
   };
 
   onSubmitUpdate = () => {
+    trackPerformCreateUpdate();
     this.props.createUpdate({
       body: this.state.updateText,
       created: new Date()
@@ -43,6 +67,8 @@ class Updates extends Component {
   };
 
   onOpenDialog = () => {
+    trackOpenCreateUpdateModal();
+    ReactGA.modalview("/updates-create-modal");
     this.setState({ dialogOpen: true });
   };
 
@@ -127,7 +153,9 @@ class Updates extends Component {
             className="paper__edit-icon"
             aria-label="More"
             color="primary"
-            onClick={event => this.onOpenDialog(event)}
+            onClick={event => {
+              this.onOpenDialog(event);
+            }}
           >
             Add a news item
           </Button>

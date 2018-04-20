@@ -21,7 +21,48 @@ import { stateToHTML } from "draft-js-export-html";
 import { stateFromHTML } from "draft-js-import-html";
 import renderHTML from "react-render-html";
 import { withRouter } from "react-router";
+import ReactGA from "react-ga";
 import MediaPanel from "../../components/MediaPanel";
+
+const trackSaveProperty = safeName => {
+  ReactGA.event({
+    category: "Property (CM)",
+    action: "Save button click",
+    label: safeName
+  });
+};
+
+const trackEditButtonClick = safeName => {
+  ReactGA.event({
+    category: "Property (CM)",
+    action: "Edit button click",
+    label: safeName
+  });
+};
+
+const trackFileUpload = safeName => {
+  ReactGA.event({
+    category: "Media (CM)",
+    action: "File upload request",
+    label: safeName
+  });
+};
+
+const trackPropertyDelete = safeName => {
+  ReactGA.event({
+    category: "Property (CM)",
+    action: "Delete",
+    label: safeName
+  });
+};
+
+const trackOpenDeletePropertyModal = safeName => {
+  ReactGA.event({
+    category: "Property (CM)",
+    action: "Delete button click (modal open)",
+    label: safeName
+  });
+};
 
 class Property extends Component {
   constructor(props) {
@@ -81,13 +122,16 @@ class Property extends Component {
     });
   };
 
-  saveEditorContent = () => {
+  saveProperty = () => {
     const {
       editorState,
       newName,
       newDescription,
       newLocationRefId
     } = this.state;
+    const { safeName } = this.props.selected;
+
+    trackSaveProperty(safeName);
 
     this.props.editProperty(
       Object.assign({}, this.props.selected, {
@@ -107,7 +151,8 @@ class Property extends Component {
   };
 
   enterEditMode = () => {
-    const { name, description, locationRefId } = this.props.selected;
+    const { name, safeName, description, locationRefId } = this.props.selected;
+    trackEditButtonClick(safeName);
     this.setState({
       editMode: true,
       newName: name,
@@ -117,19 +162,23 @@ class Property extends Component {
   };
 
   onFileDrop = files => {
-    const { _id } = this.props.selected;
+    const { _id, safeName } = this.props.selected;
+    trackFileUpload(safeName);
     const { createMedia } = this.props;
     files.map(file => createMedia(file, _id));
   };
 
   performDelete = async () => {
     const { selected, deleteProperty, history } = this.props;
+    trackPropertyDelete(selected.safeName);
     await deleteProperty(selected._id);
     history.push("/");
     this.hideDeletePropertyDialog();
   };
 
   showDeletePropertyDialog = () => {
+    const { safeName } = this.props.selected;
+    trackOpenDeletePropertyModal(safeName);
     this.setState({
       showDeletePropertyDialog: true
     });
@@ -229,7 +278,7 @@ class Property extends Component {
           )}
 
         {editMode && (
-          <Button color="primary" onClick={() => this.saveEditorContent()}>
+          <Button color="primary" onClick={() => this.saveProperty()}>
             Save
           </Button>
         )}
@@ -287,7 +336,11 @@ class Property extends Component {
   renderMedia = () => {
     const { selected, isAuthenticated } = this.props;
     return (
-      <MediaPanel media={selected.media} isAuthenticated={isAuthenticated} />
+      <MediaPanel
+        media={selected.media}
+        onFileDrop={this.onFileDrop}
+        isAuthenticated={isAuthenticated}
+      />
     );
   };
 
