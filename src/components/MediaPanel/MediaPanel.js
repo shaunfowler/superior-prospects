@@ -1,6 +1,7 @@
 import React from "react";
 import moment from "moment";
 import Dropzone from "react-dropzone";
+import ReactGA from "react-ga";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 import { Avatar } from "material-ui";
 import { FileUpload as FileUploadIcon } from "material-ui-icons";
@@ -10,9 +11,17 @@ const stripFileExtension = filename =>
 
 const formatMediaDate = date => moment(date).format("MMMM Do YYYY");
 
+const trackMediaClick = fileName => {
+  ReactGA.event({
+    category: "Media",
+    action: "Open media item",
+    label: fileName
+  });
+};
+
 class MediaPanel extends React.Component {
   renderDropZone = () => {
-    const { isAuthenticated } = this.props;
+    const { isAuthenticated, onFileDrop } = this.props;
     if (!isAuthenticated) {
       return null;
     }
@@ -25,7 +34,7 @@ class MediaPanel extends React.Component {
           </Avatar>
         </div>
         <div className="media__item__text">
-          <Dropzone onDrop={this.onFileDrop} className="dropzone" multiple>
+          <Dropzone onDrop={onFileDrop} className="dropzone" multiple>
             <div className="name">Upload new items</div>
             <div className="date">
               <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
@@ -46,7 +55,14 @@ class MediaPanel extends React.Component {
     return (
       <div>
         {media.map(m => (
-          <a href={`/api/static/${m.fileName}`} target="_blank" key={m._id}>
+          <a
+            onClick={() => {
+              trackMediaClick(m.fileName);
+            }}
+            href={`/api/static/${m.fileName}`}
+            target="_blank"
+            key={m._id}
+          >
             <div className="media__item">
               <div className="media__item__avatar">
                 {fileTypeToIcon(m.fileName)}
@@ -71,9 +87,5 @@ class MediaPanel extends React.Component {
     );
   }
 }
-
-MediaPanel.defaultProps = {
-  media: []
-};
 
 export default MediaPanel;

@@ -11,10 +11,17 @@ import {
 } from "material-ui";
 import {
   MoreVert as MoreVertIcon,
-  Delete as DeleteIcon,
-  Edit as EditIcon
+  Delete as DeleteIcon
 } from "material-ui-icons";
+import ReactGa from "react-ga";
 import "./UpdateItem.less";
+
+const trackUpdateMoreClick = () => {
+  ReactGa.event({
+    category: "Updates",
+    action: "Update 'more' button click"
+  });
+};
 
 class UpdateItem extends React.Component {
   state = {
@@ -22,6 +29,7 @@ class UpdateItem extends React.Component {
   };
 
   handleClick = event => {
+    trackUpdateMoreClick();
     this.setState({ anchorEl: event.currentTarget });
   };
 
@@ -38,16 +46,6 @@ class UpdateItem extends React.Component {
         open={Boolean(anchorEl)}
         onClose={this.handleClose}
       >
-        <MenuItem
-          onClick={event => {
-            this.handleClose(event);
-          }}
-        >
-          <ListItemIcon>
-            <EditIcon />
-          </ListItemIcon>
-          <ListItemText inset primary="Edit" />
-        </MenuItem>
         <MenuItem
           onClick={event => {
             this.handleClose(event);
@@ -73,7 +71,11 @@ class UpdateItem extends React.Component {
             secondary={body}
           />
           {isUserAuthenticated && (
-            <ListItemSecondaryAction onClick={event => this.handleClick(event)}>
+            <ListItemSecondaryAction
+              onClick={event => {
+                this.handleClick(event);
+              }}
+            >
               <IconButton aria-label="More">
                 <MoreVertIcon />
               </IconButton>

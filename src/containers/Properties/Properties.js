@@ -13,6 +13,15 @@ import {
   MenuItem,
   InputLabel
 } from "material-ui";
+import {
+  trackOpenCreateLocationModal,
+  trackCreateLocation,
+  trackOpenEditLocationModal,
+  trackEditLocation,
+  trackOpenCreatePropertyModal,
+  trackCreateProperty,
+  trackTabIndexChange
+} from "../../analytics/propertiesAnalytics";
 import PropertyItem from "../../components/PropertyItem";
 import { Typography, Button } from "material-ui";
 
@@ -32,6 +41,7 @@ class Properties extends Component {
       showLocationModal: false,
       entityId: null,
       entityName: "",
+      entitySafeName: "",
       entityDescription: "",
       modalMode: null,
       selectedLocationId: null,
@@ -45,6 +55,7 @@ class Properties extends Component {
   }
 
   onAddLocationClicked = () => {
+    trackOpenCreateLocationModal();
     this.setState({
       showLocationModal: true,
       showPropertyModal: false,
@@ -53,16 +64,19 @@ class Properties extends Component {
   };
 
   onEditLocationClicked = location => {
+    trackOpenEditLocationModal(location.safeName);
     this.setState({
       showLocationModal: true,
       entityId: location._id,
       entityName: location.name,
+      entitySafeName: location.safeName,
       entityDescription: location.body,
       modalMode: Modes.EDIT
     });
   };
 
   onAddPropertyClicked = () => {
+    trackOpenCreatePropertyModal();
     const locations = this.props.locations.list;
     const { selectedLocationId } = this.state;
 
@@ -97,6 +111,7 @@ class Properties extends Component {
   };
 
   onTabIndexChanged = (event, value) => {
+    trackTabIndexChange(value);
     this.setState({ tabIndex: value });
   };
 
@@ -105,6 +120,7 @@ class Properties extends Component {
       showPropertyModal: false,
       showLocationModal: false,
       entityName: "",
+      entitySafeName: "",
       entityDescription: "",
       selectedLocationId: null
     });
@@ -212,6 +228,7 @@ class Properties extends Component {
     const {
       entityId,
       entityName,
+      entitySafeName,
       entityDescription,
       showLocationModal,
       modalMode
@@ -257,11 +274,13 @@ class Properties extends Component {
             onClick={event => {
               let request;
               if (modalMode === Modes.CREATE) {
+                trackCreateLocation();
                 request = createLocation({
                   name: entityName,
                   description: entityDescription
                 });
               } else {
+                trackEditLocation(entitySafeName);
                 request = updateLocation({
                   _id: entityId,
                   name: entityName,
@@ -327,6 +346,7 @@ class Properties extends Component {
           </Button>
           <Button
             onClick={event => {
+              trackCreateProperty();
               createProperty({
                 name: entityName,
                 locationRefId: selectedLocationId,

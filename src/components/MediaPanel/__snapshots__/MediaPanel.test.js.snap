@@ -63,6 +63,7 @@ exports[`Properties container renders when authenticated 1`] = `
     <a
       href="/api/static/test.png"
       key="1234"
+      onClick={[Function]}
       target="_blank"
     >
       <div
@@ -109,6 +110,7 @@ exports[`Properties container renders when not authenticated 1`] = `
     <a
       href="/api/static/test.png"
       key="1234"
+      onClick={[Function]}
       target="_blank"
     >
       <div
