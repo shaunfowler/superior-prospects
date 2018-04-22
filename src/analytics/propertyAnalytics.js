@@ -3,7 +3,7 @@ import ReactGA from "react-ga";
 export const trackSaveProperty = safeName => {
   ReactGA.event({
     category: "Property (CM)",
-    action: "Save button click",
+    action: "Save property button click",
     label: safeName
   });
 };
@@ -11,7 +11,7 @@ export const trackSaveProperty = safeName => {
 export const trackEditButtonClick = safeName => {
   ReactGA.event({
     category: "Property (CM)",
-    action: "Edit button click",
+    action: "Edit property button click (toggle edit mode)",
     label: safeName
   });
 };
@@ -27,7 +27,7 @@ export const trackFileUpload = safeName => {
 export const trackPropertyDelete = safeName => {
   ReactGA.event({
     category: "Property (CM)",
-    action: "Delete",
+    action: "Delete property",
     label: safeName
   });
 };
@@ -36,7 +36,7 @@ export const trackOpenDeletePropertyModal = safeName => {
   ReactGA.modalview(`/property-edit/${safeName}`);
   ReactGA.event({
     category: "Property (CM)",
-    action: "Delete button click (modal open)",
+    action: "Delete property button click (modal open)",
     label: safeName
   });
 };

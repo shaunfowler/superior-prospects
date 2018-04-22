@@ -19,7 +19,7 @@ import "./UpdateItem.less";
 const trackUpdateMoreClick = () => {
   ReactGa.event({
     category: "Updates",
-    action: "More button click"
+    action: "Update 'more' button click"
   });
 };
 

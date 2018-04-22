@@ -14,7 +14,7 @@ const formatMediaDate = date => moment(date).format("MMMM Do YYYY");
 const trackMediaClick = fileName => {
   ReactGA.event({
     category: "Media",
-    action: "Open",
+    action: "Open media item",
     label: fileName
   });
 };
