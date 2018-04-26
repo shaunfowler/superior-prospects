@@ -19,3 +19,17 @@ export const createMedia = (file, propertyId) => {
       });
   };
 };
+
+export const deleteMedia = id => {
+  return dispatch => {
+    dispatch(MEDIA_ACTIONS.request());
+    return axios
+      .delete(`/api/media/${id}`)
+      .then(response => {
+        dispatch(MEDIA_ACTIONS.deleteSuccess(id));
+      })
+      .catch(response => {
+        dispatch(MEDIA_ACTIONS.failure(response));
+      });
+  };
+};

@@ -10,7 +10,11 @@ exports[`Home container renders without crashing 1`] = `
   >
     <WithStyles(GridWrapper)
       item={true}
-      sm={3}
+      lg={4}
+      md={4}
+      sm={12}
+      xl={3}
+      xs={12}
     >
       <WithStyles(Paper)
         className="paper"
@@ -21,7 +25,11 @@ exports[`Home container renders without crashing 1`] = `
     </WithStyles(GridWrapper)>
     <WithStyles(GridWrapper)
       item={true}
-      sm={9}
+      lg={8}
+      md={8}
+      sm={12}
+      xl={9}
+      xs={12}
     >
       <WithStyles(Paper)
         className="paper"

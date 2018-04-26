@@ -3,8 +3,23 @@ import moment from "moment";
 import Dropzone from "react-dropzone";
 import ReactGA from "react-ga";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
-import { Avatar } from "material-ui";
-import { FileUpload as FileUploadIcon } from "material-ui-icons";
+import {
+  Avatar,
+  List,
+  ListItem,
+  ListItemText,
+  ListItemIcon,
+  ListItemSecondaryAction,
+  IconButton,
+  Menu,
+  MenuItem
+} from "material-ui";
+import {
+  MoreVert as MoreVertIcon,
+  Delete as DeleteIcon,
+  FileUpload as FileUploadIcon
+} from "material-ui-icons";
+import { ListItemAvatar } from "material-ui";
 
 const stripFileExtension = filename =>
   filename.substring(0, filename.lastIndexOf("."));
@@ -19,7 +34,60 @@ const trackMediaClick = fileName => {
   });
 };
 
+const trackMediaMoreClick = () => {
+  ReactGA.event({
+    category: "Media",
+    action: "Media 'more' button click"
+  });
+};
+
+const trackDeleteMedia = () => {
+  ReactGA.event({
+    category: "Media",
+    action: "Delete media item"
+  });
+};
+
 class MediaPanel extends React.Component {
+  state = {
+    anchorEl: null
+  };
+
+  openMenu = event => {
+    trackMediaMoreClick();
+    this.setState({ anchorEl: event.currentTarget });
+  };
+
+  closeMenu = () => {
+    this.setState({ anchorEl: null, selectedMediaId: null });
+  };
+
+  renderMenu = () => {
+    const { deleteMedia } = this.props;
+    const { selectedMediaId } = this.state;
+    const { anchorEl } = this.state;
+    return (
+      <Menu
+        anchorEl={this.state.anchorEl}
+        open={Boolean(anchorEl)}
+        onClose={this.closeMenu}
+      >
+        <MenuItem
+          onClick={event => {
+            this.closeMenu(event);
+            deleteMedia(selectedMediaId);
+            trackDeleteMedia();
+          }}
+        >
+          <ListItemIcon>
+            <DeleteIcon />
+          </ListItemIcon>
+          <ListItemText inset primary="Delete" />
+        </MenuItem>
+      </Menu>
+    );
+  };
+
   renderDropZone = () => {
     const { isAuthenticated, onFileDrop } = this.props;
     if (!isAuthenticated) {
@@ -27,22 +95,18 @@ class MediaPanel extends React.Component {
     }
 
     return (
-      <div className="media__item">
-        <div className="media__item__avatar">
-          <Avatar>
-            <FileUploadIcon />
-          </Avatar>
-        </div>
-        <div className="media__item__text">
-          <Dropzone onDrop={onFileDrop} className="dropzone" multiple>
-            <div className="name">Upload new items</div>
-            <div className="date">
-              <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
-              <code>png</code>, <code>jpeg</code>
-            </div>
-          </Dropzone>
-        </div>
-      </div>
+      <ListItem disableGutters className="media__item">
+        <Avatar>
+          <FileUploadIcon />
+        </Avatar>
+        <Dropzone onDrop={onFileDrop} className="dropzone" multiple>
+          <div className="name">Upload new items</div>
+          <div className="date">
+            <code>xlsx</code>, <code>docx</code>, <code>pdf</code>,{" "}
+            <code>png</code>, <code>jpeg</code>
+          </div>
+        </Dropzone>
+      </ListItem>
     );
   };
 
@@ -53,38 +117,43 @@ class MediaPanel extends React.Component {
     }
 
     return (
-      <div>
+      <List>
+        {this.renderDropZone()}
         {media.map(m => (
-          <a
+          <ListItem
+            disableGutters
+            key={m._id}
+            className="media__item"
+            href={`/api/static/${m.fileName}`}
             onClick={() => {
               trackMediaClick(m.fileName);
             }}
-            href={`/api/static/${m.fileName}`}
-            target="_blank"
-            key={m._id}
           >
-            <div className="media__item">
-              <div className="media__item__avatar">
-                {fileTypeToIcon(m.fileName)}
-              </div>
-              <div className="media__item__text">
-                <div className="name">{stripFileExtension(m.fileName)}</div>
-                <div className="date">{formatMediaDate(m.created)}</div>
-              </div>
-            </div>
-          </a>
+            <ListItemAvatar>{fileTypeToIcon(m.fileName)}</ListItemAvatar>
+            <ListItemText
+              className="media__item__text"
+              primary={stripFileExtension(m.fileName)}
+              secondary={formatMediaDate(m.created)}
+            />
+            <ListItemSecondaryAction
+              onClick={event => {
+                this.setState({ selectedMediaId: m._id });
+                this.openMenu(event);
+              }}
+            >
+              <IconButton aria-label="More">
+                <MoreVertIcon />
+              </IconButton>
+            </ListItemSecondaryAction>
+          </ListItem>
         ))}
-      </div>
+        {this.renderMenu()}
+      </List>
     );
   };
 
   render() {
-    return (
-      <div className="media">
-        {this.renderDropZone()}
-        {this.renderMedia()}
-      </div>
-    );
+    return <div className="media">{this.renderMedia()}</div>;
   }
 }
 

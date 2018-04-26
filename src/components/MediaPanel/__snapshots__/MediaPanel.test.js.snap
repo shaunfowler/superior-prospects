@@ -4,19 +4,14 @@ exports[`Properties container renders when authenticated 1`] = `
 <div
   className="media"
 >
-  <div
-    className="media__item"
-  >
-    <div
-      className="media__item__avatar"
+  <WithStyles(List)>
+    <WithStyles(ListItem)
+      className="media__item"
+      disableGutters={true}
     >
       <WithStyles(Avatar)>
         <pure(FileUpload) />
       </WithStyles(Avatar)>
-    </div>
-    <div
-      className="media__item__text"
-    >
       <t
         className="dropzone"
         disableClick={false}
@@ -57,48 +52,58 @@ exports[`Properties container renders when authenticated 1`] = `
           </code>
         </div>
       </t>
-    </div>
-  </div>
-  <div>
-    <a
+    </WithStyles(ListItem)>
+    <WithStyles(ListItem)
+      className="media__item"
+      disableGutters={true}
       href="/api/static/test.png"
       key="1234"
       onClick={[Function]}
-      target="_blank"
     >
-      <div
-        className="media__item"
-      >
-        <div
-          className="media__item__avatar"
-        >
-          <WithStyles(Avatar)
-            style={
-              Object {
-                "backgroundColor": "#ffcc80",
-              }
+      <WithStyles(ListItemAvatar)>
+        <WithStyles(Avatar)
+          style={
+            Object {
+              "backgroundColor": "#ffcc80",
             }
-          >
-            <pure(Photo) />
-          </WithStyles(Avatar)>
-        </div>
-        <div
-          className="media__item__text"
+          }
         >
-          <div
-            className="name"
-          >
-            test
-          </div>
-          <div
-            className="date"
-          >
-            April 16th 2018
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
+          <pure(Photo) />
+        </WithStyles(Avatar)>
+      </WithStyles(ListItemAvatar)>
+      <WithStyles(ListItemText)
+        className="media__item__text"
+        primary="test"
+        secondary="April 16th 2018"
+      />
+      <WithStyles(ListItemSecondaryAction)
+        onClick={[Function]}
+      >
+        <WithStyles(IconButton)
+          aria-label="More"
+        >
+          <pure(MoreVert) />
+        </WithStyles(IconButton)>
+      </WithStyles(ListItemSecondaryAction)>
+    </WithStyles(ListItem)>
+    <WithStyles(Menu)
+      anchorEl={null}
+      onClose={[Function]}
+      open={false}
+    >
+      <WithStyles(MenuItem)
+        onClick={[Function]}
+      >
+        <WithStyles(ListItemIcon)>
+          <pure(Delete) />
+        </WithStyles(ListItemIcon)>
+        <WithStyles(ListItemText)
+          inset={true}
+          primary="Delete"
+        />
+      </WithStyles(MenuItem)>
+    </WithStyles(Menu)>
+  </WithStyles(List)>
 </div>
 `;
 
@@ -106,45 +111,57 @@ exports[`Properties container renders when not authenticated 1`] = `
 <div
   className="media"
 >
-  <div>
-    <a
+  <WithStyles(List)>
+    <WithStyles(ListItem)
+      className="media__item"
+      disableGutters={true}
       href="/api/static/test.png"
       key="1234"
       onClick={[Function]}
-      target="_blank"
     >
-      <div
-        className="media__item"
-      >
-        <div
-          className="media__item__avatar"
-        >
-          <WithStyles(Avatar)
-            style={
-              Object {
-                "backgroundColor": "#ffcc80",
-              }
+      <WithStyles(ListItemAvatar)>
+        <WithStyles(Avatar)
+          style={
+            Object {
+              "backgroundColor": "#ffcc80",
             }
-          >
-            <pure(Photo) />
-          </WithStyles(Avatar)>
-        </div>
-        <div
-          className="media__item__text"
+          }
         >
-          <div
-            className="name"
-          >
-            test
-          </div>
-          <div
-            className="date"
-          >
-            April 16th 2018
-          </div>
-        </div>
-      </div>
-    </a>
-  </div>
+          <pure(Photo) />
+        </WithStyles(Avatar)>
+      </WithStyles(ListItemAvatar)>
+      <WithStyles(ListItemText)
+        className="media__item__text"
+        primary="test"
+        secondary="April 16th 2018"
+      />
+      <WithStyles(ListItemSecondaryAction)
+        onClick={[Function]}
+      >
+        <WithStyles(IconButton)
+          aria-label="More"
+        >
+          <pure(MoreVert) />
+        </WithStyles(IconButton)>
+      </WithStyles(ListItemSecondaryAction)>
+    </WithStyles(ListItem)>
+    <WithStyles(Menu)
+      anchorEl={null}
+      onClose={[Function]}
+      open={false}
+    >
+      <WithStyles(MenuItem)
+        onClick={[Function]}
+      >
+        <WithStyles(ListItemIcon)>
+          <pure(Delete) />
+        </WithStyles(ListItemIcon)>
+        <WithStyles(ListItemText)
+          inset={true}
+          primary="Delete"
+        />
+      </WithStyles(MenuItem)>
+    </WithStyles(Menu)>
+  </WithStyles(List)>
 </div>
 `;
