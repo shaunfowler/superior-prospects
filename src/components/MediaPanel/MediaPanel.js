@@ -124,9 +124,9 @@ class MediaPanel extends React.Component {
             disableGutters
             key={m._id}
             className="media__item"
-            href={`/api/static/${m.fileName}`}
             onClick={() => {
               trackMediaClick(m.fileName);
+              window.open(`/api/static/${m.fileName}`, "_blank");
             }}
           >
             <ListItemAvatar>{fileTypeToIcon(m.fileName)}</ListItemAvatar>
