@@ -1,7 +1,7 @@
 import React from "react";
 import { shallow } from "enzyme";
 import { shallowToJson } from "enzyme-to-json";
-import MediaPanel from "./";
+import MediaPanel from "./MediaPanel";
 
 describe("Properties container", () => {
   const media = [
@@ -22,7 +22,6 @@ describe("Properties container", () => {
       media,
       isAuthenticated: true
     };
-
     const output = shallow(<MediaPanel {...props} />);
     expect(shallowToJson(output)).toMatchSnapshot();
   });
