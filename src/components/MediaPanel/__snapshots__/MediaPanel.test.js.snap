@@ -56,7 +56,6 @@ exports[`Properties container renders when authenticated 1`] = `
     <WithStyles(ListItem)
       className="media__item"
       disableGutters={true}
-      href="/api/static/test.png"
       key="1234"
       onClick={[Function]}
     >
@@ -115,7 +114,6 @@ exports[`Properties container renders when not authenticated 1`] = `
     <WithStyles(ListItem)
       className="media__item"
       disableGutters={true}
-      href="/api/static/test.png"
       key="1234"
       onClick={[Function]}
     >
