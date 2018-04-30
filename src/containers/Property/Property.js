@@ -28,7 +28,7 @@ import {
   trackPropertyDelete,
   trackOpenDeletePropertyModal
 } from "../../analytics/propertyAnalytics";
-import MediaPanel from "../../components/MediaPanel";
+import MediaPanel from "..//MediaPanel";
 
 class Property extends Component {
   constructor(props) {

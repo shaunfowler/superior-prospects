@@ -133,15 +133,6 @@ exports[`Properties container renders when not authenticated 1`] = `
         primary="test"
         secondary="April 16th 2018"
       />
-      <WithStyles(ListItemSecondaryAction)
-        onClick={[Function]}
-      >
-        <WithStyles(IconButton)
-          aria-label="More"
-        >
-          <pure(MoreVert) />
-        </WithStyles(IconButton)>
-      </WithStyles(ListItemSecondaryAction)>
     </WithStyles(ListItem)>
     <WithStyles(Menu)
       anchorEl={null}
