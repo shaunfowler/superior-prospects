@@ -30,9 +30,6 @@ const Modes = {
   CREATE: 1
 };
 
-const alphabeticalSortPredicate = (a, b) =>
-  a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0;
-
 class Properties extends Component {
   constructor(props) {
     super(props);
@@ -77,7 +74,7 @@ class Properties extends Component {
 
   onAddPropertyClicked = () => {
     trackOpenCreatePropertyModal();
-    const locations = this.props.locations.list;
+    const { locations } = this.props;
     const { selectedLocationId } = this.state;
 
     const newState = {
@@ -146,7 +143,7 @@ class Properties extends Component {
   };
 
   renderLocationTabs = () => {
-    const locations = [...this.props.locations.list];
+    const { locations } = this.props;
     return (
       <Tabs
         className="location-tabs"
@@ -157,17 +154,14 @@ class Properties extends Component {
         fullWidth
       >
         <Tab label="All Locations" />
-        {locations &&
-          locations
-            .sort(alphabeticalSortPredicate)
-            .map(l => <Tab key={l._id} label={l.name} />)}
+        {locations && locations.map(l => <Tab key={l._id} label={l.name} />)}
       </Tabs>
     );
   };
 
   renderProperties = (locationId = null) => {
-    const properties = [...this.props.properties.list];
-    const locations = this.props.locations.list;
+    const { properties, locations } = this.props;
+
     if (!properties) {
       return null;
     }
@@ -184,18 +178,16 @@ class Properties extends Component {
 
     return (
       <List>
-        {filtered
-          .sort(alphabeticalSortPredicate)
-          .map(p => (
-            <PropertyItem
-              key={p._id}
-              id={p._id}
-              name={p.name}
-              safeName={p.safeName}
-              description={p.description}
-              locationName={!locationId && getLocationName(p.locationRefId)}
-            />
-          ))}
+        {filtered.map(p => (
+          <PropertyItem
+            key={p._id}
+            id={p._id}
+            name={p.name}
+            safeName={p.safeName}
+            description={p.description}
+            locationName={!locationId && getLocationName(p.locationRefId)}
+          />
+        ))}
       </List>
     );
   };
@@ -302,7 +294,8 @@ class Properties extends Component {
   renderPropertyDialog = () => {
     const { entityName, selectedLocationId, showPropertyModal } = this.state;
     const { createProperty } = this.props;
-    const locations = this.props.locations.list;
+    const { locations } = this.props;
+
     return (
       <Dialog
         open={showPropertyModal}
@@ -364,8 +357,7 @@ class Properties extends Component {
   };
 
   render() {
-    const locations = this.props.locations.list;
-    const { isAuthenticated } = this.props;
+    const { locations, isAuthenticated } = this.props;
     const { tabIndex } = this.state;
 
     return (

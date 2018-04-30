@@ -11,10 +11,13 @@ import {
 import Properties from "./Properties";
 import "./Properties.less";
 
+const alphabeticalSortPredicate = (a, b) =>
+  a.name !== b.name ? (a.name < b.name ? -1 : 1) : 0;
+
 const mapStateToProps = ({ locations, properties, user }) => {
   return {
-    locations,
-    properties,
+    locations: [...locations.list].sort(alphabeticalSortPredicate),
+    properties: [...properties.list].sort(alphabeticalSortPredicate),
     isAuthenticated: user.isAuthenticated
   };
 };
