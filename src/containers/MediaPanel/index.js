@@ -3,4 +3,9 @@ import { deleteMedia } from "../../redux/actions/mediaActions";
 import MediaPanel from "./MediaPanel";
 import "./MediaPanel.less";
 
-export default connect(null, { deleteMedia })(MediaPanel);
+export default connect(
+  ({ user }) => ({
+    isAuthenticated: user.isAuthenticated
+  }),
+  { deleteMedia }
+)(MediaPanel);

@@ -114,6 +114,7 @@ class MediaPanel extends React.Component {
   };
 
   renderMedia = () => {
+    const { isAuthenticated } = this.props;
     const media = [...this.props.media];
     if (!media) {
       return null;
@@ -138,16 +139,18 @@ class MediaPanel extends React.Component {
               primary={stripFileExtension(m.fileName)}
               secondary={formatMediaDate(m.created)}
             />
-            <ListItemSecondaryAction
-              onClick={event => {
-                this.setState({ selectedMediaId: m._id });
-                this.openMenu(event);
-              }}
-            >
-              <IconButton aria-label="More">
-                <MoreVertIcon />
-              </IconButton>
-            </ListItemSecondaryAction>
+            {isAuthenticated && (
+              <ListItemSecondaryAction
+                onClick={event => {
+                  this.setState({ selectedMediaId: m._id });
+                  this.openMenu(event);
+                }}
+              >
+                <IconButton aria-label="More">
+                  <MoreVertIcon />
+                </IconButton>
+              </ListItemSecondaryAction>
+            )}
           </ListItem>
         ))}
         {this.renderMenu()}
