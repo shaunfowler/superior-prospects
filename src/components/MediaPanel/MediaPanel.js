@@ -26,6 +26,9 @@ const stripFileExtension = filename =>
 
 const formatMediaDate = date => moment(date).format("MMMM Do YYYY");
 
+const typeSortPredicate = (a, b) =>
+  a.type !== b.type ? (a.type < b.type ? -1 : 1) : 0;
+
 const trackMediaClick = fileName => {
   ReactGA.event({
     category: "Media",
@@ -111,7 +114,7 @@ class MediaPanel extends React.Component {
   };
 
   renderMedia = () => {
-    const { media } = this.props;
+    const media = [...this.props.media];
     if (!media) {
       return null;
     }
@@ -119,7 +122,7 @@ class MediaPanel extends React.Component {
     return (
       <List>
         {this.renderDropZone()}
-        {media.map(m => (
+        {media.sort(typeSortPredicate).map(m => (
           <ListItem
             disableGutters
             key={m._id}
