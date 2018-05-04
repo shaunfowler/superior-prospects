@@ -316,7 +316,7 @@ class Property extends Component {
         <Paper className="paper" elevation={1}>
           {this.state.initialized && (
             <Grid container spacing={24}>
-              <Grid item xs={12}>
+              <Grid item xs={12} style={{ paddingTop: 0, paddingBottom: 0 }}>
                 {this.renderTitle()}
                 {this.renderDescription()}
               </Grid>
