@@ -9,7 +9,9 @@ import store, { history } from "./redux/store/configureStore";
 import "./index.less";
 import App from "./containers/App";
 
-ReactGA.initialize("UA-78822442-1", { debug: true });
+ReactGA.initialize(process.env.GA_TRACKING_ID, {
+  debug: process.env.NODE_ENV === "development"
+});
 
 const theme = createMuiTheme({
   palette: {
