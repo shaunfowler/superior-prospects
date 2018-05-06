@@ -47,7 +47,7 @@ class Property extends Component {
 
   componentDidMount() {
     const { id } = this.props.match.params;
-    const { queryLocations, getProperty } = this.props;
+    const { queryLocations, getProperty, history } = this.props;
 
     queryLocations();
 
@@ -62,6 +62,7 @@ class Property extends Component {
         });
       })
       .catch(() => {
+        history.push("/");
         this.setState({ initialized: false, errored: true });
       });
   }
