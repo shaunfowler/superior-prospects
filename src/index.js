@@ -22,11 +22,11 @@ const theme = createMuiTheme({
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <MuiThemeProvider theme={theme}>
+    <MuiThemeProvider theme={theme}>
+      <ConnectedRouter history={history}>
         <App />
-      </MuiThemeProvider>
-    </ConnectedRouter>
+      </ConnectedRouter>
+    </MuiThemeProvider>
   </Provider>,
   document.getElementById("root")
 );

@@ -16,7 +16,6 @@ export default function propertiesReducer(state, action) {
       return newState;
     case MEDIA_ACTION_NAMES.deleteSuccess:
       newState = { ...state, selected: { ...state.selected } };
-      console.log(action);
       newState.selected.media = [...newState.selected.media].filter(
         m => m._id !== action.id
       );

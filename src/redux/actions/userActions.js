@@ -27,7 +27,8 @@ export function getUser() {
         dispatch(createGetUserSuccess(response.data));
       })
       .catch(response => {
-        dispatch(createUserFailure(response));
+        const { data, status, statusText } = response.response;
+        dispatch(createUserFailure({ data, status, statusText }));
       });
   };
 }
