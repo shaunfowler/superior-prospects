@@ -175,8 +175,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("production"),
-        GA_ENABLED: JSON.stringify(true),
-        GA_TRACKING_ID: JSON.stringify("UA-XXXXXXXX-X")
+        GA_TRACKING_ID: JSON.stringify("UA-118745632-1")
       }
     }),
     new webpack.optimize.UglifyJsPlugin({

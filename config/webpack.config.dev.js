@@ -129,8 +129,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("development"),
-        GA_ENABLED: JSON.stringify(true),
-        GA_TRACKING_ID: JSON.stringify("UA-XXXXXXXX-X")
+        GA_TRACKING_ID: JSON.stringify("UA-78822442-1")
       }
     }),
     new webpack.HotModuleReplacementPlugin(),
