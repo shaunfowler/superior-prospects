@@ -1,7 +1,59 @@
 version: 2
 
 jobs:
-  setup:
+  build_client:
+    docker:
+      - image: circleci/node:8.5.0
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+
+      - setup_remote_docker
+
+      - run:
+          name: Install Docker client
+          command: |
+            set -x
+            VER="17.03.0-ce"
+            curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
+            tar -xz -C /tmp -f /tmp/docker-$VER.tgz
+            sudo mv /tmp/docker/* /usr/bin
+
+      - run:
+          name: Login to Docker
+          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+
+      - run: 
+          name: Restore npm packages
+          command: yarn install
+
+      - run:
+          name: Test
+          command: yarn workspace superior-prospects-client test
+
+      - run:
+          name: Build Docker images
+          command: |
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker build -t shaunfowler/superior-prospects-client:latest -f ./packages/superior-prospects-client/Dockerfile .
+            else
+              docker build -t $DOCKER_REPO:$CIRCLE_SHA1 -f Dockerfile .
+            fi
+
+      - deploy:
+          name: Deploy to Docker Hub
+          command: |
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker push $DOCKER_REPO:latest
+            else
+              docker push $DOCKER_REPO:$CIRCLE_SHA1
+            fi
+
+  build_api:
     docker:
       - image: circleci/node:8.5.0
 
@@ -29,86 +81,6 @@ jobs:
           name: Login to Docker
           command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
-  build_client:
-    docker:
-      - image: circleci/node:8.5.0
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-      # - setup_remote_docker
-
-      # - run:
-      #     name: Install Docker client
-      #     command: |
-      #       set -x
-      #       VER="17.03.0-ce"
-      #       curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-      #       tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-      #       sudo mv /tmp/docker/* /usr/bin
-
-      # - run:
-      #     name: Login to Docker
-      #     command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-
-      # - run: 
-      #     name: Restore npm packages
-      #     command: yarn install
-
-      - run:
-          name: Test
-          command: yarn workspace superior-prospects-client test
-
-      - run:
-          name: Build Docker images
-          command: |
-            set -euo pipefail
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker build -t shaunfowler/superior-prospects-client:latest -f ./packages/superior-prospects-client/Dockerfile .
-            # else
-            #   docker build -t $DOCKER_REPO:$CIRCLE_SHA1 -f Dockerfile .
-            # fi
-
-      - deploy:
-          name: Deploy to Docker Hub
-          command: |
-            set -euo pipefail
-            if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker push $DOCKER_REPO:latest
-            # else
-            #   docker push $DOCKER_REPO:$CIRCLE_SHA1
-            # fi
-
-  build_api:
-    docker:
-      - image: circleci/node:8.5.0
-
-    working_directory: ~/repo
-
-    steps:
-      - checkout
-
-    #   - setup_remote_docker
-
-    #   - run:
-    #       name: Install Docker client
-    #       command: |
-    #         set -x
-    #         VER="17.03.0-ce"
-    #         curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-    #         tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-    #         sudo mv /tmp/docker/* /usr/bin
-
-    #   - run: 
-    #       name: Restore npm packages
-    #       command: yarn install
-
-    #   - run:
-    #       name: Login to Docker
-    #       command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-
       - run:
           name: Build Docker images
           command: |
@@ -134,10 +106,5 @@ workflows:
 
   my_workflow:
     jobs:
-      - setup
       - build_client
-          requires:
-            - setup
       - build_api
-          requires:
-            - setup
