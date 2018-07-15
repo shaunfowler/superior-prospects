@@ -136,8 +136,8 @@ workflows:
     jobs:
       - setup
       - build_client
-        requires:
-          - setup
+          requires:
+            - setup
       - build_api
-        requires:
-          - setup
+          requires:
+            - setup
