@@ -43,7 +43,7 @@ jobs:
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
               docker build -t shaunfowler/superior-prospects-client:latest -f packages/superior-prospects-client/Dockerfile .
             else
-              docker build -t shaunfowler/superior-prospects-client:$CIRCLE_SHA1 -f Dockerfile packages/superior-prospects-client/Dockerfile .
+              docker build -t shaunfowler/superior-prospects-client:$CIRCLE_SHA1 -f packages/superior-prospects-client/Dockerfile .
             fi
 
       - deploy:
@@ -92,7 +92,7 @@ jobs:
           command: |
             set -euo pipefail
             if [ "${CIRCLE_BRANCH}" == "master" ]; then
-              docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .
+              docker build -t shaunfowler/superior-prospects-api:latest -f packages/superior-prospects-api/Dockerfile .
             else
               docker build -t shaunfowler/superior-prospects-api:$CIRCLE_SHA1 -f packages/superior-prospects-api/Dockerfile .
             fi
