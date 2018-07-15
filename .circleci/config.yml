@@ -100,3 +100,10 @@ jobs:
             else
               docker push shaunfowler/superior-prospects-api:$CIRCLE_SHA1
             fi
+
+workflows:
+  version: 2
+
+  my_workflow:
+    - build_client
+    - build_api
