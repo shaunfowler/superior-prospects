@@ -134,7 +134,7 @@ workflows:
 
   my_workflow:
     jobs:
-      - setup:
+      - setup
       - build_client:
           requires:
             - setup
