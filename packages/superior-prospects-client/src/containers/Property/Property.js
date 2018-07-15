@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component } from "react"
 import {
   Paper,
   Grid,
@@ -12,27 +12,27 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions
-} from "material-ui";
-import { red } from "material-ui/colors";
-import { EditorState } from "draft-js";
-import { Editor } from "react-draft-wysiwyg";
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { stateToHTML } from "draft-js-export-html";
-import { stateFromHTML } from "draft-js-import-html";
-import renderHTML from "react-render-html";
-import { withRouter } from "react-router";
+} from "material-ui"
+import { red } from "material-ui/colors"
+import { EditorState } from "draft-js"
+import { Editor } from "react-draft-wysiwyg"
+import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
+import { stateToHTML } from "draft-js-export-html"
+import { stateFromHTML } from "draft-js-import-html"
+import renderHTML from "react-render-html"
+import { withRouter } from "react-router"
 import {
   trackSaveProperty,
   trackEditButtonClick,
   trackFileUpload,
   trackPropertyDelete,
   trackOpenDeletePropertyModal
-} from "../../analytics/propertyAnalytics";
-import MediaPanel from "..//MediaPanel";
+} from "../../analytics/propertyAnalytics"
+import MediaPanel from "..//MediaPanel"
 
 class Property extends Component {
   constructor(props) {
-    super(props);
+    super(props)
 
     this.state = {
       initialized: false,
@@ -42,52 +42,52 @@ class Property extends Component {
       newName: "",
       newDescription: "",
       newLocationRefId: ""
-    };
+    }
   }
 
   componentDidMount() {
-    const { id } = this.props.match.params;
-    const { queryLocations, getProperty, history } = this.props;
+    const { id } = this.props.match.params
+    const { queryLocations, getProperty, history } = this.props
 
-    queryLocations();
+    queryLocations()
 
     getProperty(id)
       .then(response => {
-        const { name, body } = this.props.selected;
-        document.title = `${name} - Superior Prospects`;
-        const contentState = stateFromHTML(body);
+        const { name, body } = this.props.selected
+        document.title = `${name} - Superior Prospects`
+        const contentState = stateFromHTML(body)
         this.setState({
           initialized: true,
           editorState: EditorState.createWithContent(contentState)
-        });
+        })
       })
       .catch(() => {
-        history.push("/");
-        this.setState({ initialized: false, errored: true });
-      });
+        history.push("/")
+        this.setState({ initialized: false, errored: true })
+      })
   }
 
   onEditorStateChange = editorState => {
     this.setState({
       editorState
-    });
-  };
+    })
+  }
 
   onNameChange = event => {
-    this.setState({ newName: event.target.value });
-  };
+    this.setState({ newName: event.target.value })
+  }
 
   onDescriptionChange = event => {
     this.setState({
       newDescription: event.target.value
-    });
-  };
+    })
+  }
 
   onLocationChange = event => {
     this.setState({
       newLocationRefId: event.target.value
-    });
-  };
+    })
+  }
 
   saveProperty = () => {
     const {
@@ -95,10 +95,10 @@ class Property extends Component {
       newName,
       newDescription,
       newLocationRefId
-    } = this.state;
-    const { safeName } = this.props.selected;
+    } = this.state
+    const { safeName } = this.props.selected
 
-    trackSaveProperty(safeName);
+    trackSaveProperty(safeName)
 
     this.props.editProperty(
       Object.assign({}, this.props.selected, {
@@ -107,60 +107,60 @@ class Property extends Component {
         description: newDescription,
         locationRefId: newLocationRefId
       })
-    );
+    )
 
     this.setState({
       editMode: false,
       newName: "",
       newDescription: "",
       newLocationRefId: ""
-    });
-  };
+    })
+  }
 
   enterEditMode = () => {
-    const { name, safeName, description, locationRefId } = this.props.selected;
-    trackEditButtonClick(safeName);
+    const { name, safeName, description, locationRefId } = this.props.selected
+    trackEditButtonClick(safeName)
     this.setState({
       editMode: true,
       newName: name,
       newDescription: description,
       newLocationRefId: locationRefId
-    });
-  };
+    })
+  }
 
   onFileDrop = files => {
-    const { _id, safeName } = this.props.selected;
-    trackFileUpload(safeName);
-    const { createMedia } = this.props;
-    files.map(file => createMedia(file, _id));
-  };
+    const { _id, safeName } = this.props.selected
+    trackFileUpload(safeName)
+    const { createMedia } = this.props
+    files.map(file => createMedia(file, _id))
+  }
 
   performDelete = async () => {
-    const { selected, deleteProperty, history } = this.props;
-    trackPropertyDelete(selected.safeName);
-    await deleteProperty(selected._id);
-    history.push("/");
-    this.hideDeletePropertyDialog();
-  };
+    const { selected, deleteProperty, history } = this.props
+    trackPropertyDelete(selected.safeName)
+    await deleteProperty(selected._id)
+    history.push("/")
+    this.hideDeletePropertyDialog()
+  }
 
   showDeletePropertyDialog = () => {
-    const { safeName } = this.props.selected;
-    trackOpenDeletePropertyModal(safeName);
+    const { safeName } = this.props.selected
+    trackOpenDeletePropertyModal(safeName)
     this.setState({
       showDeletePropertyDialog: true
-    });
-  };
+    })
+  }
 
   hideDeletePropertyDialog = () => {
     this.setState({
       showDeletePropertyDialog: false
-    });
-  };
+    })
+  }
 
   renderDeleteConfirmationDialog = () => {
-    const { selected } = this.props;
+    const { selected } = this.props
     if (!selected) {
-      return null;
+      return null
     }
 
     return (
@@ -190,13 +190,13 @@ class Property extends Component {
           </Button>
         </DialogActions>
       </Dialog>
-    );
-  };
+    )
+  }
 
   renderTitle = () => {
-    const { selected, isAuthenticated, locations } = this.props;
-    const { editMode, newName, newLocationRefId } = this.state;
-    const location = locations.find(l => l._id === selected.locationRefId);
+    const { selected, isAuthenticated, locations } = this.props
+    const { editMode, newName, newLocationRefId } = this.state
+    const location = locations.find(l => l._id === selected.locationRefId)
 
     return (
       <div className="paper__title">
@@ -215,34 +215,34 @@ class Property extends Component {
           )}
           {editMode &&
             locations && (
-              <Select
-                className="location-select"
-                value={newLocationRefId}
-                onChange={this.onLocationChange}
-                inputProps={{
-                  name: "age",
-                  id: "age-simple"
-                }}
-              >
-                {locations.map(l => (
-                  <MenuItem key={l._id} value={l._id}>
-                    {l.name}
-                  </MenuItem>
-                ))}
-              </Select>
-            )}
+            <Select
+              className="location-select"
+              value={newLocationRefId}
+              onChange={this.onLocationChange}
+              inputProps={{
+                name: "age",
+                id: "age-simple"
+              }}
+            >
+              {locations.map(l => (
+                <MenuItem key={l._id} value={l._id}>
+                  {l.name}
+                </MenuItem>
+              ))}
+            </Select>
+          )}
         </Typography>
 
         {isAuthenticated &&
           !editMode && (
-            <Button
-              color="default"
-              style={{ color: red[400] }}
-              onClick={() => this.showDeletePropertyDialog()}
-            >
+          <Button
+            color="default"
+            style={{ color: red[400] }}
+            onClick={() => this.showDeletePropertyDialog()}
+          >
               Delete
-            </Button>
-          )}
+          </Button>
+        )}
 
         {editMode && (
           <Button color="primary" onClick={() => this.saveProperty()}>
@@ -251,17 +251,17 @@ class Property extends Component {
         )}
         {isAuthenticated &&
           !editMode && (
-            <Button color="primary" onClick={() => this.enterEditMode()}>
+          <Button color="primary" onClick={() => this.enterEditMode()}>
               Edit
-            </Button>
-          )}
+          </Button>
+        )}
       </div>
-    );
-  };
+    )
+  }
 
   renderDescription = () => {
-    const { editMode, newDescription } = this.state;
-    const { selected } = this.props;
+    const { editMode, newDescription } = this.state
+    const { selected } = this.props
     return (
       <div className="description">
         {!editMode && <Typography>{selected.description}</Typography>}
@@ -277,12 +277,12 @@ class Property extends Component {
           />
         )}
       </div>
-    );
-  };
+    )
+  }
 
   renderBody = () => {
-    const { editorState, editMode } = this.state;
-    const { selected } = this.props;
+    const { editorState, editMode } = this.state
+    const { selected } = this.props
     return (
       <div className="body">
         {editMode ? (
@@ -297,19 +297,19 @@ class Property extends Component {
           selected.body && renderHTML(selected.body)
         )}
       </div>
-    );
-  };
+    )
+  }
 
   renderMedia = () => {
-    const { selected, isAuthenticated } = this.props;
+    const { selected, isAuthenticated } = this.props
     return (
       <MediaPanel
         media={selected.media}
         onFileDrop={this.onFileDrop}
         isAuthenticated={isAuthenticated}
       />
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -332,8 +332,8 @@ class Property extends Component {
         </Paper>
         {this.renderDeleteConfirmationDialog()}
       </div>
-    );
+    )
   }
 }
 
-export default withRouter(Property);
+export default withRouter(Property)

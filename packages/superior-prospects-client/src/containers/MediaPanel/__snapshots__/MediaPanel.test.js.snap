@@ -17,6 +17,7 @@ exports[`Properties container renders when authenticated 1`] = `
         disableClick={false}
         disablePreview={false}
         disabled={false}
+        inputProps={Object {}}
         maxSize={Infinity}
         minSize={0}
         multiple={true}
