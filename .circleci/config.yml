@@ -13,7 +13,7 @@ jobs:
       - setup_remote_docker
 
       - run:
-          command: pwd && ls -la && tree
+          command: pwd && ls -la
 
       - run:
           name: Install Docker client
@@ -68,7 +68,7 @@ jobs:
       - setup_remote_docker
 
       - run:
-          command: pwd && ls -la && tree
+          command: pwd && ls -la
 
       - run:
           name: Install Docker client
