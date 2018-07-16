@@ -9,7 +9,6 @@ jobs:
 
     steps:
       - checkout
-
       - setup_remote_docker
 
       - run:
@@ -21,10 +20,6 @@ jobs:
             tar -xz -C /tmp -f /tmp/docker-$VER.tgz
             sudo mv /tmp/docker/* /usr/bin
 
-      - run:
-          name: Login to Docker
-          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-
       - run: 
           name: Restore npm packages
           command: yarn install
@@ -33,7 +28,7 @@ jobs:
           root: .
           paths:
             - .
-          
+
   build_client:
     docker:
       - image: circleci/node:8.5.0
@@ -46,9 +41,9 @@ jobs:
 
       - setup_remote_docker
 
-      # - run:
-      #     name: Login to Docker
-      #     command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+      - run:
+          name: Login to Docker
+          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
       - run:
           name: Test
@@ -75,57 +70,42 @@ jobs:
               docker push shaunfowler/superior-prospects-client:$CIRCLE_SHA1
             fi
 
-  # build_api:
-  #   docker:
-  #     - image: circleci/node:8.5.0
+  build_api:
+    docker:
+      - image: circleci/node:8.5.0
 
-  #   working_directory: ~/repo
+    working_directory: ~/repo
 
-  #   steps:
-  #     - checkout
+    steps:
+      - attach_workspace:
+          at: .
 
-  #     - setup_remote_docker
+      - setup_remote_docker
 
-  #     - run:
-  #         command: pwd && ls -la packages/superior-prospects-api
+      - run:
+          name: Login to Docker
+          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
-  #     - run:
-  #         name: Install Docker client
-  #         command: |
-  #           set -x
-  #           VER="17.03.0-ce"
-  #           curl -L -o /tmp/docker-$VER.tgz https://get.docker.com/builds/Linux/x86_64/docker-$VER.tgz
-  #           tar -xz -C /tmp -f /tmp/docker-$VER.tgz
-  #           sudo mv /tmp/docker/* /usr/bin
+      - run:
+          name: Build Docker images
+          command: |
+            cd packages/superior-prospects-api
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .
+            else
+              docker build -t shaunfowler/superior-prospects-api:$CIRCLE_SHA1 -f Dockerfile .
+            fi
 
-  #     - run: 
-  #         name: Restore npm packages
-  #         command: yarn install
-
-  #     - run:
-  #         name: Login to Docker
-  #         command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
-
-  #     - run:
-  #         name: Build Docker images
-  #         command: |
-  #           cd packages/superior-prospects-api
-  #           set -euo pipefail
-  #           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-  #             docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .
-  #           else
-  #             docker build -t shaunfowler/superior-prospects-api:$CIRCLE_SHA1 -f Dockerfile .
-  #           fi
-
-  #     - deploy:
-  #         name: Deploy to Docker Hub
-  #         command: |
-  #           set -euo pipefail
-  #           if [ "${CIRCLE_BRANCH}" == "master" ]; then
-  #             docker push shaunfowler/superior-prospects-api:latest
-  #           else
-  #             docker push shaunfowler/superior-prospects-api:$CIRCLE_SHA1
-  #           fi
+      - deploy:
+          name: Deploy to Docker Hub
+          command: |
+            set -euo pipefail
+            if [ "${CIRCLE_BRANCH}" == "master" ]; then
+              docker push shaunfowler/superior-prospects-api:latest
+            else
+              docker push shaunfowler/superior-prospects-api:$CIRCLE_SHA1
+            fi
 
 workflows:
   version: 2
@@ -136,4 +116,6 @@ workflows:
       - build_client:
           requires:
             - setup
-      # - build_api
+      - build_api:
+          requires:
+            - setup
