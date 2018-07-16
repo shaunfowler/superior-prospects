@@ -46,9 +46,9 @@ jobs:
 
       - setup_remote_docker
 
-      - run:
-          name: Login to Docker
-          command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
+      # - run:
+      #     name: Login to Docker
+      #     command: docker login -u $DOCKER_HUB_USERNAME -p $DOCKER_HUB_PASSWORD
 
       - run:
           name: Test
