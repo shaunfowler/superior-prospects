@@ -110,7 +110,7 @@ jobs:
 workflows:
   version: 2
 
-  my_workflow:
+  boil_the_ocean:
     jobs:
       - setup
       - build_client:
