@@ -14,14 +14,10 @@ The source for http://superiorprospects.com.
 
 `yarn build`
 
-> To rebuild only the app image, run: `docker build -t shaunfowler/sp_client -f Dockerfile .`
+> To rebuild only the app image, run: `docker build -t shaunfowler/superior-prospects-client -f Dockerfile .`
 
 ## Run
 
 `yarn start`
-
-or
-
-`docker run shaunfowler/sp_client`
 
 Access the app at `http://localhost:3000`.

@@ -7,9 +7,9 @@
         "start": "node server.js",
         "nodemon": "nodemon -L server.js",
         "nodemon:noauth": "BYPASS_AUTH=true nodemon -L server.js",
-        "build:image": "docker build -t shaunfowler/sp_server:latest -f Dockerfile .",
-        "build:image:mongo_seed": "docker build -t shaunfowler/sp_mongo_seed:latest -f Dockerfile.mongo_seed .",
-        "build:images": "npm run build:image:mongo_seed && npm run build:image"
+        "build:image": "docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .",
+        "build:image:seed": "docker build -t shaunfowler/superior-prospects-api-seed:latest -f Dockerfile.seed .",
+        "build:images": "npm run build:image:seed && npm run build:image"
     },
     "keywords": [],
     "author": "",

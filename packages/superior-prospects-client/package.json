@@ -72,7 +72,7 @@
     "build": "webpack --config config/webpack.config.prod.js",
     "test": "node scripts/test.js --env=jsdom",
     "lint": "eslint ./src/",
-    "build:image": "docker build -t sp_client -f Dockerfile ."
+    "build:image": "docker build -t shaunfowler/superior-prospects-client -f Dockerfile ."
   },
   "devDependencies": {
     "eslint": "^4.8.0",

@@ -25,7 +25,7 @@ require("./auth/passport.google");
 // Connect to mongo
 mongoose.Promise = global.Promise;
 mongoose
-    .connect("mongodb://sp_mongo/sp")
+    .connect("mongodb://mongo/sp")
     .then(() => console.log("Connection to MongoDB succesful"))
     .catch(err => {
         console.error("Failed to connect to MongoDB", err);

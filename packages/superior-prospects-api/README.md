@@ -17,5 +17,5 @@ npm run build:image
 or
 
 ```
-docker build -t shaunfowler/sp_server:latest -f Dockerfile .
+docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .
 ```
