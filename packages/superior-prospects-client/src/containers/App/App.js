@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Route, Switch } from "react-router-dom";
-import Reboot from "material-ui/Reboot";
 import Header from "../../components/Header";
 import Jumbotron from "../../components/Jumbotron";
 import Footer from "../../components/Footer";
@@ -16,7 +15,6 @@ class App extends Component {
   render() {
     return (
       <div className="app">
-        <Reboot />
         <Header />
         <Jumbotron />
         <Switch>

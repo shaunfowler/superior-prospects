@@ -1,27 +1,37 @@
-# Superior Prospects
+# superior-prospects
 
-[![CircleCI](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master.svg?style=svg)](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master)
+This is a monorepo for [Superior Prospects](http://superiorprospects.com).
 
-The source for http://superiorprospects.com.
+- [superior-prospects-client](packages/superior-prospects-client)
+- [superior-prospects-api](packages/superior-prospects-client)
 
-> Note: This service is intended to be deployed in swarm. See the composition repo that contains the docker-compose file: https://github.com/shaunfowler/superior-prospects-composition
+## Deployment
 
-## Install Dependencies
+### Create secrets
 
-`yarn`
+Create two docker secrets called `sp_client_id` and `sp_client_secret`. These, respectively, represent the client ID and secret for [Google Cloud APIs](https://console.cloud.google.com/apis/credentials).
 
-## Build
+### Deploy the stack
 
-`yarn build`
+## Local development
 
-> To rebuild only the app image, run: `docker build -t shaunfowler/sp_client -f Dockerfile .`
+To deploy the stack in swarm, run:
 
-## Run
+```
+docker swarm init
+docker stack deploy -c docker-compose.yml superior_prospects
+```
 
-`yarn start`
+## Production
 
-or
+```
+./deploy.sh
+```
 
-`docker run shaunfowler/sp_client`
+#### Mock data
 
-Access the app at `http://localhost:3000`.
+To seed mongo with mock data, run:
+
+```
+docker stack deploy -c docker-compose.seed.yml superior_prospects
+```

@@ -1,0 +1,46 @@
+version: '3.1'
+services:
+    traefik:
+        image: traefik:latest
+        command: --web --web.metrics.prometheus --web.metrics.prometheus.buckets="0.1,0.3,1.2,5.0" --docker --docker.domain=traefik --docker.swarmmode=true --logLevel=DEBUG --entryPoints='Name:http Address::80' --defaultentrypoints=http
+        ports:
+            - "80:80"
+            - "7010:8080"
+        volumes:
+            - /var/run/docker.sock:/var/run/docker.sock
+            - /dev/null:/traefik.toml
+
+    client:
+        image: shaunfowler/superior-prospects-client:latest
+        deploy:
+            labels:
+                - "traefik.frontend.rule=PathPrefixStrip: /"
+                - "traefik.port=3000"
+                - "traefik.docker.network=superior_prospects_default"
+
+    api:
+        image: shaunfowler/superior-prospects-api:latest
+        volumes:
+            - ./persistence/uploads:/usr/app/uploads
+        secrets:
+            - sp_client_id
+            - sp_client_secret
+        environment:
+            - API_BASE_URL=http://${DOMAIN:-localhost}/api
+        deploy:
+            labels:
+                - "traefik.frontend.rule=PathPrefixStrip: /api"
+                - "traefik.port=4000"
+                - "traefik.docker.network=superior_prospects_default"
+
+    mongo:
+        image: mongo:latest
+        command: mongod --smallfiles --bind_ip 0.0.0.0
+        volumes:
+            - "./persistence/mongodata/:/data/db"
+
+secrets:
+    sp_client_id:
+        external: true
+    sp_client_secret:
+        external: true
