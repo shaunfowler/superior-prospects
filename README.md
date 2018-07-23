@@ -9,7 +9,7 @@ This is a monorepo for [Superior Prospects](http://superiorprospects.com).
 
 ### Create secrets
 
-Create two docker secrets called `sp_client_id` and `sp_client_secret`. These, respectively, represent the client ID and secreet for [Google Cloud APIs](https://console.cloud.google.com/apis/credentials).
+Create two docker secrets called `sp_client_id` and `sp_client_secret`. These, respectively, represent the client ID and secret for [Google Cloud APIs](https://console.cloud.google.com/apis/credentials).
 
 ### Deploy the stack
 
