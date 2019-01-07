@@ -7,12 +7,10 @@ import {
   ListItem,
   ListItemText,
   ListItemIcon
-} from "material-ui";
-import {
-  Person as PersonIcon,
-  Info as InfoIcon,
-  Business as BusinessIcon
-} from "material-ui-icons";
+} from "@material-ui/core";
+import PersonIcon from "@material-ui/icons/Person";
+import InfoIcon from "@material-ui/icons/Info";
+import BusinessIcon from "@material-ui/icons/Business";
 import "./About.less";
 
 class About extends Component {
@@ -24,10 +22,10 @@ class About extends Component {
     return (
       <div>
         <div className="paper__title">
-          <Typography variant="title">About</Typography>
+          <Typography variant="h6">About</Typography>
         </div>
         <div className="content">
-          <Typography variant="subheading">
+          <Typography variant="subtitle1">
             Related Experience and Training (Brian Fowler)
           </Typography>
           <p>
@@ -92,7 +90,7 @@ class About extends Component {
     return (
       <div>
         <div className="paper__title">
-          <Typography variant="title">Contact</Typography>
+          <Typography variant="h6">Contact</Typography>
         </div>
         <div className="content">
           <List>

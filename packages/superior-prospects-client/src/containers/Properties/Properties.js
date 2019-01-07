@@ -12,7 +12,7 @@ import {
   Select,
   MenuItem,
   InputLabel
-} from "material-ui";
+} from "@material-ui/core";
 import {
   trackOpenCreateLocationModal,
   trackCreateLocation,
@@ -23,7 +23,7 @@ import {
   trackTabIndexChange
 } from "../../analytics/propertiesAnalytics";
 import PropertyItem from "../../components/PropertyItem";
-import { Typography, Button } from "material-ui";
+import { Typography, Button } from "@material-ui/core";
 
 const Modes = {
   EDIT: 0,
@@ -127,7 +127,7 @@ class Properties extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="paper__title">
-        <Typography variant="title">Properties</Typography>
+        <Typography variant="h6">Properties</Typography>
         {isAuthenticated && (
           <div>
             <Button color="primary" onClick={() => this.onAddLocationClicked()}>
@@ -151,7 +151,7 @@ class Properties extends Component {
         onChange={this.onTabIndexChanged}
         indicatorColor="primary"
         textColor="primary"
-        fullWidth
+        variant="fullWidth"
       >
         <Tab label="All Locations" />
         {locations && locations.map(l => <Tab key={l._id} label={l.name} />)}
@@ -200,7 +200,7 @@ class Properties extends Component {
     const { isAuthenticated } = this.props;
 
     return (
-      <Typography variant="subheading" className="location-summary">
+      <Typography variant="subtitle1" className="location-summary">
         {isAuthenticated && (
           <div className="location-toolbar">
             <Button

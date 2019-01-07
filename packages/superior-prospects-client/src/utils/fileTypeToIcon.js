@@ -1,7 +1,8 @@
 import React from "react";
-import { Avatar } from "material-ui";
-import { red, blue, green, orange } from "material-ui/colors";
-import { Photo, Attachment } from "material-ui-icons";
+import { Avatar } from "@material-ui/core";
+import { red, blue, green, orange } from "@material-ui/core/colors";
+import Photo from "@material-ui/icons/Photo";
+import Attachment from "@material-ui/icons/Attachment";
 
 const textStyle = {
   fontWeight: 800,

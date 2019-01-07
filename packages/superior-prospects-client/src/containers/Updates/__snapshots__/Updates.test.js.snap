@@ -6,7 +6,7 @@ exports[`Updates container renders when authenticated 1`] = `
     className="paper__title"
   >
     <WithStyles(Typography)
-      variant="title"
+      variant="h6"
     >
       News
     </WithStyles(Typography)>
@@ -50,6 +50,7 @@ exports[`Updates container renders when authenticated 1`] = `
         select={false}
         type="text"
         value=""
+        variant="standard"
       />
     </WithStyles(DialogContent)>
     <WithStyles(DialogActions)>
@@ -87,7 +88,7 @@ exports[`Updates container renders when unauthenticated 1`] = `
     className="paper__title"
   >
     <WithStyles(Typography)
-      variant="title"
+      variant="h6"
     >
       News
     </WithStyles(Typography)>

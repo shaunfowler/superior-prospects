@@ -1,10 +1,10 @@
 import React from "react";
 import { NavLink, Link } from "react-router-dom";
 import ReactGA from "react-ga";
-import AppBar from "material-ui/AppBar";
-import Toolbar from "material-ui/Toolbar";
-import Button from "material-ui/Button";
-import Typography from "material-ui/Typography";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/Button";
+import Typography from "@material-ui/core/Typography";
 
 const trackHeaderLink = () => {
   ReactGA.event({
@@ -17,7 +17,7 @@ const Header = () => (
   <AppBar className="app-bar container" position="static">
     <Toolbar className="header container">
       <Link to="/" onClick={() => trackHeaderLink()} className="logo">
-        <Typography variant="title" color="inherit">
+        <Typography variant="h6" color="inherit">
           Superior Prospects Inc.
         </Typography>
       </Link>
