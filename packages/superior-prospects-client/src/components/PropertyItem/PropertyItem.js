@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { ListItem, ListItemText, Typography } from "material-ui";
+import { ListItem, ListItemText, Typography } from "@material-ui/core";
 import "./PropertyItem.less";
 
 const PropertyItem = ({ safeName, name, description, locationName }) => (

@@ -12,8 +12,8 @@ import {
   DialogContent,
   DialogContentText,
   DialogActions
-} from "material-ui"
-import { red } from "material-ui/colors"
+} from "@material-ui/core"
+import { red } from "@material-ui/core/colors"
 import { EditorState } from "draft-js"
 import { Editor } from "react-draft-wysiwyg"
 import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css"
@@ -200,7 +200,7 @@ class Property extends Component {
 
     return (
       <div className="paper__title">
-        <Typography variant="title">
+        <Typography variant="h6">
           {!editMode && selected.name}
           {editMode && (
             <TextField

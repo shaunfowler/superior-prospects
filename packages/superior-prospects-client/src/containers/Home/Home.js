@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Grid, Paper } from "material-ui";
+import { Grid, Paper } from "@material-ui/core";
 import Properties from "../Properties";
 import Updates from "../Updates";
 

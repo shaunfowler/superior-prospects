@@ -25,6 +25,7 @@ exports[`Properties container renders when authenticated 1`] = `
         select={false}
         type="text"
         value=""
+        variant="standard"
       />
     </WithStyles(DialogContent)>
     <WithStyles(DialogContent)>
@@ -38,6 +39,7 @@ exports[`Properties container renders when authenticated 1`] = `
         select={false}
         type="text"
         value=""
+        variant="standard"
       />
     </WithStyles(DialogContent)>
     <WithStyles(DialogActions)>
@@ -77,16 +79,17 @@ exports[`Properties container renders when authenticated 1`] = `
         select={false}
         type="text"
         value=""
+        variant="standard"
       />
       <br />
       <br />
       <WithStyles(FormControl)>
-        <WithStyles(InputLabel)
+        <WithStyles(WithFormControlContext(InputLabel))
           htmlFor="location"
         >
           Location
-        </WithStyles(InputLabel)>
-        <WithStyles(Select)
+        </WithStyles(WithFormControlContext(InputLabel))>
+        <WithStyles(WithFormControlContext(Select))
           fullWidth={true}
           inputProps={
             Object {
@@ -119,7 +122,7 @@ exports[`Properties container renders when authenticated 1`] = `
     className="paper__title"
   >
     <WithStyles(Typography)
-      variant="title"
+      variant="h6"
     >
       Properties
     </WithStyles(Typography)>
@@ -140,11 +143,11 @@ exports[`Properties container renders when authenticated 1`] = `
   </div>
   <WithStyles(Tabs)
     className="location-tabs"
-    fullWidth={true}
     indicatorColor="primary"
     onChange={[Function]}
     textColor="primary"
     value={0}
+    variant="fullWidth"
   >
     <WithStyles(Tab)
       label="All Locations"
@@ -162,18 +165,18 @@ exports[`Properties container renders when not authenticated 1`] = `
     className="paper__title"
   >
     <WithStyles(Typography)
-      variant="title"
+      variant="h6"
     >
       Properties
     </WithStyles(Typography)>
   </div>
   <WithStyles(Tabs)
     className="location-tabs"
-    fullWidth={true}
     indicatorColor="primary"
     onChange={[Function]}
     textColor="primary"
     value={0}
+    variant="fullWidth"
   >
     <WithStyles(Tab)
       label="All Locations"
@@ -191,18 +194,18 @@ exports[`Properties container renders with properties and locations 1`] = `
     className="paper__title"
   >
     <WithStyles(Typography)
-      variant="title"
+      variant="h6"
     >
       Properties
     </WithStyles(Typography)>
   </div>
   <WithStyles(Tabs)
     className="location-tabs"
-    fullWidth={true}
     indicatorColor="primary"
     onChange={[Function]}
     textColor="primary"
     value={0}
+    variant="fullWidth"
   >
     <WithStyles(Tab)
       label="All Locations"

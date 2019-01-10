@@ -10,7 +10,7 @@ exports[`Properties container renders when authenticated 1`] = `
       disableGutters={true}
     >
       <WithStyles(Avatar)>
-        <pure(FileUpload) />
+        <pure(CloudUploadIcon) />
       </WithStyles(Avatar)>
       <t
         className="dropzone"
@@ -68,7 +68,7 @@ exports[`Properties container renders when authenticated 1`] = `
             }
           }
         >
-          <pure(Photo) />
+          <pure(PhotoIcon) />
         </WithStyles(Avatar)>
       </WithStyles(ListItemAvatar)>
       <WithStyles(ListItemText)
@@ -82,7 +82,7 @@ exports[`Properties container renders when authenticated 1`] = `
         <WithStyles(IconButton)
           aria-label="More"
         >
-          <pure(MoreVert) />
+          <pure(MoreVertIcon) />
         </WithStyles(IconButton)>
       </WithStyles(ListItemSecondaryAction)>
     </WithStyles(ListItem)>
@@ -95,7 +95,7 @@ exports[`Properties container renders when authenticated 1`] = `
         onClick={[Function]}
       >
         <WithStyles(ListItemIcon)>
-          <pure(Delete) />
+          <pure(DeleteIcon) />
         </WithStyles(ListItemIcon)>
         <WithStyles(ListItemText)
           inset={true}
@@ -126,7 +126,7 @@ exports[`Properties container renders when not authenticated 1`] = `
             }
           }
         >
-          <pure(Photo) />
+          <pure(PhotoIcon) />
         </WithStyles(Avatar)>
       </WithStyles(ListItemAvatar)>
       <WithStyles(ListItemText)
@@ -144,7 +144,7 @@ exports[`Properties container renders when not authenticated 1`] = `
         onClick={[Function]}
       >
         <WithStyles(ListItemIcon)>
-          <pure(Delete) />
+          <pure(DeleteIcon) />
         </WithStyles(ListItemIcon)>
         <WithStyles(ListItemText)
           inset={true}

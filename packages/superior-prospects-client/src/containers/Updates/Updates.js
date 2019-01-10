@@ -9,7 +9,7 @@ import {
   DialogContentText,
   DialogActions,
   TextField
-} from "material-ui";
+} from "@material-ui/core";
 import {
   trackOpenCreateUpdateModal,
   trackPerformCreateUpdate,
@@ -129,7 +129,7 @@ class Updates extends Component {
     const { isAuthenticated } = this.props;
     return (
       <div className="paper__title">
-        <Typography variant="title">News</Typography>
+        <Typography variant="h6">News</Typography>
         {isAuthenticated && (
           <Button
             className="paper__edit-icon"

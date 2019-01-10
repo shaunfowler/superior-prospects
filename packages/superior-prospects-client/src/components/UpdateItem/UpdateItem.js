@@ -8,11 +8,9 @@ import {
   IconButton,
   Menu,
   MenuItem
-} from "material-ui";
-import {
-  MoreVert as MoreVertIcon,
-  Delete as DeleteIcon
-} from "material-ui-icons";
+} from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DeleteIcon from "@material-ui/icons/Delete";
 import ReactGa from "react-ga";
 import "./UpdateItem.less";
 

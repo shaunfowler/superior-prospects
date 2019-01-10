@@ -13,13 +13,12 @@ import {
   IconButton,
   Menu,
   MenuItem
-} from "material-ui";
-import {
-  MoreVert as MoreVertIcon,
-  Delete as DeleteIcon,
-  FileUpload as FileUploadIcon
-} from "material-ui-icons";
-import { ListItemAvatar } from "material-ui";
+} from "@material-ui/core";
+import MoreVertIcon from "@material-ui/icons/MoreVert";
+import DeleteIcon from "@material-ui/icons/Delete";
+import FileUploadIcon from "@material-ui/icons/CloudUpload";
+
+import { ListItemAvatar } from "@material-ui/core";
 
 const stripFileExtension = filename =>
   filename.substring(0, filename.lastIndexOf("."));
