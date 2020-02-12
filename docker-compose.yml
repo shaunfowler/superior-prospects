@@ -1,7 +1,7 @@
 version: '3.1'
 services:
     traefik:
-        image: traefik:latest
+        image: traefik:1.6.5
         command: --web --web.metrics.prometheus --web.metrics.prometheus.buckets="0.1,0.3,1.2,5.0" --docker --docker.domain=traefik --docker.swarmmode=true --logLevel=DEBUG --entryPoints='Name:http Address::80' --defaultentrypoints=http
         ports:
             - "80:80"
@@ -20,8 +20,10 @@ services:
 
     api:
         image: shaunfowler/superior-prospects-api:latest
+        command: npm run nodemon
         volumes:
             - ./persistence/uploads:/usr/app/uploads
+            - ./packages/superior-prospects-api/:/usr/app
         secrets:
             - sp_client_id
             - sp_client_secret
@@ -34,7 +36,7 @@ services:
                 - "traefik.docker.network=superior_prospects_default"
 
     mongo:
-        image: mongo:latest
+        image: mongo:4.0
         command: mongod --smallfiles --bind_ip 0.0.0.0
         volumes:
             - "./persistence/mongodata/:/data/db"
