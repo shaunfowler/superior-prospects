@@ -4,7 +4,12 @@
 
 The backend API for http://superiorprospects.com.
 
-> Note: This service is depdendent on two Docker secrets (`sp_client_id` and `sp_client_secret`) and sould be deployed in swarm. See the composition repo that contains the docker-compose file: https://github.com/shaunfowler/superior-prospects-composition
+> Note: This service is depdendent on two Docker secrets (`sp_client_id` and `sp_client_secret`) and sould be deployed in swarm.
+
+```
+echo "xxx" | docker secret create sp_client_id -
+echo "xxx" | docker secret create sp_client_secret -
+```
 
 ### Build
 
@@ -18,4 +23,25 @@ or
 
 ```
 docker build -t shaunfowler/superior-prospects-api:latest -f Dockerfile .
+```
+
+### Local Development
+
+```diff
+diff --git a/docker-compose.yml b/docker-compose.yml
+index d056a0c..efba7f9 100644
+--- a/docker-compose.yml
++++ b/docker-compose.yml
+@@ -19,9 +19,11 @@ services:
+                 - "traefik.docker.network=superior_prospects_default"
+
+     api:
+         image: shaunfowler/superior-prospects-api:latest
++        command: npm run nodemon
+         volumes:
+             - ./persistence/uploads:/usr/app/uploads
++            - ./packages/superior-prospects-api/:/usr/app
+         secrets:
+             - sp_client_id
+             - sp_client_secret
 ```

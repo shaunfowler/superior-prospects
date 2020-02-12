@@ -19,8 +19,8 @@ if (process.env.BYPASS_AUTH === "true") {
     console.log("\n\n*** RUNNING WITH AUTHENTICATION DISABLED ***\n\n");
 }
 
-// Setup google auth strategy
-require("./auth/passport.google");
+// Setup auth strategy
+require("./auth/passport.facebook");
 
 // Connect to mongo
 mongoose.Promise = global.Promise;
