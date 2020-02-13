@@ -1,7 +1,6 @@
 var passport = require("passport");
-// var GoogleStrategy = require("passport-google-oauth").OAuth2Strategy;
-var FacebookStrategy = require("passport-facebook").Strategy;
-var config = require("./config.facebook");
+var GoogleStrategy = require("passport-google-oauth20").Strategy;
+var config = require("./config.google");
 var UserModel = require("../schema/user");
 
 var strategySettings = {
@@ -10,7 +9,7 @@ var strategySettings = {
     callbackURL: config.callbackURL
 };
 
-console.log("Facebook", strategySettings);
+console.log("Google", strategySettings);
 
 passport.serializeUser((user, done) => {
     done(null, user);
@@ -21,30 +20,31 @@ passport.deserializeUser((user, done) => {
 });
 
 module.exports = passport.use(
-    new FacebookStrategy(
+    new GoogleStrategy(
         strategySettings,
         (req, accessToken, refreshToken, profile, done) => {
-            console.log("Validating user...", profile);
+            console.log("Validating user...");
 
-            // Build a user object from the facebook profile result.
+            // Build a user object from the google profile result.
             // This user object will be contained in the request context.
             var user = {
                 id: profile.id,
+                email: profile.emails[0].value,
                 displayName: profile.displayName
             };
 
-            UserModel.find({ email: user.id }, (error, users) => {
+            UserModel.find({ email: user.email }, (error, users) => {
                 if (error) {
                     console.log("Error looking up user", error);
                     done(null, false);
                     return;
                 }
 
-                if (users.length === 1 && users[0].email === user.id) {
+                if (users.length === 1 && users[0].email === user.email) {
                     console.info("Validated username and password");
                     done(null, user);
                 } else {
-                    console.info(`User not found by ID: ${user.id}`);
+                    console.info(`User not found by email: ${user.email}`);
                     done(null, false);
                 }
             });

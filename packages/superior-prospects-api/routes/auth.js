@@ -2,15 +2,15 @@ var express = require("express");
 var passport = require("passport");
 var router = express.Router();
 
-router.route("/facebook/callback").get(
-    passport.authenticate("facebook", {
+router.route("/google/callback").get(
+    passport.authenticate("google", {
         successRedirect: "/",
         failure: "/?error=auth"
     })
 );
 
-router.route("/facebook").get(
-    passport.authenticate("facebook", { 
+router.route("/google").get(
+    passport.authenticate("google", { 
         scope: ["email"]
     })
 );

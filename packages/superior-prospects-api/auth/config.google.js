@@ -7,7 +7,7 @@ const clientSecret = fs
     .trim();
 
 const apiHostname = process.env.API_BASE_URL || "localhost:4000";
-const callbackURL = `${apiHostname}/auth/facebook/callback`;
+const callbackURL = `${apiHostname}/auth/google/callback`;
 
 module.exports = {
     clientID,
