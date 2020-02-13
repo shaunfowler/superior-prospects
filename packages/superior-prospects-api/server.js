@@ -5,7 +5,6 @@ const session = require("express-session");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const promBundle = require("express-prom-bundle");
 const healthRoute = require("./routes/health");
 const userRoute = require("./routes/user");
 const authRoute = require("./routes/auth");
@@ -20,7 +19,7 @@ if (process.env.BYPASS_AUTH === "true") {
 }
 
 // Setup auth strategy
-require("./auth/passport.facebook");
+require("./auth/passport.google");
 
 // Connect to mongo
 mongoose.Promise = global.Promise;
@@ -39,7 +38,6 @@ app.use(bodyParser.urlencoded({ limit: "50mb", extended: true }));
 app.use(session({ secret: "1afcfdfb-94a1-5d57-f3c3-b07b1a530ddb" }));
 app.use(passport.initialize());
 app.use(passport.session());
-app.use("/*", promBundle({ includePath: true }));
 
 // Serve the uplaods dir
 app.use("/static", express.static(path.join(__dirname, "uploads")));
