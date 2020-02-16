@@ -2,13 +2,12 @@ version: '3.1'
 services:
     traefik:
         image: traefik:1.6.5
-        command: --docker --docker.domain=traefik --docker.swarmmode=true --logLevel=DEBUG --entryPoints='Name:http Address::80' --defaultentrypoints=http
         ports:
             - "80:80"
-            # - "7010:8080"
+            # - "8080:8080"
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
-            - /dev/null:/traefik.toml
+            - $PWD/traefik.toml:/etc/traefik/traefik.toml
 
     client:
         image: shaunfowler/superior-prospects-client:latest

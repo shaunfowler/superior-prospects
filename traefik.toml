@@ -1,0 +1,13 @@
+logLevel = "DEBUG"
+defaultEntryPoints = ["http"]
+
+[docker]
+    domain = "traefik"
+    swarmmode = true
+
+[entryPoints]
+    [entryPoints.http]
+        address = ":80"
+
+[api]
+    dashboard = true

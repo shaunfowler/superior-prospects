@@ -3,29 +3,34 @@
 This is a monorepo for [Superior Prospects](http://superiorprospects.com).
 
 - [superior-prospects-client](packages/superior-prospects-client)
-- [superior-prospects-api](packages/superior-prospects-client)
+- [superior-prospects-api](packages/superior-prospects-api)
 
 ## Deployment
 
 ### Create secrets
 
-Create two docker secrets called `sp_client_id` and `sp_client_secret`. These, respectively, represent the client ID and secret for [Facebook](https://developers.facebook.com/).
+Create two docker secrets called `sp_client_id` and `sp_client_secret`. These, respectively, represent the client ID and secret for [Google](https://console.cloud.google.com/apis/credentials).
+
+```
+ echo "xxx" | docker secret create sp_client_id -
+ echo "xxx" | docker secret create sp_client_secret -
+```
 
 ### Deploy the stack
 
-## Local development
+#### Production
+
+```
+./deploy.sh
+```
+
+#### Local development
 
 To deploy the stack in swarm, run:
 
 ```
 docker swarm init
-docker stack deploy -c docker-compose.yml superior_prospects
-```
-
-## Production
-
-```
-./deploy.sh
+DOMAIN=localhost docker stack deploy -c docker-compose.yml superior_prospects
 ```
 
 #### Mock data
