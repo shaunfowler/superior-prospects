@@ -4,13 +4,6 @@
 
 The backend API for http://superiorprospects.com.
 
-> Note: This service is depdendent on two Docker secrets (`sp_client_id` and `sp_client_secret`) and sould be deployed in swarm.
-
-```
-echo "xxx" | docker secret create sp_client_id -
-echo "xxx" | docker secret create sp_client_secret -
-```
-
 ### Build
 
 To build the image, run:
