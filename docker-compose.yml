@@ -28,7 +28,7 @@ services:
             - sp_client_id
             - sp_client_secret
         environment:
-            - API_BASE_URL=http://${DOMAIN:-localhost}/api
+            - API_BASE_URL=https://${DOMAIN:-localhost}/api
         deploy:
             labels:
                 - "traefik.frontend.rule=PathPrefixStrip: /api"
