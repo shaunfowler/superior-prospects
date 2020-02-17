@@ -1,6 +1,6 @@
 # superior-prospects
 
-This is a monorepo for [Superior Prospects](http://superiorprospects.com).
+This is a monorepo for [Superior Prospects](https://superiorprospects.com).
 
 - [superior-prospects-client](packages/superior-prospects-client)
 - [superior-prospects-api](packages/superior-prospects-api)

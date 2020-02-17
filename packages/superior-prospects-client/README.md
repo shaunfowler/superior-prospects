@@ -2,7 +2,7 @@
 
 [![CircleCI](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master.svg?style=svg)](https://circleci.com/gh/shaunfowler/superior-prospects/tree/master)
 
-The front-end source for http://superiorprospects.com.
+The front-end source for https://superiorprospects.com.
 
 ## Install Dependencies
 
@@ -18,4 +18,4 @@ The front-end source for http://superiorprospects.com.
 
 `yarn start`
 
-Access the app at `http://localhost:3000`.
+Access the app at `https://localhost:3000`.
