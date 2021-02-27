@@ -103,8 +103,6 @@ class About extends Component {
                   <div>
                     Brian Fowler, President
                     <br />
-                    +1 (204) 753-8201
-                    <br />
                     bfowler@superiorprospects.com
                   </div>
                 }
