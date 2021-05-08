@@ -21,7 +21,7 @@
         "express-prom-bundle": "^3.2.1",
         "express-session": "^1.15.6",
         "guid": "0.0.12",
-        "lodash": "^4.17.19",
+        "lodash": "^4.17.21",
         "mongoose": "5.7.5",
         "multer": "^1.3.0",
         "passport": "^0.4.0",
