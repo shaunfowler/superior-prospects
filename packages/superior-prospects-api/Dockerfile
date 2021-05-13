@@ -7,8 +7,8 @@ COPY ./ /usr/app/
 RUN apk add --update git && \
 	rm -rf /tmp/* /var/cache/apk/*
 
-RUN npm install --silent
+RUN yarn
 
 EXPOSE 4000
 
-CMD ["npm", "start"]
+CMD ["yarn", "start"]

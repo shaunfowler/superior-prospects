@@ -5,7 +5,7 @@ services:
         ports:
             - 80:80
             - 443:443
-            # - 8080:8080
+            - 8080:8080
         volumes:
             - /var/run/docker.sock:/var/run/docker.sock
             - $PWD/certs/:/etc/traefik/certs
@@ -13,6 +13,10 @@ services:
 
     client:
         image: shaunfowler/superior-prospects-client:latest
+        command: yarn start
+        volumes:
+            - ./packages/superior-prospects-client/:/usr/app
+            - ./node_modules/:/node_modules
         deploy:
             labels:
                 - "traefik.frontend.rule=PathPrefixStrip: /"
@@ -21,8 +25,13 @@ services:
 
     api:
         image: shaunfowler/superior-prospects-api:latest
+        # ports:
+        #     - 80:4000
+        command: yarn nodemon
         volumes:
+            - ./packages/superior-prospects-api/:/usr/app
             - ./persistence/uploads:/usr/app/uploads
+            - ./node_modules/:/usr/app/node_modules
         secrets:
             - sp_client_id
             - sp_client_secret
