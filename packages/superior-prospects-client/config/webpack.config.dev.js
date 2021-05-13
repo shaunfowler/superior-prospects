@@ -20,7 +20,8 @@ module.exports = {
     port: 3000,
     host: "0.0.0.0",
     proxy: { "/api/**": { target: "http://localhost:80", secure: false } },
-    historyApiFallback: true
+    historyApiFallback: true,
+    disableHostCheck: true
   },
   entry: ["babel-polyfill", paths.appIndexJs],
   output: {
