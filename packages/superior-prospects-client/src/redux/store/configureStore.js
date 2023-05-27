@@ -4,7 +4,6 @@ import reduxImmutableStateInvariant from "redux-immutable-state-invariant";
 import createHistory from "history/createBrowserHistory";
 import { routerMiddleware } from "react-router-redux";
 import rootReducer from "../reducers";
-import routeTrackerMiddleware from "../middleware/routeTrackerMiddleware";
 
 export const history = createHistory();
 
@@ -17,7 +16,6 @@ const enhancer = composeEnhancers(
     reduxImmutableStateInvariant(),
     thunk,
     routerMiddleware(history),
-    routeTrackerMiddleware
   )
 );
 

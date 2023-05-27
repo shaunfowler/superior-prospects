@@ -1,4 +1,4 @@
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 
 export const trackOpenCreateUpdateModal = () => {
   ReactGA.modalview("/updates-create");

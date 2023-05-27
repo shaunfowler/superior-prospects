@@ -19,7 +19,7 @@ module.exports = {
     compress: true,
     port: 3000,
     host: "0.0.0.0",
-    proxy: { "/api/**": { target: "http://localhost:80", secure: false } },
+    proxy: { "/api/**": { target: "https://superiorprospects.com", secure: false } },
     historyApiFallback: true,
     disableHostCheck: true
   },
@@ -130,7 +130,7 @@ module.exports = {
     new webpack.DefinePlugin({
       "process.env": {
         NODE_ENV: JSON.stringify("development"),
-        GA_TRACKING_ID: JSON.stringify("UA-78822442-1")
+        GA_TRACKING_ID: JSON.stringify("G-KFRDVBY9T0")
       }
     }),
     new webpack.HotModuleReplacementPlugin(),

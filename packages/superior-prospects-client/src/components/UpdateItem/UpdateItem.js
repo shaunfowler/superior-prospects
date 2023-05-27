@@ -11,7 +11,7 @@ import {
 } from "@material-ui/core";
 import MoreVertIcon from "@material-ui/icons/MoreVert";
 import DeleteIcon from "@material-ui/icons/Delete";
-import ReactGa from "react-ga";
+import ReactGa from "react-ga4";
 import "./UpdateItem.less";
 
 const trackUpdateMoreClick = () => {

@@ -1,7 +1,7 @@
 import React from "react";
 import moment from "moment";
 import Dropzone from "react-dropzone";
-import ReactGA from "react-ga";
+import ReactGA from "react-ga4";
 import fileTypeToIcon from "../../utils/fileTypeToIcon";
 import {
   Avatar,
