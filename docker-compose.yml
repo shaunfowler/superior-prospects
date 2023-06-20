@@ -1,47 +1,10 @@
 version: '3.1'
 services:
-    traefik:
-        image: traefik:1.6.5
-        ports:
-            - 80:80
-            - 443:443
-            # - 8080:8080
-        volumes:
-            - /var/run/docker.sock:/var/run/docker.sock
-            - $PWD/certs/:/etc/traefik/certs
-            - $PWD/traefik.toml:/etc/traefik/traefik.toml
-
-    client:
-        image: shaunfowler/superior-prospects-client:latest
-        deploy:
-            labels:
-                - "traefik.frontend.rule=PathPrefixStrip: /"
-                - "traefik.port=3000"
-                - "traefik.docker.network=superior_prospects_default"
-
-    api:
-        image: shaunfowler/superior-prospects-api:latest
-        volumes:
-            - ./persistence/uploads:/usr/app/uploads
-        secrets:
-            - sp_client_id
-            - sp_client_secret
-        environment:
-            - API_BASE_URL=https://${DOMAIN:-localhost}/api
-        deploy:
-            labels:
-                - "traefik.frontend.rule=PathPrefixStrip: /api"
-                - "traefik.port=4000"
-                - "traefik.docker.network=superior_prospects_default"
-
     mongo:
         image: mongo:4.0
         command: mongod --smallfiles --bind_ip 0.0.0.0
+        ports:
+            - '27017:27017'
         volumes:
             - "./persistence/mongodata/:/data/db"
-
-secrets:
-    sp_client_id:
-        external: true
-    sp_client_secret:
-        external: true
+            - "./api/mock/:/mock"

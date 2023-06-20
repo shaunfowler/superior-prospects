@@ -1,0 +1,23 @@
+.property-item {
+  margin: 25px 0;
+
+  li,
+  .property-item__name {
+    transition: 250ms;
+  }
+
+  &__location {
+    font-size: 14px;
+    color: #999;
+  }
+
+  &:hover {
+    & > li {
+      background-color: #f6f6f6;
+    }
+
+    .property-item__name {
+      color: #2196f3;
+    }
+  }
+}
