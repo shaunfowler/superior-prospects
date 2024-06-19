@@ -1,7 +1,7 @@
 import ReactGA from "react-ga4";
 
 export const trackOpenCreateLocationModal = () => {
-  ReactGA.modalview("/location-create");
+  // ReactGA.modalview("/location-create");
   ReactGA.event({
     category: "Properties - Location (CM)",
     action: "Create location button click (modal open)"
@@ -16,7 +16,7 @@ export const trackCreateLocation = () => {
 };
 
 export const trackOpenEditLocationModal = safeName => {
-  ReactGA.modalview(`/location-edit/${safeName}`);
+  // ReactGA.modalview(`/location-edit/${safeName}`);
   ReactGA.event({
     category: "Properties - Location (CM)",
     action: "Edit location button click (modal open)",

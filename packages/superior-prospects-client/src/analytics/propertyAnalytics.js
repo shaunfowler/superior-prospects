@@ -33,7 +33,7 @@ export const trackPropertyDelete = safeName => {
 };
 
 export const trackOpenDeletePropertyModal = safeName => {
-  ReactGA.modalview(`/property-edit/${safeName}`);
+  // ReactGA.modalview(`/property-edit/${safeName}`);
   ReactGA.event({
     category: "Property (CM)",
     action: "Delete property button click (modal open)",

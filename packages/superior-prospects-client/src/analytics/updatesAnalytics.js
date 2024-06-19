@@ -1,7 +1,7 @@
 import ReactGA from "react-ga4";
 
 export const trackOpenCreateUpdateModal = () => {
-  ReactGA.modalview("/updates-create");
+  // ReactGA.modalview("/updates-create");
   ReactGA.event({
     category: "Updates",
     action: "Add update button click (modal open)"
